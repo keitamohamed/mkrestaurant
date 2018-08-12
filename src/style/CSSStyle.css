@@ -1,0 +1,9 @@
+
+#topPane {
+    -fx-background-color: #99e248;
+}
+#labelCategory {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-font-family: Verdana, Arial, Helvetica, sans-seri;
+}
