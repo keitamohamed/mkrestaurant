@@ -21,7 +21,7 @@
          <children>
             <Pane fx:id="topPane" prefHeight="60.0" prefWidth="1231.0">
                <children>
-                  <Button layoutX="1107.0" layoutY="14.0" mnemonicParsing="false" text="Admain" />
+                  <Button layoutX="1070.0" layoutY="17.0" mnemonicParsing="false" text="Admain" />
                </children>
                <padding>
                   <Insets bottom="10.0" top="10.0" />
@@ -33,14 +33,14 @@
             <Label fx:id="rName" layoutX="102.0" layoutY="23.0" text="MK Restaurant" />
             <Label fx:id="rAddress" layoutX="72.0" layoutY="61.0" />
             <Label fx:id="rPhone" layoutX="60.0" layoutY="110.0" text="Phone #:  (540) 770-1100" />
-            <TableView layoutX="-1.0" layoutY="153.0" prefHeight="232.0" prefWidth="321.0">
+            <TableView fx:id="itemListTable" layoutX="-1.0" layoutY="153.0" prefHeight="232.0" prefWidth="321.0">
               <columns>
                 <TableColumn prefWidth="124.0" text="Product" />
                 <TableColumn prefWidth="101.0" text="Quantity" />
                   <TableColumn minWidth="0.0" prefWidth="95.0" text="Price" />
               </columns>
             </TableView>
-            <TableView layoutY="403.0" prefHeight="166.0" prefWidth="321.0">
+            <TableView fx:id="totalPriceTable" layoutY="403.0" prefHeight="166.0" prefWidth="321.0">
               <columns>
                 <TableColumn prefWidth="93.0" text="Total item" />
                 <TableColumn prefWidth="89.0" text="Discount" />
@@ -49,7 +49,7 @@
             </TableView>
          </children></Pane>
       <ListView fx:id="rightPane" layoutX="987.0" layoutY="113.0" prefHeight="567.0" prefWidth="200.0" style="-fx-background-color: brown;" />
-      <Label fx:id="labelCategory" layoutX="1045.0" layoutY="72.0" text="Categories" />
+      <Label fx:id="labelCategory" layoutX="1054.0" layoutY="81.0" text="Categories" />
       <ScrollPane hbarPolicy="NEVER" layoutX="342.0" layoutY="113.0" prefHeight="567.0" prefWidth="638.0" vbarPolicy="NEVER">
          <content>
             <FlowPane fx:id="flowPane" hgap="5.0" prefHeight="567.0" prefWidth="616.0" vgap="5.0" />

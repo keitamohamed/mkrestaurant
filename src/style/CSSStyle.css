@@ -13,6 +13,7 @@
 .table-view .column-header {
     -fx-text-fill: #fff;
     -fx-background-color: #14a816;
+    -fx-border-width: 0 0 3 0;
 }
 
 .table-view .column-header .label{
@@ -22,7 +23,25 @@
 }
 
 .table-view .table-row-cell {
-    -fx-border-width: 1px dotted;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: dotted;
+}
+
+.button {
+    -fx-font-size: 18px;
+    -fx-font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+    -fx-background-color: transparent;
+}
+
+#leftPane {
+    -fx-border-width: 0 1 0 0;
+    -fx-border-style: dotted;
+}
+
+#flowPane .button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: lightgray;
+
 }
 
 #topPane {
@@ -30,15 +49,10 @@
 }
 
 #flowPane .button {
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
     -fx-pref-height: 135px;
     -fx-pref-width: 200px;
-}
-
-#flowPane .button .g {
-    -fx-font-size: 18px;
-    -fx-pref-height: 135px;
-    -fx-pref-width: 200px;
+    -fx-text-fill: transparent;
 }
 
 #labelCategory {
@@ -47,7 +61,7 @@
     -fx-font-family: Verdana, Arial, Helvetica, sans-seri;
 }
 
-/*Label style*/
+/*Styling all the Label*/
 
 #rName {
     -fx-font-weight: bold;
