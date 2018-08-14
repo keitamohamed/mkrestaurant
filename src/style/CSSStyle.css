@@ -1,9 +1,59 @@
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 10px;
+
+}
+
+.table-view {
+    -fx-table-cell-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-border: none
+}
+
+.table-view .column-header {
+    -fx-text-fill: #fff;
+    -fx-background-color: #14a816;
+}
+
+.table-view .column-header .label{
+    -fx-text-fill: #fff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-row-cell {
+    -fx-border-width: 1px dotted;
+}
 
 #topPane {
     -fx-background-color: #99e248;
 }
+
+#flowPane .button {
+    -fx-font-size: 18px;
+    -fx-pref-height: 135px;
+    -fx-pref-width: 200px;
+}
+
+#flowPane .button .g {
+    -fx-font-size: 18px;
+    -fx-pref-height: 135px;
+    -fx-pref-width: 200px;
+}
+
 #labelCategory {
     -fx-font-size: 18px;
     -fx-font-weight: bold;
     -fx-font-family: Verdana, Arial, Helvetica, sans-seri;
+}
+
+/*Label style*/
+
+#rName {
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+
+#rAddress, #rPhone{
+    -fx-font-size: 16px;
 }
