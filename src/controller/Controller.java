@@ -1,5 +1,6 @@
 package controller;
 
+import blueprint.Cart;
 import blueprint.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +30,9 @@ public class Controller {
     @FXML
     private Label labelCategory, rAddress;
     @FXML
-    TableView itemListTable, totalPriceTable;
+    TableView<Cart> itemListTable;
+    @FXML
+    TableView<String> totalPriceTable;
 
     private List<Product> products = new ArrayList<Product>();
     private List<Button> buttonList = new ArrayList<Button>();

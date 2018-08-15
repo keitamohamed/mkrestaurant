@@ -4,20 +4,23 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Product {
+public class Cart {
     private SimpleStringProperty productID;
-    private SimpleStringProperty name;
+    private SimpleStringProperty  name;
     private SimpleIntegerProperty quantity;
     private SimpleDoubleProperty price;
-    private SimpleStringProperty image;
 
-    public Product() {}
-    public Product(String id, String n, int q, double p, String i) {
+    public Cart(String id, String n, int q, double p) {
         this.productID = new SimpleStringProperty(id);
         this.name = new SimpleStringProperty(n);
         this.quantity = new SimpleIntegerProperty(q);
         this.price = new SimpleDoubleProperty(p);
-        this.image = new SimpleStringProperty(i);
+    }
+
+    @Override
+    public String toString() {
+        return "Product ID: " + productID + " Name " + name +
+                " Quantity " + quantity + " Price " + price;
     }
 
     public String getProductID() {
@@ -36,7 +39,4 @@ public class Product {
         return price.get();
     }
 
-    public String getImage() {
-        return image.get();
-    }
 }
