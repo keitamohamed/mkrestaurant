@@ -40,18 +40,30 @@ public class Controller {
         loadData(products);
         doNotShowMessage();
         rAddress.setText("3420 Eastway Ave NW\n\tRoanoke VA");
-        flowPaneChildren(products);
+        flowPaneChildren(buttonList, products);
+        actionListener(buttonList);
 
     }
 
-    private void flowPaneChildren(List<Product> products) {
+    private void flowPaneChildren(List<Button> buttonList, List<Product> products) {
         for (int i = 0; i < products.size(); i++) {
             Button button = new Button();
             button.setGraphic(imageView(products.get(i).getImage()));
             button.setText(products.get(i).getName());
+            buttonList.add(button);
             flowPane.getChildren().add(button);
+
         }
         observableList = FXCollections.observableList(buttonList);
+    }
+
+    private void actionListener(List<Button> buttons) {
+        for (int i = 0; i < buttons.size(); i++) {
+            final int location = i;
+            buttons.get(i).setOnAction(e -> {
+            });
+
+        }
     }
 
     private void loadData(List<Product> products) {
