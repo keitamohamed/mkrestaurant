@@ -2,14 +2,14 @@ package controller;
 
 import blueprint.Cart;
 import blueprint.Product;
+import javafx.beans.property.ReadOnlyDoubleWrapper;
+import javafx.beans.property.ReadOnlyIntegerWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class Controller {
@@ -30,13 +31,19 @@ public class Controller {
     @FXML
     private Label labelCategory, rAddress;
     @FXML
-    TableView<Cart> itemListTable;
+    TableView<String> itemListTable;
+    @FXML
+    TableColumn<String, String> pName;
+    @FXML
+    TableColumn<String, String> quantity;
+    @FXML
+    TableColumn<String, String> productPrice;
     @FXML
     TableView<String> totalPriceTable;
 
-    private List<Product> products = new ArrayList<Product>();
-    private List<Button> buttonList = new ArrayList<Button>();
-    private ObservableList<Button> observableList;
+    private ObservableList<Product> products = FXCollections.observableArrayList();
+    private ObservableList<Button> buttonList = FXCollections.observableArrayList();
+    private ObservableList<Button> observableList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -44,7 +51,7 @@ public class Controller {
         doNotShowMessage();
         rAddress.setText("3420 Eastway Ave NW\n\tRoanoke VA");
         flowPaneChildren(buttonList, products);
-        actionListener(buttonList);
+        actionListener(buttonList, products);
 
     }
 
@@ -52,36 +59,51 @@ public class Controller {
         for (int i = 0; i < products.size(); i++) {
             Button button = new Button();
             button.setGraphic(imageView(products.get(i).getImage()));
-            button.setText(products.get(i).getName());
+            button.setText("" + products.get(i).getProductID());
             buttonList.add(button);
             flowPane.getChildren().add(button);
-
         }
-        observableList = FXCollections.observableList(buttonList);
+        observableList.addAll(buttonList);
     }
 
-    private void actionListener(List<Button> buttons) {
+    private void actionListener(List<Button> buttons, ObservableList<Product> products) {
         for (int i = 0; i < buttons.size(); i++) {
             final int location = i;
             buttons.get(i).setOnAction(e -> {
+                for (Product p : products) {
+                    if (Integer.parseInt(buttons.get(location).getText()) == p.getProductID()) {
+                        shoppingTable(p.getName(), p.getQuantity(), p.getPrice());
+                    }
+                }
+                //System.out.println("Number generated: " + buttons.get(location).getText());
             });
 
         }
     }
 
+    private void shoppingTable(String name, int q, double price) {
+        pName.setCellValueFactory(n -> new ReadOnlyStringWrapper(name));
+        quantity.setCellValueFactory(qu -> new ReadOnlyStringWrapper(String.valueOf(q)));
+        productPrice.setCellValueFactory(p -> new ReadOnlyStringWrapper(String.valueOf(price)));
+
+        itemListTable.getColumns().add(pName);
+        itemListTable.getColumns().add(quantity);
+        //itemListTable.getColumns().add(productPrice);
+    }
+
     private void loadData(List<Product> products) {
-        products.add(new Product("Lay's, Sun and Jalapeno", 5, 8.89, "chips"));
-        products.add(new Product("Chips Ahoy", 15, 5.37, "chips-ahoy-cookie"));
-        products.add(new Product("Pure-Life Water", 7, 3.98, "pure-life-water"));
-        products.add(new Product("Grandmas Chocolate", 9, 1.89, "grandmas-cookie"));
-        products.add(new Product("Origing Water", 5, 2.56, "origing-water"));
-        products.add(new Product("Deer Park", 9, 2.89, "deer-park"));
-        products.add(new Product("Strawberry and Peach", 10, 5.47, "fruit-one"));
-        products.add(new Product("Apple, Banana and Pana", 10, 12.36, "fruit-two"));
-        products.add(new Product("Golden valley", 13, 3.89, "golden-valley"));
-        products.add(new Product("Orange", 89, 3.89, "orange"));
-        products.add(new Product("Orange drink", 23, 2.49, "orange-drink"));
-        products.add(new Product("Oreo", 6, 3.67, "oreo"));
+        products.add(new Product(generateProductID(), "Lay's, Sun and Jalapeno", 5, 8.89, "chips"));
+        products.add(new Product(generateProductID(),"Chips Ahoy", 15, 5.37, "chips-ahoy-cookie"));
+        products.add(new Product(generateProductID(),"Pure-Life Water", 7, 3.98, "pure-life-water"));
+        products.add(new Product(generateProductID(),"Grandmas Chocolate", 9, 1.89, "grandmas-cookie"));
+        products.add(new Product(generateProductID(),"Origing Water", 5, 2.56, "origing-water"));
+        products.add(new Product(generateProductID(),"Deer Park", 9, 2.89, "deer-park"));
+        products.add(new Product(generateProductID(),"Strawberry and Peach", 10, 5.47, "fruit-one"));
+        products.add(new Product(generateProductID(),"Apple, Banana and Pana", 10, 12.36, "fruit-two"));
+        products.add(new Product(generateProductID(),"Golden valley", 13, 3.89, "golden-valley"));
+        products.add(new Product(generateProductID(),"Orange", 89, 3.89, "orange"));
+        products.add(new Product(generateProductID(),"Orange drink", 23, 2.49, "orange-drink"));
+        products.add(new Product(generateProductID(),"Oreo", 6, 3.67, "oreo"));
     }
 
     private ImageView imageView (String imageName) {
@@ -102,5 +124,10 @@ public class Controller {
     private void doNotShowMessage() {
         this.itemListTable.setPlaceholder(new Label(""));
         this.totalPriceTable.setPlaceholder(new Label(""));
+    }
+
+    private int generateProductID() {
+        Random random = new Random();
+        return (random.nextInt(90000) + 90000);
     }
 }

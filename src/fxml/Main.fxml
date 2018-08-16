@@ -35,9 +35,9 @@
             <Label fx:id="rPhone" layoutX="60.0" layoutY="110.0" text="Phone #:  (540) 770-1100" />
             <TableView fx:id="itemListTable" layoutX="-1.0" layoutY="153.0" prefHeight="232.0" prefWidth="321.0">
               <columns>
-                <TableColumn prefWidth="124.0" text="Product" />
-                <TableColumn prefWidth="101.0" text="Quantity" />
-                  <TableColumn minWidth="0.0" prefWidth="95.0" text="Price" />
+                <TableColumn fx:id="pName" prefWidth="124.0" text="Product" />
+                <TableColumn fx:id="quantity" prefWidth="101.0" text="Quantity" />
+                  <TableColumn fx:id="productPrice" minWidth="0.0" prefWidth="95.0" text="Price" />
               </columns>
             </TableView>
             <TableView fx:id="totalPriceTable" layoutY="403.0" prefHeight="166.0" prefWidth="321.0">

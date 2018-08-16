@@ -5,22 +5,22 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Product {
-    private SimpleStringProperty productID;
+    private SimpleIntegerProperty productID;
     private SimpleStringProperty name;
     private SimpleIntegerProperty quantity;
     private SimpleDoubleProperty price;
     private SimpleStringProperty image;
 
     public Product() {}
-    public Product(String id, String n, int q, double p, String i) {
-        this.productID = new SimpleStringProperty(id);
+    public Product(int id, String n, int q, double p, String i) {
+        this.productID = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(n);
         this.quantity = new SimpleIntegerProperty(q);
         this.price = new SimpleDoubleProperty(p);
         this.image = new SimpleStringProperty(i);
     }
 
-    public String getProductID() {
+    public int getProductID() {
         return productID.get();
     }
 

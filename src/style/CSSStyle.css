@@ -1,13 +1,12 @@
 .scroll-pane {
     -fx-background-color: transparent;
     -fx-padding: 0 0 0 10px;
-
 }
 
 .table-view {
     -fx-table-cell-border-color: transparent;
     -fx-background-color: transparent;
-    -fx-border: none
+    -fx-border: none;
 }
 
 .table-view .column-header {
