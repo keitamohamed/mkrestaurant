@@ -5,13 +5,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Cart {
-    private SimpleStringProperty productID;
     private SimpleStringProperty  name;
     private SimpleIntegerProperty quantity;
     private SimpleDoubleProperty price;
 
-    public Cart(String id, String n, int q, double p) {
-        this.productID = new SimpleStringProperty(id);
+    public Cart(String n, int q, double p) {
         this.name = new SimpleStringProperty(n);
         this.quantity = new SimpleIntegerProperty(q);
         this.price = new SimpleDoubleProperty(p);
@@ -19,12 +17,7 @@ public class Cart {
 
     @Override
     public String toString() {
-        return "Product ID: " + productID + " Name " + name +
-                " Quantity " + quantity + " Price " + price;
-    }
-
-    public String getProductID() {
-        return productID.get();
+        return " Name " + name + " Quantity " + quantity + " Price " + price;
     }
 
     public String getName() {

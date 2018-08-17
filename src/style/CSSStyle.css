@@ -10,7 +10,6 @@
 }
 
 .table-view .column-header {
-    -fx-text-fill: #fff;
     -fx-background-color: #14a816;
     -fx-border-width: 0 0 3 0;
 }
@@ -22,8 +21,43 @@
 }
 
 .table-view .table-row-cell {
-    -fx-border-width: 0 0 1 0;
-    -fx-border-style: dotted;
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+}
+
+.table-view .table-row-cell .text {
+    -fx-font-size: 15px;
+}
+
+.table-view .table-row-cell:selected .text{
+    -fx-background-color: steelblue;
+    -fx-fill: #b2030c;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-column{
+    -fx-alignment: center;
+}
+
+.table-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.table-view .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-insets: none;
+    -fx-background-radius: none;
+    -fx-background-color: transparent;
+}
+
+.table-view .scroll-bar .increment-arrow,
+.table-view .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
 }
 
 .button {
@@ -62,6 +96,18 @@
 
 /*Styling all the Label*/
 
+#totalItemT, #discountT, #totalPriceT {
+    -fx-text-fill: #fff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-color: #14a816;
+    -fx-alignment: center;
+}
+
+#totalItem, #discount, #totalPrice {
+    -fx-alignment: center;
+}
+
 #rName {
     -fx-font-weight: bold;
     -fx-font-size: 20px;
@@ -69,4 +115,14 @@
 
 #rAddress, #rPhone{
     -fx-font-size: 16px;
+}
+
+/*Buttons style*/
+#removeItem {
+    -fx-text-fill: #fff;
+    -fx-font-size: 16px;
+    -fx-border: none;
+    -fx-background-color: #b2030c;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
 }

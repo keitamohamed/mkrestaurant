@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -31,19 +32,20 @@ public class Controller {
     @FXML
     private Label labelCategory, rAddress;
     @FXML
-    TableView<String> itemListTable;
+    TableView<Cart> itemListTable;
     @FXML
-    TableColumn<String, String> pName;
+    TableColumn<Cart, String> pName;
     @FXML
-    TableColumn<String, String> quantity;
+    TableColumn<Cart, Integer> quantity;
     @FXML
-    TableColumn<String, String> productPrice;
+    TableColumn<Cart, Double> productPrice;
     @FXML
     TableView<String> totalPriceTable;
 
     private ObservableList<Product> products = FXCollections.observableArrayList();
     private ObservableList<Button> buttonList = FXCollections.observableArrayList();
     private ObservableList<Button> observableList = FXCollections.observableArrayList();
+    private ObservableList<Cart> carts = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -75,20 +77,18 @@ public class Controller {
                         shoppingTable(p.getName(), p.getQuantity(), p.getPrice());
                     }
                 }
-                //System.out.println("Number generated: " + buttons.get(location).getText());
             });
 
         }
     }
 
     private void shoppingTable(String name, int q, double price) {
-        pName.setCellValueFactory(n -> new ReadOnlyStringWrapper(name));
-        quantity.setCellValueFactory(qu -> new ReadOnlyStringWrapper(String.valueOf(q)));
-        productPrice.setCellValueFactory(p -> new ReadOnlyStringWrapper(String.valueOf(price)));
+        carts.add(new Cart(name, q, price));
+        pName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        itemListTable.getColumns().add(pName);
-        itemListTable.getColumns().add(quantity);
-        //itemListTable.getColumns().add(productPrice);
+        itemListTable.setItems(carts);
     }
 
     private void loadData(List<Product> products) {
@@ -123,7 +123,6 @@ public class Controller {
 
     private void doNotShowMessage() {
         this.itemListTable.setPlaceholder(new Label(""));
-        this.totalPriceTable.setPlaceholder(new Label(""));
     }
 
     private int generateProductID() {
