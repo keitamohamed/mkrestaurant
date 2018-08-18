@@ -32,7 +32,7 @@
 .table-view .table-row-cell:selected .text{
     -fx-background-color: steelblue;
     -fx-fill: #b2030c;
-    -fx-font-weight: bold;
+    -fx-font-weight: bolder;
 }
 
 .table-view .table-column{
@@ -96,25 +96,32 @@
 
 /*Styling all the Label*/
 
-#totalItemT, #discountT, #totalPriceT {
-    -fx-text-fill: #fff;
-    -fx-font-size: 18px;
+#totalItemT, #discountT, #priceT, #totalT {
+    -fx-font-size: 15px;
+    -fx-font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
     -fx-font-weight: bold;
-    -fx-background-color: #14a816;
+    /*-fx-background-color: #14a816;*/
     -fx-alignment: center;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #000;
+    -fx-border-style: dotted;
 }
 
-#totalItem, #discount, #totalPrice {
+#totalItem, #discount, #totalPrice, #discountPer, #sumPrice {
+    -fx-font-size: 16px;
+    -fx-font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
     -fx-alignment: center;
 }
 
 #rName {
-    -fx-font-weight: bold;
     -fx-font-size: 20px;
+    -fx-font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
+    -fx-font-weight: bold;
 }
 
 #rAddress, #rPhone{
-    -fx-font-size: 16px;
+    -fx-font-size: 15px;
+    -fx-font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
 }
 
 /*Buttons style*/

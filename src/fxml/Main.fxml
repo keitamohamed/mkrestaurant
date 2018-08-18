@@ -30,23 +30,26 @@
       </GridPane>
       <Pane fx:id="leftPane" layoutX="14.0" layoutY="89.0" prefHeight="591.0" prefWidth="321.0">
          <children>
-            <Label fx:id="rName" layoutX="102.0" layoutY="23.0" text="MK Restaurant" />
-            <Label fx:id="rAddress" layoutX="72.0" layoutY="61.0" />
-            <Label fx:id="rPhone" layoutX="60.0" layoutY="110.0" text="Phone #:  (540) 770-1100" />
-            <TableView fx:id="itemListTable" layoutX="-1.0" layoutY="153.0" prefHeight="232.0" prefWidth="321.0">
+            <Label fx:id="rName" layoutX="56.0" layoutY="14.0" text="MK Restaurant" />
+            <Label fx:id="rAddress" layoutX="56.0" layoutY="50.0" text="Address" />
+            <Label fx:id="rPhone" layoutX="56.0" layoutY="96.0" text="Phone #:  (540) 770-1100" />
+            <TableView fx:id="itemListTable" layoutY="121.0" prefHeight="232.0" prefWidth="321.0">
               <columns>
                 <TableColumn fx:id="pName" prefWidth="124.0" resizable="false" text="Product" />
                 <TableColumn fx:id="quantity" prefWidth="101.0" resizable="false" text="Quantity" />
                   <TableColumn fx:id="productPrice" minWidth="0.0" prefWidth="95.0" resizable="false" text="Price" />
               </columns>
             </TableView>
-            <Label fx:id="totalItemT" layoutX="2.0" layoutY="460.0" prefHeight="27.0" prefWidth="109.0" text="Total item" />
-            <Label fx:id="discountT" layoutX="105.0" layoutY="460.0" prefHeight="27.0" prefWidth="101.0" text="Discount" />
-            <Label fx:id="totalPriceT" layoutX="190.0" layoutY="460.0" prefHeight="27.0" prefWidth="128.0" text="Total Price" />
-            <Label fx:id="totalItem" layoutX="35.0" layoutY="502.0" text="0" />
-            <Label fx:id="discount" layoutX="135.0" layoutY="502.0" text="0 %" />
-            <Label fx:id="totalPrice" layoutX="239.0" layoutY="502.0" text="0" />
-            <Button fx:id="removeItem" layoutX="7.0" layoutY="397.0" mnemonicParsing="false" text="Remove Item" />
+            <Label fx:id="totalItemT" layoutX="3.0" layoutY="414.0" prefHeight="27.0" prefWidth="109.0" text="Total item" />
+            <Label fx:id="discountT" layoutX="106.0" layoutY="414.0" prefHeight="27.0" prefWidth="101.0" text="Discount%" />
+            <Label fx:id="priceT" layoutX="191.0" layoutY="414.0" prefHeight="27.0" prefWidth="128.0" text="Item Price" />
+            <Label fx:id="totalItem" layoutX="29.0" layoutY="456.0" text="0" />
+            <Label fx:id="discountPer" layoutX="124.0" layoutY="456.0" text="0 %" />
+            <Label fx:id="sumPrice" layoutX="218.0" layoutY="456.0" text="0" />
+            <Button fx:id="removeItem" layoutX="7.0" layoutY="365.0" mnemonicParsing="false" text="Remove Item" />
+            <Label fx:id="discount" layoutX="127.0" layoutY="533.0" text="0" />
+            <Label fx:id="totalPrice" layoutX="222.0" layoutY="533.0" text="0" />
+            <Label fx:id="totalT" layoutX="112.0" layoutY="496.0" prefHeight="17.0" prefWidth="207.0" text="Discount   Total Price" />
          </children></Pane>
       <ListView fx:id="rightPane" layoutX="987.0" layoutY="113.0" prefHeight="567.0" prefWidth="200.0" style="-fx-background-color: brown;" />
       <Label fx:id="labelCategory" layoutX="1054.0" layoutY="81.0" text="Categories" />

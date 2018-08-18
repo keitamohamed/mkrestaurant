@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -30,7 +31,9 @@ public class Controller {
     @FXML
     private ListView listView, rightPane;
     @FXML
-    private Label labelCategory, rAddress;
+    private Label labelCategory, rAddress, totalItem, discount, totalPrice;
+    @FXML
+    private Label discountPer, sumPrice;
     @FXML
     TableView<Cart> itemListTable;
     @FXML
@@ -74,49 +77,51 @@ public class Controller {
             buttons.get(i).setOnAction(e -> {
                 for (Product p : products) {
                     if (Integer.parseInt(buttons.get(location).getText()) == p.getProductID()) {
-                        shoppingTable(p.getName(), p.getQuantity(), p.getPrice());
+                        shoppingTable(p.getName(), p.getPrice());
                     }
                 }
             });
-
         }
     }
 
-    private void shoppingTable(String name, int q, double price) {
-        carts.add(new Cart(name, q, price));
+    private void shoppingTable(String name, double price) {
+        carts.add(new Cart(name, 1, price));
         pName.setCellValueFactory(new PropertyValueFactory<>("name"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         itemListTable.setItems(carts);
+        calculateTotal(carts);
     }
 
     private void loadData(List<Product> products) {
-        products.add(new Product(generateProductID(), "Lay's, Sun and Jalapeno", 5, 8.89, "chips"));
-        products.add(new Product(generateProductID(),"Chips Ahoy", 15, 5.37, "chips-ahoy-cookie"));
-        products.add(new Product(generateProductID(),"Pure-Life Water", 7, 3.98, "pure-life-water"));
-        products.add(new Product(generateProductID(),"Grandmas Chocolate", 9, 1.89, "grandmas-cookie"));
-        products.add(new Product(generateProductID(),"Origing Water", 5, 2.56, "origing-water"));
-        products.add(new Product(generateProductID(),"Deer Park", 9, 2.89, "deer-park"));
-        products.add(new Product(generateProductID(),"Strawberry and Peach", 10, 5.47, "fruit-one"));
-        products.add(new Product(generateProductID(),"Apple, Banana and Pana", 10, 12.36, "fruit-two"));
-        products.add(new Product(generateProductID(),"Golden valley", 13, 3.89, "golden-valley"));
-        products.add(new Product(generateProductID(),"Orange", 89, 3.89, "orange"));
-        products.add(new Product(generateProductID(),"Orange drink", 23, 2.49, "orange-drink"));
-        products.add(new Product(generateProductID(),"Oreo", 6, 3.67, "oreo"));
+        products.add(new Product(generateProductID(), "Lay's, Sun and Jalapeno Chip", 1, 3.78, "chips"));
+        products.add(new Product(generateProductID(), "Chips Ahoy Cookie", 15, 5.37, "chips-ahoy-cookie"));
+        products.add(new Product(generateProductID(), "Pure-Life Water", 7, 3.98, "pure-life-water"));
+        products.add(new Product(generateProductID(), "Grandmas Chocolate Cookie", 9, 1.89, "grandmas-cookie"));
+        products.add(new Product(generateProductID(), "Origin Water", 5, 2.56, "origing-water"));
+        products.add(new Product(generateProductID(), "Deer Park Water", 9, 2.89, "deer-park"));
+        products.add(new Product(generateProductID(), "Strawberry and Peach", 10, 5.47, "fruit-one"));
+        products.add(new Product(generateProductID(), "Apple, Banana and Pana", 10, 12.36, "fruit-two"));
+        products.add(new Product(generateProductID(), "Golden valley Water", 13, 1.50, "golden-valley"));
+        products.add(new Product(generateProductID(), "Orange", 89, 3.89, "orange"));
+        products.add(new Product(generateProductID(), "Orange drink", 23, 2.49, "orange-drink"));
+        products.add(new Product(generateProductID(), "Oreo Cookie", 6, 3.67, "oreo"));
     }
 
-    private ImageView imageView (String imageName) {
+    private ImageView imageView(String imageName) {
         Image image;
         ImageView view;
         try {
             image = new Image(getClass().getResourceAsStream("/image/" + imageName + ".png"));
             view = new ImageView(image);
-            view.setFitWidth(150); view.setFitHeight(135);
-        }catch (NullPointerException e) {
+            view.setFitWidth(150);
+            view.setFitHeight(135);
+        } catch (NullPointerException e) {
             image = new Image(getClass().getResourceAsStream("/image/" + imageName + ".jpg"));
             view = new ImageView(image);
-            view.setFitWidth(150); view.setFitHeight(135);
+            view.setFitWidth(150);
+            view.setFitHeight(135);
         }
         return view;
     }
@@ -128,5 +133,46 @@ public class Controller {
     private int generateProductID() {
         Random random = new Random();
         return (random.nextInt(90000) + 90000);
+    }
+
+    private void calculateTotal(ObservableList<Cart> carts) {
+        NumberFormat nf = NumberFormat.getCurrencyInstance();
+        double price = 0;
+        if (!totalItem.getText().isEmpty()) {
+            totalItem.setText("0");
+        }
+        for (Cart c : carts) {
+            totalItem.setText(String.valueOf((Integer.parseInt(totalItem.getText()) + c.getQuantity())));
+
+            if (sumPrice.getText().equals("0")) {
+                sumPrice.setText(nf.format(c.getPrice()));
+                totalPrice.setText(nf.format(c.getPrice()));
+            }
+            else {
+                price += c.getPrice();
+                if (price > 100) {
+                    double dPercent = .05;
+                    if (price > 200) {
+                        dPercent = .10;
+                    }
+                    discountPer.setText(String.valueOf(dPercent) + " %");
+                    discount.setText(nf.format(price * dPercent));
+
+                    sumPrice.setText(nf.format(price));
+                    totalPrice.setText(String.valueOf(nf.format(price - Double.parseDouble(discount.getText().substring(1)) )));
+
+                } else {
+                    sumPrice.setText(nf.format(price));
+                    totalPrice.setText(nf.format(price));
+                }
+            }
+
+        }
+    }
+
+    private double removeSign(String value) {
+        System.out.println("Value is " + value);
+        value = value.substring(1);
+        return (Double.parseDouble(value));
     }
 }
