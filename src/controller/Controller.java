@@ -5,9 +5,14 @@ import blueprint.Product;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -33,6 +38,8 @@ public class Controller {
     @FXML
     private Label labelCategory, rAddress, totalItem, discount, totalPrice;
     @FXML
+    private Button removeItem, updateCart, checkOut;
+    @FXML
     private Label discountPer, sumPrice;
     @FXML
     TableView<Cart> itemListTable;
@@ -57,7 +64,22 @@ public class Controller {
         rAddress.setText("3420 Eastway Ave NW\n\tRoanoke VA");
         flowPaneChildren(buttonList, products);
         actionListener(buttonList, products);
+        itemListTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (itemListTable.getSelectionModel().getSelectedItem() != null) {
+                if (!removeItem.isVisible() && !updateCart.isVisible()) {
+                    removeItem.setVisible(true);
+                    updateCart.setVisible(true);
+                }
+                removeItem.setText("" + itemListTable.getSelectionModel().getSelectedIndex());
+                updateCart.setText("" + itemListTable.getSelectionModel().getSelectedIndex());
+            }
+        });
 
+        removeItem.setOnAction(event -> {
+            carts.remove(Integer.parseInt(removeItem.getText()));
+            itemListTable.setItems(carts);
+            calculateTotal(carts);
+        });
     }
 
     private void flowPaneChildren(List<Button> buttonList, List<Product> products) {
@@ -78,6 +100,9 @@ public class Controller {
                 for (Product p : products) {
                     if (Integer.parseInt(buttons.get(location).getText()) == p.getProductID()) {
                         shoppingTable(p.getName(), p.getPrice());
+                        if (!checkOut.isVisible() && !totalPrice.getText().equals("0")) {
+                            checkOut.setVisible(true);
+                        }
                     }
                 }
             });
@@ -126,15 +151,6 @@ public class Controller {
         return view;
     }
 
-    private void doNotShowMessage() {
-        this.itemListTable.setPlaceholder(new Label(""));
-    }
-
-    private int generateProductID() {
-        Random random = new Random();
-        return (random.nextInt(90000) + 90000);
-    }
-
     private void calculateTotal(ObservableList<Cart> carts) {
         NumberFormat nf = NumberFormat.getCurrencyInstance();
         double price = 0;
@@ -152,7 +168,7 @@ public class Controller {
                 price += c.getPrice();
                 if (price > 100) {
                     double dPercent = .05;
-                    if (price > 200) {
+                    if (price >= 1000) {
                         dPercent = .10;
                     }
                     discountPer.setText(String.valueOf(dPercent) + " %");
@@ -168,11 +184,24 @@ public class Controller {
             }
 
         }
+        // If shopping cart is empty-Re-set discount and price variables back to their default value
+        if (carts.size() == 0) {
+            sumPrice.setText("0");
+            totalPrice.setText("0");
+            discountPer.setText("0 %");
+            discount.setText("0");
+        }
     }
 
-    private double removeSign(String value) {
-        System.out.println("Value is " + value);
-        value = value.substring(1);
-        return (Double.parseDouble(value));
+    private void doNotShowMessage() {
+        this.itemListTable.setPlaceholder(new Label(""));
+        removeItem.setVisible(false);
+        updateCart.setVisible(false);
+        checkOut.setVisible(false);
+    }
+
+    private int generateProductID() {
+        Random random = new Random();
+        return (random.nextInt(90000) + 90000);
     }
 }
