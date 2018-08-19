@@ -28,5 +28,6 @@
     </orderEntry>
     <orderEntry type="library" name="controlsfx-8.40.14" level="application" />
     <orderEntry type="library" name="org.controlsfx:controlsfx:8.40.14" level="application" />
+    <orderEntry type="library" name="org.controlsfx:controlsfx:8.40.141" level="application" />
   </component>
 </module>
