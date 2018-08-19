@@ -12,6 +12,7 @@ public class Main extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("style/CSSStyle.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("style/Message.css").toExternalForm());
         primaryStage.setTitle("MK: Restaurant");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);

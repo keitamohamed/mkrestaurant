@@ -10,7 +10,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import message.Message;
+import org.controlsfx.control.Notifications;
 
+import javax.management.Notification;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Random;
@@ -34,6 +37,8 @@ public class Controller {
     TableColumn<Cart, Integer> quantity;
     @FXML
     TableColumn<Cart, Double> productPrice;
+
+    private Notifications notifications;
 
     private ObservableList<Product> products = FXCollections.observableArrayList();
     private ObservableList<Button> buttonList = FXCollections.observableArrayList();
@@ -87,6 +92,7 @@ public class Controller {
                 for (Product p : products) {
                     if (Integer.parseInt(buttons.get(location).getText()) == p.getProductID()) {
                         shoppingTable(p.getName(), p.getPrice());
+                        Message.successful("Successfully", "Successfully added product");
                         if (!checkOut.isVisible() && !totalPrice.getText().equals("0")) {
                             checkOut.setVisible(true);
                         }
