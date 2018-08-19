@@ -10,7 +10,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -20,17 +19,13 @@ import java.util.Random;
 public class Controller {
 
     @FXML
-    private Pane topPane, leftPane;
-    @FXML
     private FlowPane flowPane;
     @FXML
-    private ListView listView, rightPane;
+    private TextField searchKeyWord;
     @FXML
-    private Label labelCategory, rAddress, totalItem, discount, totalPrice;
+    private Label rAddress, totalItem, discount, totalPrice, discountPer, sumPrice;
     @FXML
     private Button removeItem, updateCart, checkOut;
-    @FXML
-    private Label discountPer, sumPrice;
     @FXML
     TableView<Cart> itemListTable;
     @FXML
@@ -39,8 +34,6 @@ public class Controller {
     TableColumn<Cart, Integer> quantity;
     @FXML
     TableColumn<Cart, Double> productPrice;
-    @FXML
-    TableView<String> totalPriceTable;
 
     private ObservableList<Product> products = FXCollections.observableArrayList();
     private ObservableList<Button> buttonList = FXCollections.observableArrayList();
@@ -53,6 +46,7 @@ public class Controller {
         doNotShowMessage();
         rAddress.setText("3420 Eastway Ave NW\n\tRoanoke VA");
         flowPaneChildren(buttonList, products);
+        filterSearch();
         actionListener(buttonList, products);
         itemListTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (itemListTable.getSelectionModel().getSelectedItem() != null) {
@@ -70,13 +64,16 @@ public class Controller {
             itemListTable.setItems(carts);
             calculateTotal(carts);
         });
+
+
     }
 
     private void flowPaneChildren(List<Button> buttonList, List<Product> products) {
-        for (int i = 0; i < products.size(); i++) {
-            Button button = new Button();
-            button.setGraphic(imageView(products.get(i).getImage()));
-            button.setText("" + products.get(i).getProductID());
+        Button button;
+        for (Product product : products) {
+            button = new Button();
+            button.setGraphic(imageView(product.getImage()));
+            button.setText("" + product.getProductID());
             buttonList.add(button);
             flowPane.getChildren().add(button);
         }
@@ -97,6 +94,32 @@ public class Controller {
                 }
             });
         }
+    }
+
+    private void filterSearch() {
+        searchKeyWord.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (newValue.isEmpty()) {
+                flowPane.getChildren().clear();
+                flowPaneChildren(buttonList, products);
+                actionListener(buttonList, products);
+                return;
+            }
+
+            flowPane.getChildren().clear();
+            for (Product product : products) {
+                Button button = new Button();
+                if (product.getName().toLowerCase().contains(newValue.toLowerCase())
+                        || String.valueOf(product.getProductID()).contains(newValue.toLowerCase())) {
+                    button.setGraphic(imageView(product.getImage()));
+                    button.setText("" + product.getProductID());
+                    buttonList.add(button);
+                    flowPane.getChildren().add(button);
+                }
+            }
+
+            actionListener(buttonList, products);
+        });
     }
 
     private void shoppingTable(String name, double price) {
@@ -128,12 +151,12 @@ public class Controller {
         Image image;
         ImageView view;
         try {
-            image = new Image(getClass().getResourceAsStream("/image/" + imageName + ".png"));
+            image = new Image(getClass().getResourceAsStream("/image/pImage/" + imageName + ".png"));
             view = new ImageView(image);
             view.setFitWidth(150);
             view.setFitHeight(135);
         } catch (NullPointerException e) {
-            image = new Image(getClass().getResourceAsStream("/image/" + imageName + ".jpg"));
+            image = new Image(getClass().getResourceAsStream("/image/pImage/" + imageName + ".jpg"));
             view = new ImageView(image);
             view.setFitWidth(150);
             view.setFitHeight(135);
@@ -151,11 +174,11 @@ public class Controller {
             totalItem.setText(String.valueOf((Integer.parseInt(totalItem.getText()) + c.getQuantity())));
 
             if (sumPrice.getText().equals("0")) {
-                sumPrice.setText(nf.format(c.getPrice()));
-                totalPrice.setText(nf.format(c.getPrice()));
+                sumPrice.setText(nf.format((c.getQuantity() * c.getPrice())));
+                totalPrice.setText(nf.format((c.getQuantity() * c.getPrice())));
             }
             else {
-                price += c.getPrice();
+                price += (c.getQuantity() * c.getPrice());
                 if (price > 100) {
                     double dPercent = .05;
                     if (price >= 1000) {

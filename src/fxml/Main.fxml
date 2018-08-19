@@ -53,10 +53,11 @@
             <Button fx:id="updateCart" layoutX="80.0" layoutY="365.0" mnemonicParsing="false" />
             <Button fx:id="checkOut" layoutX="232.0" layoutY="574.0" mnemonicParsing="false" />
          </children></Pane>
-      <ScrollPane hbarPolicy="NEVER" layoutX="358.0" layoutY="113.0" prefHeight="567.0" prefWidth="831.0" vbarPolicy="NEVER">
+      <ScrollPane hbarPolicy="NEVER" layoutX="358.0" layoutY="144.0" prefHeight="536.0" prefWidth="831.0" vbarPolicy="NEVER">
          <content>
-            <FlowPane fx:id="flowPane" hgap="5.0" prefHeight="567.0" prefWidth="846.0" vgap="5.0" />
+            <FlowPane fx:id="flowPane" hgap="5.0" prefHeight="569.0" prefWidth="827.0" vgap="5.0" />
          </content>
       </ScrollPane>
+      <TextField fx:id="searchKeyWord" layoutX="888.0" layoutY="81.0" prefHeight="39.0" prefWidth="298.0" promptText="Search by keyword" />
    </children>
 </AnchorPane>
