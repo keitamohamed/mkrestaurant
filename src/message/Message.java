@@ -7,15 +7,12 @@ import org.controlsfx.control.Notifications;
 
 public class Message {
 
-    public static void successful(String title, String message) {
-        ImageView view = new ImageView(Message.class.getResource("/image/icon/Ok.png").toExternalForm());
+    public static void successful(String message) {
         Notifications.create()
                 .darkStyle()
-                .title(title)
                 .text(message)
                 .position(Pos.CENTER)
-                .graphic(view)
-                .hideAfter(Duration.seconds(5))
+                .hideAfter(Duration.seconds(20))
                 .show();
     }
 }

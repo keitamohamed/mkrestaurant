@@ -1,22 +1,23 @@
+.notification-bar {
+    -fx-padding: 5px 10px 5px 10px;
+}
 .notification-bar>.pane {
-    -fx-padding: 5 5 5 5;
-    -fx-background-insets: 0, 1, 2;
+    -fx-padding: 5px 10px 5px 10px;
+    -fx-background-insets: 0;
     -fx-pref-width: 100px;
     -fx-pref-height: 40px;
-    -fx-background-color: red, yellow, blue;
     -fx-background-image: url("/image/icon/ok.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 60px 40px;
+    -fx-background-position: left center;
 }
 
 .notification-bar>.pane .title {
-    -fx-font-size: 1.333em; /*16px;*/
+    -fx-font-size: 20px;
     -fx-text-fill: #000;
     -fx-font-weight: bold;
 }
 
 .notification-bar>.pane .label {
-    -fx-font-size: 1em; /*12px;*/
-    -fx-text-fill: #000;
-    -fx-alignment: top-left;
+    -fx-alignment: center;
 }
