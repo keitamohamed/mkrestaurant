@@ -6,10 +6,6 @@
     -fx-background-insets: 0;
     -fx-pref-width: 100px;
     -fx-pref-height: 40px;
-    -fx-background-image: url("/image/icon/ok.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: 60px 40px;
-    -fx-background-position: left center;
 }
 
 .notification-bar>.pane .title {

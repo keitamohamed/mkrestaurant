@@ -91,7 +91,6 @@ public class Controller {
                 for (Product p : products) {
                     if (Integer.parseInt(buttons.get(location).getText()) == p.getProductID()) {
                         shoppingTable(p.getName(), p.getPrice());
-                        Message.successful("Successfully added product");
                         if (!checkOut.isVisible() && !totalPrice.getText().equals("0")) {
                             checkOut.setVisible(true);
                         }
@@ -128,6 +127,15 @@ public class Controller {
     }
 
     private void shoppingTable(String name, double price) {
+        for (Cart cart : carts) {
+            if (carts.size() != 0) {
+                if (cart.getName().equals(name)) {
+                    Message.successful((name + " is already in your cart. " +
+                            "\nSelect the " + name + " in your car and update it."));
+                    return;
+                }
+            }
+        }
         carts.add(new Cart(name, 1, price));
         pName.setCellValueFactory(new PropertyValueFactory<>("name"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
