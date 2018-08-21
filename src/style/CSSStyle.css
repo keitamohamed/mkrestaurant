@@ -37,6 +37,8 @@
 
 .table-view .table-column{
     -fx-alignment: center;
+    -fx-padding: 10px 0 0 0;
+    -fx-border-width: 0 0 0 0;
 }
 
 .table-view .scroll-bar:horizontal {
@@ -79,6 +81,21 @@
     -fx-background-color: transparent;
 }
 
+.combo-box {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: dashed;
+    -fx-border-color: #000;
+    /*-fx-pref-width: 80px;*/
+}
+
+.combo-box .cell {
+    -fx-font-size: 16px;
+    -fx-font-family: "Times New Roman";
+    -fx-text-fill: #000;
+    -fx-text-alignment: center;
+}
+
 #leftPane {
     -fx-border-width: 0 1 0 0;
     -fx-border-style: dotted;
@@ -90,8 +107,13 @@
 
 }
 
-#topPane {
+#topPane, #footer {
     -fx-background-color: #99e248;
+}
+
+#footer .label{
+    -fx-font-size: 18px;
+    -fx-font-family: "Times New Roman";
 }
 
 #flowPane .button {
@@ -107,13 +129,11 @@
     -fx-font-family: Verdana, Arial, Helvetica, sans-seri;
 }
 
-/*Styling all the Label*/
-
+/*==============Styling all the Label==============*/
 #totalItemT, #discountT, #priceT, #totalT {
     -fx-font-size: 15px;
     -fx-font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
     -fx-font-weight: bold;
-    /*-fx-background-color: #14a816;*/
     -fx-alignment: center;
     -fx-border-width: 2 0 2 0;
     -fx-border-color: #000;
@@ -137,8 +157,7 @@
     -fx-font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
 }
 
-/*Buttons style*/
-
+/*================Buttons style==============*/
 #leftPane .button {
     -fx-text-fill: transparent;
     -fx-border: none;

@@ -32,4 +32,7 @@ public class Cart {
         return price.get();
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity.set(quantity);
+    }
 }

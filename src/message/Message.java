@@ -7,12 +7,12 @@ import org.controlsfx.control.Notifications;
 
 public class Message {
 
-    public static void successful(String message) {
+    public static void successful(String message, int second) {
         Notifications.create()
                 .darkStyle()
                 .text(message)
                 .position(Pos.CENTER)
-                .hideAfter(Duration.seconds(20))
+                .hideAfter(Duration.seconds(second))
                 .show();
     }
 }

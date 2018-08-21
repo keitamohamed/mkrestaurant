@@ -2,6 +2,8 @@ package controller;
 
 import blueprint.Cart;
 import blueprint.Product;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,7 +27,7 @@ public class Controller {
     @FXML
     private TextField searchKeyWord;
     @FXML
-    private Label rAddress, totalItem, discount, totalPrice, discountPer, sumPrice;
+    private Label rAddress, totalItem, discount, totalPrice, discountPer, sumPrice, copyRight;
     @FXML
     private Button removeItem, updateCart, checkOut;
     @FXML
@@ -36,8 +38,8 @@ public class Controller {
     TableColumn<Cart, Integer> quantity;
     @FXML
     TableColumn<Cart, Double> productPrice;
-
-    private Notifications notifications;
+    @FXML
+    private ComboBox<Integer> numQuantity;
 
     private ObservableList<Product> products = FXCollections.observableArrayList();
     private ObservableList<Button> buttonList = FXCollections.observableArrayList();
@@ -49,6 +51,7 @@ public class Controller {
         loadData(products);
         doNotShowMessage();
         rAddress.setText("3420 Eastway Ave NW\n\tRoanoke VA");
+        copyRight.setText("Copyright \u00a9 2018. All right reserved. Powered by M.K Platform");
         flowPaneChildren(buttonList, products);
         filterSearch();
         actionListener(buttonList, products);
@@ -57,6 +60,7 @@ public class Controller {
                 if (!removeItem.isVisible() && !updateCart.isVisible()) {
                     removeItem.setVisible(true);
                     updateCart.setVisible(true);
+                    numQuantity.setVisible(true);
                 }
                 removeItem.setText("" + itemListTable.getSelectionModel().getSelectedIndex());
                 updateCart.setText("" + itemListTable.getSelectionModel().getSelectedIndex());
@@ -67,6 +71,15 @@ public class Controller {
             carts.remove(Integer.parseInt(removeItem.getText()));
             itemListTable.setItems(carts);
             calculateTotal(carts);
+        });
+
+        numQuantity.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (numQuantity.getSelectionModel().getSelectedItem() != null) {
+                int quantity = numQuantity.getSelectionModel().getSelectedItem();
+                carts.get((Integer.parseInt(updateCart.getText()))).setQuantity(quantity);
+                itemListTable.refresh();
+                calculateTotal(carts);
+            }
         });
 
 
@@ -131,7 +144,7 @@ public class Controller {
             if (carts.size() != 0) {
                 if (cart.getName().equals(name)) {
                     Message.successful((name + " is already in your cart. " +
-                            "\nSelect the " + name + " in your car and update it."));
+                            "Select\nit in your car and update it quantity."), 5);
                     return;
                 }
             }
@@ -224,6 +237,8 @@ public class Controller {
         removeItem.setVisible(false);
         updateCart.setVisible(false);
         checkOut.setVisible(false);
+        numQuantity.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        numQuantity.setVisible(false);
     }
 
     private int generateProductID() {
