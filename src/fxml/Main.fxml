@@ -9,7 +9,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="783.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="758.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <children>
       <GridPane layoutX="-10.0" prefHeight="52.0" prefWidth="1231.0">
         <columnConstraints>
@@ -60,7 +60,7 @@
          </content>
       </ScrollPane>
       <TextField fx:id="searchKeyWord" layoutX="888.0" layoutY="81.0" prefHeight="39.0" prefWidth="298.0" promptText="Search by keyword" />
-      <GridPane layoutX="-5.0" layoutY="735.0" prefHeight="61.0" prefWidth="1221.0">
+      <GridPane layoutX="-5.0" layoutY="712.0" prefHeight="52.0" prefWidth="1221.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>

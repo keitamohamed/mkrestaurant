@@ -2,8 +2,6 @@ package controller;
 
 import blueprint.Cart;
 import blueprint.Product;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import message.Message;
-import org.controlsfx.control.Notifications;
 
 import java.text.NumberFormat;
 import java.util.List;
