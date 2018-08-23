@@ -11,7 +11,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("fxml/Main.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("style/CSSStyle.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("style/Main.css").toExternalForm());
         scene.getStylesheets().add(Main.class.getResource("style/Message.css").toExternalForm());
         primaryStage.setTitle("MK: Restaurant");
         primaryStage.setScene(scene);

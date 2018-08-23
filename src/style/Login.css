@@ -3,7 +3,30 @@
     -fx-secondary: #FFFF8D;
     -fx-primarytext: #B2B2B2;
 }
+ .root {
+    -fx-background-color: -fx-primary;
+}
 
-.root {
-    -fx-primary: -fx-primary;
+.root .text-field {
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-primarytext;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: dashed;
+    -fx-border-color: -fx-secondary;
+    -fx-background-color: transparent;
+}
+
+.root .text-field:hover {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Times New Roman";
+}
+
+.root .button {
+    -fx-font-size: 18px;
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-family: "Times New Roman";
+    -fx-border-radius: 50px;
+    -fx-border-color: -fx-secondary;
+    -fx-background-color: transparent;
 }

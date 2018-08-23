@@ -4,20 +4,26 @@ import blueprint.Cart;
 import blueprint.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import message.Message;
+import stage.SwitchScene;
 
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Random;
 
 
-public class Controller {
+public class Main {
 
     @FXML
     private FlowPane flowPane;
@@ -26,7 +32,7 @@ public class Controller {
     @FXML
     private Label rAddress, totalItem, discount, totalPrice, discountPer, sumPrice, copyRight;
     @FXML
-    private Button removeItem, checkOut;
+    private Button removeItem, checkOut, logInNLogOut;
     @FXML
     TableView<Cart> itemListTable;
     @FXML
@@ -238,5 +244,22 @@ public class Controller {
     private int generateProductID() {
         Random random = new Random();
         return (random.nextInt(90000) + 90000);
+    }
+
+    @FXML
+    public void logInNLogOut(Event event) {
+        if (logInNLogOut.getText().equals("Login")) {
+            switchStage();
+            logOut(event);
+        }
+    }
+
+    private void switchStage() {
+        String className = this.getClass().getSimpleName();
+        SwitchScene.switchScene(className, "User Login");
+    }
+
+    private void logOut(Event event) {
+        ((Node)event.getSource()).getScene().getWindow().hide();
     }
 }
