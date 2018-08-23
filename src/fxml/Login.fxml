@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="358.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Login">
+   <children>
+      <Label alignment="CENTER" layoutX="271.0" layoutY="34.0" text="Login Page" />
+      <TextField layoutX="168.0" layoutY="93.0" prefHeight="49.0" prefWidth="316.0" promptText="Enter login name">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TextField>
+      <TextField layoutX="168.0" layoutY="185.0" prefHeight="39.0" prefWidth="316.0" promptText="Enter password" />
+      <ImageView fitHeight="49.0" fitWidth="72.0" layoutX="96.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="49.0" fitWidth="72.0" layoutX="96.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="406.0" layoutY="269.0" mnemonicParsing="false" text="Login" />
+      <Button layoutX="539.0" layoutY="28.0" mnemonicParsing="false" text="Sign Up" />
+   </children>
+</AnchorPane>

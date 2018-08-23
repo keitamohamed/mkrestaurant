@@ -26,7 +26,7 @@ public class Controller {
     @FXML
     private Label rAddress, totalItem, discount, totalPrice, discountPer, sumPrice, copyRight;
     @FXML
-    private Button removeItem, updateCart, checkOut;
+    private Button removeItem, checkOut;
     @FXML
     TableView<Cart> itemListTable;
     @FXML
@@ -54,13 +54,11 @@ public class Controller {
         actionListener(buttonList, products);
         itemListTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (itemListTable.getSelectionModel().getSelectedItem() != null) {
-                if (!removeItem.isVisible() && !updateCart.isVisible()) {
+                if (!removeItem.isVisible()) {
                     removeItem.setVisible(true);
-                    updateCart.setVisible(true);
                     numQuantity.setVisible(true);
                 }
                 removeItem.setText("" + itemListTable.getSelectionModel().getSelectedIndex());
-                updateCart.setText("" + itemListTable.getSelectionModel().getSelectedIndex());
             }
         });
 
@@ -73,7 +71,7 @@ public class Controller {
         numQuantity.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (numQuantity.getSelectionModel().getSelectedItem() != null) {
                 int quantity = numQuantity.getSelectionModel().getSelectedItem();
-                carts.get((Integer.parseInt(updateCart.getText()))).setQuantity(quantity);
+                carts.get((Integer.parseInt(removeItem.getText()))).setQuantity(quantity);
                 itemListTable.refresh();
                 calculateTotal(carts);
             }
@@ -232,7 +230,6 @@ public class Controller {
     private void doNotShowMessage() {
         this.itemListTable.setPlaceholder(new Label(""));
         removeItem.setVisible(false);
-        updateCart.setVisible(false);
         checkOut.setVisible(false);
         numQuantity.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         numQuantity.setVisible(false);

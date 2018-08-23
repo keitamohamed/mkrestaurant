@@ -96,6 +96,11 @@
     -fx-text-alignment: center;
 }
 
+#topPane .button {
+    -fx-font-size: 18px;
+    -fx-font-family: "Times New Roman";
+}
+
 #leftPane {
     -fx-border-width: 0 1 0 0;
     -fx-border-style: dotted;
@@ -177,10 +182,6 @@
 
 #removeItem {
     -fx-background-image: url("/image/icon/return-cart.png");
-}
-
-#updateCart {
-    -fx-background-image: url("/image/icon/update-cart.png");
 }
 
 #checkOut {
