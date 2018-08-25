@@ -3,12 +3,23 @@
     -fx-secondary: #FFFF8D;
     -fx-primarytext: #B2B2B2;
 }
- .root {
+
+.root {
     -fx-background-color: -fx-primary;
+    -fx-padding: 0 10px 10px 10px;
+
 }
 
-.root .text-field {
+.root .label {
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-family: "Apple Chancery", cursive;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.root .text-field, .root .password-field {
     -fx-font-size: 16px;
+    -fx-font-family: "Times New Roman";
     -fx-text-fill: -fx-primarytext;
     -fx-border-width: 0 0 1 0;
     -fx-border-style: dashed;
@@ -16,17 +27,23 @@
     -fx-background-color: transparent;
 }
 
-.root .text-field:hover {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-font-family: "Times New Roman";
+.root .text-field:hover, .root .password-field:hover {
+    -fx-border-color: -fx-primarytext;
+    -fx-padding: 0 0 10px 0;
 }
 
 .root .button {
     -fx-font-size: 18px;
     -fx-text-fill: -fx-primarytext;
     -fx-font-family: "Times New Roman";
-    -fx-border-radius: 50px;
-    -fx-border-color: -fx-secondary;
+    -fx-border-width: 0;
     -fx-background-color: transparent;
+}
+
+.root .button:hover {
+    -fx-cursor: hand;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1;
+    -fx-border-color: -fx-secondary;
+    -fx-border-style: dashed;
 }

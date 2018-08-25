@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane fx:id="login" prefHeight="358.0" prefWidth="631.0" stylesheets="@../style/Login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Login">
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Login">
    <children>
-      <Label alignment="CENTER" layoutX="271.0" layoutY="34.0" text="Login Page" />
-      <TextField layoutX="168.0" layoutY="93.0" prefHeight="49.0" prefWidth="316.0" promptText="Enter login name">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </TextField>
-      <TextField layoutX="168.0" layoutY="185.0" prefHeight="39.0" prefWidth="316.0" promptText="Enter password" />
-      <ImageView fitHeight="49.0" fitWidth="72.0" layoutX="96.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="49.0" fitWidth="72.0" layoutX="96.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="406.0" layoutY="269.0" mnemonicParsing="false" text="Login" />
-      <Button layoutX="539.0" layoutY="28.0" mnemonicParsing="false" text="Sign Up" />
+      <Label layoutX="203.0" layoutY="34.0" text="MK Restaurant" />
+      <Button layoutX="400.0" layoutY="29.0" mnemonicParsing="false" text="Sign up" />
+      <TextField layoutX="167.0" layoutY="95.0" promptText="Enter username" />
+      <Button layoutX="308.0" layoutY="233.0" mnemonicParsing="false" text="Login" />
+      <ImageView fx:id="imageView" fitHeight="25.0" fitWidth="30.0" layoutX="134.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/icon/Key-white.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="134.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/icon/user.png" />
+         </image>
+      </ImageView>
+      <PasswordField layoutX="167.0" layoutY="158.0" promptText="Enter password" />
    </children>
+   <opaqueInsets>
+      <Insets left="20.0" right="20.0" />
+   </opaqueInsets>
 </AnchorPane>
