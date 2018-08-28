@@ -50,7 +50,7 @@ public class Main {
     private ObservableList<Cart> carts = FXCollections.observableArrayList();
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         loadData(products);
         doNotShowMessage();
         rAddress.setText("3420 Eastway Ave NW\n\tRoanoke VA");

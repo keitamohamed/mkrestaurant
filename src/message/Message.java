@@ -15,4 +15,13 @@ public class Message {
                 .hideAfter(Duration.seconds(second))
                 .show();
     }
+
+    public static void connectionFailed(String title, String message) {
+        Notifications.create()
+                .title(title)
+                .darkStyle()
+                .text(message)
+                .position(Pos.CENTER)
+                .show();
+    }
 }
