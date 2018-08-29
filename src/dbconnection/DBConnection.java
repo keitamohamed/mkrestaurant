@@ -21,28 +21,32 @@ public class DBConnection implements DBCInterface{
         return instance;
     }
 
-    private DBConnection () throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException {
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public DBConnection(){
         connection = mySQL();
     }
 
     @Override
-    public Connection mySQL() throws ClassNotFoundException, IOException,
-            IllegalAccessException, InstantiationException{
-        injectPropertiesValue();
+    public Connection mySQL(){
 
         try {
+            injectPropertiesValue();
+
             Class.forName(drName).getDeclaredConstructor().newInstance();
             Enumeration enumeration = DriverManager.getDrivers();
             while (enumeration.hasMoreElements())
                 enumeration.nextElement();
-            System.out.printf("Successfully connected 1");
         } catch (NoSuchMethodException | InvocationTargetException e) {
             Message.connectionFailed("No-Such-Method-Exaction", e.getMessage());
+        } catch (IllegalAccessException | IOException | InstantiationException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
         try {
             connection = DriverManager.getConnection((url + dbName), sName, sPassword);
-            System.out.printf("Successfully connected 2");
         } catch (SQLException | NullPointerException e) {
             Message.connectionFailed("Connection Failed", e.getMessage());
         }
