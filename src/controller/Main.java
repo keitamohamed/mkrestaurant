@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import message.Message;
+import sqlscript.SQLPrepareStatement;
 import stage.SwitchScene;
 
 import java.text.NumberFormat;
@@ -24,7 +25,7 @@ import java.util.Random;
 
 
 public class Main {
-
+    private SQLPrepareStatement statement = new SQLPrepareStatement();
     @FXML
     private FlowPane flowPane;
     @FXML
@@ -82,8 +83,6 @@ public class Main {
                 calculateTotal(carts);
             }
         });
-
-
     }
 
     private void flowPaneChildren(List<Button> buttonList, List<Product> products) {
@@ -93,7 +92,8 @@ public class Main {
             button.setGraphic(imageView(product.getImage()));
             button.setText("" + product.getProductID());
             buttonList.add(button);
-            flowPane.getChildren().add(button);
+            flowPane.getChildren().addAll(button,
+                    new Label("\tPrice: $" + product.getPrice()));
         }
         observableList.addAll(buttonList);
     }
@@ -132,7 +132,7 @@ public class Main {
                     button.setGraphic(imageView(product.getImage()));
                     button.setText("" + product.getProductID());
                     buttonList.add(button);
-                    flowPane.getChildren().add(button);
+                    flowPane.getChildren().addAll(button, new Label("\tPrice: $" + product.getPrice()));
                 }
             }
 
@@ -159,19 +159,20 @@ public class Main {
         calculateTotal(carts);
     }
 
-    private void loadData(List<Product> products) {
-        products.add(new Product(generateProductID(), "Lay's, Sun and Jalapeno Chip", 1, 3.78, "chips"));
-        products.add(new Product(generateProductID(), "Chips Ahoy Cookie", 15, 5.37, "chips-ahoy-cookie"));
-        products.add(new Product(generateProductID(), "Pure-Life Water", 7, 3.98, "pure-life-water"));
-        products.add(new Product(generateProductID(), "Grandmas Chocolate Cookie", 9, 1.89, "grandmas-cookie"));
-        products.add(new Product(generateProductID(), "Origin Water", 5, 2.56, "origing-water"));
-        products.add(new Product(generateProductID(), "Deer Park Water", 9, 2.89, "deer-park"));
-        products.add(new Product(generateProductID(), "Strawberry and Peach", 10, 5.47, "fruit-one"));
-        products.add(new Product(generateProductID(), "Apple, Banana and Pana", 10, 12.36, "fruit-two"));
-        products.add(new Product(generateProductID(), "Golden valley Water", 13, 1.50, "golden-valley"));
-        products.add(new Product(generateProductID(), "Orange", 89, 3.89, "orange"));
-        products.add(new Product(generateProductID(), "Orange drink", 23, 2.49, "orange-drink"));
-        products.add(new Product(generateProductID(), "Oreo Cookie", 6, 3.67, "oreo"));
+    private void loadData(ObservableList<Product> products) {
+        statement.product(products);
+//        products.add(new Product(generateProductID(), "Lay's, Sun and Jalapeno Chip", 1, 3.78, "chips"));
+//        products.add(new Product(generateProductID(), "Chips Ahoy Cookie", 15, 5.37, "chips-ahoy-cookie"));
+//        products.add(new Product(generateProductID(), "Pure-Life Water", 7, 3.98, "pure-life-water"));
+//        products.add(new Product(generateProductID(), "Grandmas Chocolate Cookie", 9, 1.89, "grandmas-cookie"));
+//        products.add(new Product(generateProductID(), "Origin Water", 5, 2.56, "origing-water"));
+//        products.add(new Product(generateProductID(), "Deer Park Water", 9, 2.89, "deer-park"));
+//        products.add(new Product(generateProductID(), "Strawberry and Peach", 10, 5.47, "fruit-one"));
+//        products.add(new Product(generateProductID(), "Apple, Banana and Pana", 10, 12.36, "fruit-two"));
+//        products.add(new Product(generateProductID(), "Golden valley Water", 13, 1.50, "golden-valley"));
+//        products.add(new Product(generateProductID(), "Orange", 89, 3.89, "orange"));
+//        products.add(new Product(generateProductID(), "Orange drink", 23, 2.49, "orange-drink"));
+//        products.add(new Product(generateProductID(), "Oreo Cookie", 6, 3.67, "oreo"));
     }
 
     private ImageView imageView(String imageName) {

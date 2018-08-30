@@ -1,5 +1,12 @@
+
+* {
+    -fx-primary: #4F545b;
+    -fx-primarytext: #FFF;
+}
+
 .notification-bar {
     -fx-padding: 5px 10px 5px 10px;
+    -fx-pref-width: 200px;
 }
 .notification-bar>.pane {
     -fx-padding: 5px 10px 5px 10px;
@@ -18,4 +25,15 @@
     -fx-font-size: 16px;
     -fx-font-family: "Times New Roman";
     -fx-alignment: center;
+}
+
+.dialog-pane {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-primarytext;
+}
+
+.dialog-pane .label.content {
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 16px;
 }

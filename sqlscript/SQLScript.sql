@@ -8,6 +8,7 @@ CREATE TABLE User (
   LastName VARCHAR(60) NOT NULL,
   UserName VARCHAR(60) NOT NULL,
   Password VARCHAR(60) NOT NULL,
+  UserType VARCHAR(10) NOT NULL,
 
   PRIMARY KEY (UserID)
 )ENGINE = innoDB;
@@ -36,7 +37,7 @@ CREATE TABLE Product (
   PName VARCHAR (50) NOT NULL,
   Quantity INT NOT NULL,
   Price DECIMAL (6, 2) NOT NULL,
-  PImageName VARCHAR (50) NULL,
+  ImageName VARCHAR (50) NULL,
 
   PRIMARY KEY (ProductID)
 )ENGINE = innoDB;
@@ -48,16 +49,16 @@ CREATE TABLE POrder (
   PID INT NOT NULL,
   Quantity INT NOT NULL,
   Price DECIMAL (6, 2) NOT NULL,
-  pImageName VARCHAR (50) NULL,
+  ImageName VARCHAR (50) NULL,
 
   PRIMARY KEY (POrderID),
   CONSTRAINT PID_FK FOREIGN KEY (PID) REFERENCES Product (ProductID)
 )ENGINE = innoDB;
 
-INSERT INTO User (UserID, FirstName, LastName, UserName, Password)
-VALUE (25634, 'John', 'Smith', 'jSmith', '!2Smith'),
-      (67234, 'Ashely', 'William', 'aWilliam', 'Ashely!23');
-INSERT INTO Product (ProductID, PName, Quantity, Price, PImageName)
+INSERT INTO User (UserID, FirstName, LastName, UserName, Password, UserType)
+VALUE (25634, 'John', 'Smith', 'jSmith', '!2Smith', 'Admin'),
+      (67234, 'Ashely', 'William', 'aWilliam', 'Ashely!23', 'Cust');
+INSERT INTO Product (ProductID, PName, Quantity, Price, ImageName)
 VALUE (7823, 'Lays, Sun and Jalapeno Chip', 1, 3.78, 'chips'),
       (67231, 'Chips Ahoy Cookie', 15, 5.37, 'chips-ahoy-cookie'),
       (75662, 'Pure-Life Water', 7, 3.98, 'pure-life-water'),

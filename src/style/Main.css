@@ -1,3 +1,8 @@
+
+* {
+    -fx-text-color: #000;
+}
+
 .scroll-pane {
     -fx-background-color: transparent;
     -fx-padding: 0 0 0 10px;
@@ -86,7 +91,6 @@
     -fx-border-width: 0 0 1 0;
     -fx-border-style: dashed;
     -fx-border-color: #000;
-    /*-fx-pref-width: 80px;*/
 }
 
 .combo-box .cell {
@@ -109,7 +113,12 @@
 #flowPane .button:hover {
     -fx-cursor: hand;
     -fx-background-color: lightgray;
+}
 
+#flowPane .label {
+    -fx-font-size: 16px;
+    -fx-font-family: "Times New Roman";
+    -fx-text-fill: -fx-text-color;
 }
 
 #topPane, #footer {

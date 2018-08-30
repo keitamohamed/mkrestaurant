@@ -10,7 +10,6 @@ import java.util.*;
 public class DBConnection implements DBCInterface{
     private InputStream inputStream;
     private Connection connection;
-
     private String sName, sPassword, dbName, drName, url;
     private static  DBConnection instance;
 
@@ -34,13 +33,12 @@ public class DBConnection implements DBCInterface{
 
         try {
             injectPropertiesValue();
-
             Class.forName(drName).getDeclaredConstructor().newInstance();
             Enumeration enumeration = DriverManager.getDrivers();
             while (enumeration.hasMoreElements())
                 enumeration.nextElement();
         } catch (NoSuchMethodException | InvocationTargetException e) {
-            Message.connectionFailed("No-Such-Method-Exaction", e.getMessage());
+            Message.loginFailed("No-Such-Method-Exaction", e.getMessage());
         } catch (IllegalAccessException | IOException | InstantiationException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -48,9 +46,8 @@ public class DBConnection implements DBCInterface{
         try {
             connection = DriverManager.getConnection((url + dbName), sName, sPassword);
         } catch (SQLException | NullPointerException e) {
-            Message.connectionFailed("Connection Failed", e.getMessage());
+            Message.loginFailed("Connection Failed", e.getMessage());
         }
-
         return connection;
     }
 
@@ -69,7 +66,8 @@ public class DBConnection implements DBCInterface{
             url = properties.getProperty("url");
 
         }catch (Exception e) {
-            Message.connectionFailed("Connection Failed", e.getMessage());}
+            Message.loginFailed("Connection Failed", e.getMessage());
+        }
         finally {
             assert inputStream != null;
             inputStream.close();

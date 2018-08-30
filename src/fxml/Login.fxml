@@ -14,7 +14,7 @@
    <children>
       <Label layoutX="203.0" layoutY="34.0" text="MK Restaurant" />
       <Button layoutX="400.0" layoutY="29.0" mnemonicParsing="false" text="Sign up" />
-      <TextField layoutX="167.0" layoutY="95.0" promptText="Enter username" />
+      <TextField fx:id="userName" layoutX="167.0" layoutY="95.0" promptText="Enter username" />
       <Button fx:id="login" layoutX="308.0" layoutY="233.0" mnemonicParsing="false" text="Login" />
       <ImageView fx:id="imageView" fitHeight="25.0" fitWidth="30.0" layoutX="134.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -26,7 +26,7 @@
             <Image url="@../image/icon/user.png" />
          </image>
       </ImageView>
-      <PasswordField layoutX="167.0" layoutY="158.0" promptText="Enter password" />
+      <PasswordField fx:id="password" layoutX="167.0" layoutY="158.0" promptText="Enter password" />
       <Label fx:id="incorrectLogin" layoutX="147.0" layoutY="200.0" text="Incorrect username or password" />
    </children>
    <opaqueInsets>
