@@ -40,7 +40,7 @@ public class SQLPrepareStatement {
                     return true;
             }
         }catch (SQLException ex) {
-            String message = "Username: " + name + ", password " + password +
+            String message = "Username: " + name.getText().trim() + ", password " + password.getText().trim() +
                     " is in correct. " + ex.getMessage();
             Message.loginFailed("Exception", message);
         }finally {
@@ -53,7 +53,7 @@ public class SQLPrepareStatement {
         return false;
     }
 
-    public ObservableList<Product> product (ObservableList<Product> products) {
+    public void product (ObservableList<Product> products) {
         try {
             pst = dbConnection.getConnection().prepareStatement(query.getLoadProduct());
             rs = pst.executeQuery();
@@ -71,6 +71,5 @@ public class SQLPrepareStatement {
                 Message.loginFailed("SQL-Exception", sql.getMessage());
             }
         }
-        return products;
     }
 }
