@@ -25,6 +25,7 @@ import java.util.Random;
 
 
 public class Main {
+    private static String userID;
     private SQLPrepareStatement statement = new SQLPrepareStatement();
     @FXML
     private FlowPane flowPane;
@@ -161,18 +162,6 @@ public class Main {
 
     private void loadData(ObservableList<Product> products) {
         statement.product(products);
-//        products.add(new Product(generateProductID(), "Lay's, Sun and Jalapeno Chip", 1, 3.78, "chips"));
-//        products.add(new Product(generateProductID(), "Chips Ahoy Cookie", 15, 5.37, "chips-ahoy-cookie"));
-//        products.add(new Product(generateProductID(), "Pure-Life Water", 7, 3.98, "pure-life-water"));
-//        products.add(new Product(generateProductID(), "Grandmas Chocolate Cookie", 9, 1.89, "grandmas-cookie"));
-//        products.add(new Product(generateProductID(), "Origin Water", 5, 2.56, "origing-water"));
-//        products.add(new Product(generateProductID(), "Deer Park Water", 9, 2.89, "deer-park"));
-//        products.add(new Product(generateProductID(), "Strawberry and Peach", 10, 5.47, "fruit-one"));
-//        products.add(new Product(generateProductID(), "Apple, Banana and Pana", 10, 12.36, "fruit-two"));
-//        products.add(new Product(generateProductID(), "Golden valley Water", 13, 1.50, "golden-valley"));
-//        products.add(new Product(generateProductID(), "Orange", 89, 3.89, "orange"));
-//        products.add(new Product(generateProductID(), "Orange drink", 23, 2.49, "orange-drink"));
-//        products.add(new Product(generateProductID(), "Oreo Cookie", 6, 3.67, "oreo"));
     }
 
     private ImageView imageView(String imageName) {
@@ -249,7 +238,7 @@ public class Main {
 
     @FXML
     public void logInNLogOut(Event event) {
-        if (logInNLogOut.getText().equals("Login")) {
+        if (logInNLogOut.getText().equals("Sign in")) {
             switchStage();
             logOut(event);
         }
@@ -257,10 +246,18 @@ public class Main {
 
     private void switchStage() {
         String className = this.getClass().getSimpleName();
-        SwitchScene.switchScene(className, "User Login");
+        SwitchScene.switchScene(className, null, false);
     }
 
+    @FXML
     private void logOut(Event event) {
-        ((Node)event.getSource()).getScene().getWindow().hide();
+        if (logInNLogOut.getText().equals("Sign In")) {
+            ((Node)event.getSource()).getScene().getWindow().hide();
+            switchStage();
+        }
+    }
+
+    public static void receiveUserID(String id) {
+        userID = id;
     }
 }

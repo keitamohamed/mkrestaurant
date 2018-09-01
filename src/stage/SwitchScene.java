@@ -1,6 +1,9 @@
 package stage;
 
+import controller.Admin;
+import controller.Main;
 import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -12,14 +15,18 @@ import java.io.IOException;
 
 public class SwitchScene {
 
-    public static void switchScene(String className, String title) {
+    private static String title;
+
+    public static void switchScene(String className, String userID, boolean admin) {
         try {
-            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(getFXML(className)));
+            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(getFXML(className, admin)));
+            sendUserID(userID, admin);
             Stage stage = new Stage();
             stage.setScene(new Scene(anchorPane));
             stage.setTitle(title);
             stage.setResizable(false);
-            stage.getScene().getStylesheets().add(SwitchScene.class.getResource(getStyleSheet(className)).toExternalForm());
+            System.out.println(getStyleSheet(className, admin) + " " + admin);
+            stage.getScene().getStylesheets().add(SwitchScene.class.getResource(getStyleSheet(className, admin)).toExternalForm());
             stage.show();
             stage.setOnCloseRequest(e -> stage.close());
         }catch (IOException io) {
@@ -27,6 +34,7 @@ public class SwitchScene {
         }
     }
 
+    @FXML
     public static void logOut(Event e) {
         try {
             ((Node)e.getSource()).getScene().getWindow().hide();
@@ -43,21 +51,36 @@ public class SwitchScene {
         }
     }
 
-    private static String getFXML(String name) {
+    private static String getFXML(String name, boolean admin) {
         switch(name) {
             case "Main":
-                return "../fxml/Login.fxml";
+                if (!admin) {
+                    title = "Login";
+                    return "../fxml/Login.fxml";
+                }
             case "Login":
-                return "../fxml/Main.fxml";
+                if (!admin) {
+                    title = "Main";
+                    return "../fxml/Main.fxml";
+                }
         }
-        return null;
+        title = "Employee";
+        return "../fxml/Admin.fxml";
     }
 
-    private static String getStyleSheet(String name) {
+    private static String getStyleSheet(String name, boolean admin) {
         if (name.equals("Main"))
             return "../style/Login.css";
-        else if (name.equals("Login"))
+        else if (name.equals("Login") && !admin)
             return "../style/Main.css";
-        return null;
+        return "../style/Admin.css";
+    }
+
+    private static void sendUserID(String userID, boolean admin) {
+        if (admin) {
+            Admin.receiveUserID(userID);
+            return;
+        }
+        Main.receiveUserID(userID);
     }
 }

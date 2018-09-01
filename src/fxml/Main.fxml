@@ -21,7 +21,7 @@
          <children>
             <Pane fx:id="topPane" prefHeight="41.0" prefWidth="1231.0">
                <children>
-                  <Button fx:id="logInNLogOut" layoutX="1070.0" layoutY="7.0" mnemonicParsing="false" onAction="#logInNLogOut" text="Login" />
+                  <Button fx:id="logInNLogOut" layoutX="1060.0" layoutY="7.0" mnemonicParsing="false" onAction="#logOut" prefHeight="39.0" prefWidth="89.0" text="Sign In" />
                </children>
                <padding>
                   <Insets bottom="10.0" top="10.0" />
