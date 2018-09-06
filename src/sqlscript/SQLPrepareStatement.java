@@ -2,13 +2,11 @@ package sqlscript;
 
 import blueprint.Product;
 import dbconnection.DBConnection;
-import javafx.collections.ObservableArrayBase;
 import javafx.collections.ObservableList;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import message.Message;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
