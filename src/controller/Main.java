@@ -160,10 +160,6 @@ public class Main {
         calculateTotal(carts);
     }
 
-    private void loadData(ObservableList<Product> products) {
-        statement.product(products);
-    }
-
     private ImageView imageView(String imageName) {
         Image image;
         ImageView view;
@@ -221,6 +217,9 @@ public class Main {
             discountPer.setText("0 %");
             discount.setText("0");
         }
+    }
+    private void loadData(ObservableList<Product> products) {
+        statement.product(products);
     }
 
     private void doNotShowMessage() {

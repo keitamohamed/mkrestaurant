@@ -18,9 +18,7 @@ CREATE TABLE UserInfo(
   UserAddress VARCHAR(100) NOT NULL,
   City VARCHAR(20) NOT NULL,
   State VARCHAR(3) NOT NULL,
-  Zipcode INT NOT NULL,
-
-  CONSTRAINT UserID_FK FOREIGN KEY (UserID) REFERENCES User (UserID)
+  Zipcode INT NOT NULL
 )ENGINE = innoDB;
 
 CREATE TABLE ShippingAddress (
@@ -28,8 +26,7 @@ CREATE TABLE ShippingAddress (
   UID INT NOT NULL,
   SAddress VARCHAR (150) NOT NULL,
 
-  PRIMARY KEY (SID),
-  CONSTRAINT UID_FK FOREIGN KEY (UID) REFERENCES User (UserID)
+  PRIMARY KEY (SID)
 )ENGINE = innoDB;
 
 CREATE TABLE Product (
@@ -51,17 +48,20 @@ CREATE TABLE POrder (
   Price DECIMAL (6, 2) NOT NULL,
   ImageName VARCHAR (50) NULL,
 
-  PRIMARY KEY (POrderID),
-  CONSTRAINT PID_FK FOREIGN KEY (PID) REFERENCES Product (ProductID)
+  PRIMARY KEY (POrderID)
 )ENGINE = innoDB;
+
+ALTER TABLE UserInfo ADD CONSTRAINT UserID_FK FOREIGN KEY (UserID) REFERENCES User (UserID);
+ALTER TABLE ShippingAddress ADD CONSTRAINT UID_FK FOREIGN KEY (UID) REFERENCES User (UserID);
+ALTER TABLE POrder ADD CONSTRAINT PID_FK FOREIGN KEY (PID) REFERENCES Product (ProductID);
 
 INSERT INTO User (UserID, FirstName, LastName, UserName, Password, UserType)
 VALUE (25634, 'John', 'Smith', 'jSmith', '!2Smith', 'Admin'),
       (67234, 'Ashely', 'William', 'aWilliam', 'Ashely!23', 'Cust');
 INSERT INTO Product (ProductID, PName, Quantity, Price, ImageName)
-VALUE (7823, 'Lays, Sun and Jalapeno Chip', 1, 3.78, 'chips'),
-      (67231, 'Chips Ahoy Cookie', 15, 5.37, 'chips-ahoy-cookie'),
-      (75662, 'Pure-Life Water', 7, 3.98, 'pure-life-water'),
+VALUE (78232, 'Lays, Sun and Jalapeno Chip', 1, 3.78, 'chips'),
+      (67235, 'Chips Ahoy Cookie', 15, 5.37, 'chips-ahoy-cookie'),
+      (75062, 'Pure-Life Water', 7, 3.98, 'pure-life-water'),
       (99873, 'Grandmas Chocolate Cookie', 9, 1.89, 'grandmas-cookie'),
       (56221, 'Origin Water', 5, 2.56, 'origing-water'),
       (67342, 'Deer Park Water', 9, 2.89, 'deer-park'),
@@ -71,4 +71,8 @@ VALUE (7823, 'Lays, Sun and Jalapeno Chip', 1, 3.78, 'chips'),
       (33178, 'Orange', 89, 3.89, 'orange'),
       (45543, 'Orange drink', 23, 2.49, 'orange-drink'),
       (77563, 'Oreo Cookie', 6, 3.67, 'oreo');
+
+
+
+
 
