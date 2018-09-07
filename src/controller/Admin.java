@@ -5,13 +5,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sqlscript.SQLPrepareStatement;
+import stage.SwitchScene;
 
 public class Admin {
     private static String userID;
@@ -49,24 +52,17 @@ public class Admin {
         searchP.textProperty().addListener((observable, oldValue, newValue) -> {
 
             filteredScoreData.setPredicate(p -> {
-
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-
                 String lowerCaseFilter = newValue.toLowerCase();
                 return (String.valueOf(p.getProductID()).toLowerCase().contains(lowerCaseFilter))
                             || (p.getName().toLowerCase().contains(lowerCaseFilter));
             });
         });
 
-        // 3. Wrap the FilteredList in a SortedList.
         SortedList<Product> sortedData = new SortedList<>(filteredScoreData);
-
-        // 4. Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(productTable.comparatorProperty());
-
-        // 5. Add sorted (and filtered) data to the table.
         productTable.setItems(sortedData);
     }
 
@@ -83,5 +79,17 @@ public class Admin {
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         productTable.setItems(products);
+    }
+
+    @FXML
+    private void logOut(Event event) {
+        ((Node)event.getSource()).getScene().getWindow().hide();
+        switchStage(event);
+    }
+
+    private void switchStage(Event event) {
+        String className = this.getClass().getSimpleName();
+        ((Node)event.getSource()).getScene().getWindow().hide();
+        SwitchScene.switchScene(className, null, false);
     }
 }

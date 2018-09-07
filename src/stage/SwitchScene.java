@@ -25,7 +25,6 @@ public class SwitchScene {
             stage.setScene(new Scene(anchorPane));
             stage.setTitle(title);
             stage.setResizable(false);
-            System.out.println(getStyleSheet(className, admin) + " " + admin);
             stage.getScene().getStylesheets().add(SwitchScene.class.getResource(getStyleSheet(className, admin)).toExternalForm());
             stage.show();
             stage.setOnCloseRequest(e -> stage.close());
@@ -52,17 +51,13 @@ public class SwitchScene {
     }
 
     private static String getFXML(String name, boolean admin) {
-        switch(name) {
-            case "Main":
-                if (!admin) {
-                    title = "Login";
-                    return "../fxml/Login.fxml";
-                }
-            case "Login":
-                if (!admin) {
-                    title = "Main";
-                    return "../fxml/Main.fxml";
-                }
+        if (name.equals("Main") && !admin) {
+            title = "Login";
+            return "../fxml/Login.fxml";
+        }
+        else if ((name.equals("Login") || name.equals("Admin")) && !admin) {
+            title = "Main";
+            return "../fxml/Main.fxml";
         }
         title = "Employee";
         return "../fxml/Admin.fxml";
@@ -71,7 +66,7 @@ public class SwitchScene {
     private static String getStyleSheet(String name, boolean admin) {
         if (name.equals("Main"))
             return "../style/Login.css";
-        else if (name.equals("Login") && !admin)
+        else if ((name.equals("Login") || name.equals("Admin")) && !admin)
             return "../style/Main.css";
         return "../style/Admin.css";
     }
