@@ -8,11 +8,9 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.controlsfx.control.PopOver;
 import sqlscript.SQLPrepareStatement;
 import stage.SwitchScene;
 
@@ -34,6 +32,9 @@ public class Admin {
     private Button logout;
     @FXML
     private TextField searchP;
+    @FXML
+    private Label name;
+    private PopOver over = new PopOver();
 
     private ObservableList<Product> products = FXCollections.observableArrayList();
 
@@ -41,6 +42,14 @@ public class Admin {
     private void initialize() {
         loadProduct(products);
         sortBy();
+
+        name.setOnMouseEntered(e -> {
+            show();
+        });
+
+        name.setOnMouseExited(e -> {
+            over.hide();
+        });
     }
     public static void receiveUserID(String id) {
         userID = id;
@@ -91,5 +100,9 @@ public class Admin {
         String className = this.getClass().getSimpleName();
         ((Node)event.getSource()).getScene().getWindow().hide();
         SwitchScene.switchScene(className, null, false);
+    }
+
+    private void show() {
+        over.show(name);
     }
 }
