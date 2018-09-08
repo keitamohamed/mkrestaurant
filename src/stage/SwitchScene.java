@@ -30,6 +30,7 @@ public class SwitchScene {
             stage.setOnCloseRequest(e -> stage.close());
         }catch (IOException io) {
             System.out.println("IO-Exception occur: " + io.getMessage());
+            io.printStackTrace();
         }
     }
 

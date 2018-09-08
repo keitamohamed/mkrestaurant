@@ -83,22 +83,22 @@
     -fx-border-width: 0;
     -fx-background-color: -fx-primarybc;
 }
-.menu-bar .menu {
+.menu-bar .menu, #popUp {
     -fx-border-width: 0;
     -fx-border-insets: 0;
     -fx-border-radius: 0;
 }
 
-.menu .label {
+.menu .label, #uAccount {
     -fx-text-fill: #FFF;
-    -fx-font-size: 16px;
+    -fx-font-size: 18px;
 }
 
 .context-menu {
     -fx-border-width: 0;
     -fx-padding: 0;
 }
-.menu-bar .menu .menu-item {
+.menu-bar .menu .menu-item, #popUp {
     -fx-padding: 0;
     -fx-background-color: -fx-primarybc;
     -fx-border-width: 0;
@@ -106,7 +106,7 @@
     -fx-border-radius: 0;
 }
 
-.menu-bar .menu .menu-item .button {
+.menu-bar .menu .menu-item .button, #popUp .button {
     -fx-font-size: 16px;
     -fx-font-family: "Times New Roman";
     -fx-text-fill: -fx-primarytext;
@@ -114,7 +114,15 @@
     -fx-background-color: transparent;
 }
 
-.menu-bar .menu .menu-item .button:hover {
+#uAccount:hover {
+    -fx-padding: 0 5 0 5;
+}
+
+#popUp .button {
+    -fx-font-size: 18px;
+}
+
+.menu-bar .menu .menu-item .button:hover, #uAccount:hover, #popUp .button:hover {
     -fx-background-color: #4e91fc;
 }
 

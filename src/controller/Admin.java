@@ -1,15 +1,27 @@
 package controller;
 
 import blueprint.Product;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.util.Duration;
 import org.controlsfx.control.PopOver;
 import sqlscript.SQLPrepareStatement;
 import stage.SwitchScene;
@@ -29,12 +41,13 @@ public class Admin {
     @FXML
     private TableColumn<Product, Double> productPrice;
     @FXML
-    private Button logout;
+    private Button logout, account;
     @FXML
     private TextField searchP;
     @FXML
-    private Label name;
-    private PopOver over = new PopOver();
+    private Label uAccount;
+    @FXML
+    private Pane popUp;
 
     private ObservableList<Product> products = FXCollections.observableArrayList();
 
@@ -43,12 +56,18 @@ public class Admin {
         loadProduct(products);
         sortBy();
 
-        name.setOnMouseEntered(e -> {
-            show();
+        uAccount.setOnMouseEntered(e -> {
+            popUp.setVisible(true);
         });
 
-        name.setOnMouseExited(e -> {
-            over.hide();
+        popUp.shapeProperty().addListener(observable -> {
+            if (!popUp.isVisible()) {
+                popUp.setVisible(false);
+            }
+        });
+
+        popUp.setOnMouseExited(event ->  {
+            popUp.setVisible(false);
         });
     }
     public static void receiveUserID(String id) {
@@ -76,6 +95,7 @@ public class Admin {
     }
 
     private void loadProduct(ObservableList<Product> products) {
+        popUp.setVisible(false);
         receiveUserID(userID);
         statement.product(products);
         if (productTable.getItems().size() > 0) {
@@ -102,7 +122,4 @@ public class Admin {
         SwitchScene.switchScene(className, null, false);
     }
 
-    private void show() {
-        over.show(name);
-    }
 }
