@@ -55,6 +55,7 @@ public class Admin {
     private void initialize() {
         loadProduct(products);
         sortBy();
+//        uAccount.setText("Hello, " + statement.userInfo(userID));
 
         uAccount.setOnMouseEntered(e -> {
             popUp.setVisible(true);
@@ -75,7 +76,6 @@ public class Admin {
     }
 
     private void sortBy() {
-
         FilteredList<Product> filteredScoreData = new FilteredList<>(products, p -> true);
         searchP.textProperty().addListener((observable, oldValue, newValue) -> {
 
@@ -97,7 +97,7 @@ public class Admin {
     private void loadProduct(ObservableList<Product> products) {
         popUp.setVisible(false);
         receiveUserID(userID);
-        statement.product(products);
+        statement.product(products, userID, uAccount);
         if (productTable.getItems().size() > 0) {
             productTable.getItems().clear();
         }

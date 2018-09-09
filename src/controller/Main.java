@@ -219,7 +219,7 @@ public class Main {
         }
     }
     private void loadData(ObservableList<Product> products) {
-        statement.product(products);
+        statement.product(products, userID, new Label());
     }
 
     private void doNotShowMessage() {

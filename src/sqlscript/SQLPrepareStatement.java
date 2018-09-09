@@ -3,6 +3,7 @@ package sqlscript;
 import blueprint.Product;
 import dbconnection.DBConnection;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import message.Message;
@@ -51,8 +52,44 @@ public class SQLPrepareStatement {
         return false;
     }
 
-    public void product (ObservableList<Product> products) {
+    public String userInfo (String userID, Label uAccount) {
         try {
+            pst = dbConnection.getConnection().prepareStatement(query.getUserInfo());
+            pst.setString(1, userID);
+            rs = pst.executeQuery();
+
+            if (rs.first()) {
+                System.out.println("Print: " + rs.getString("Username"));
+                uAccount.setText("Hello, " + rs.getString("Username"));
+            }
+
+        }catch (SQLException ex) {
+            Message.loginFailed("Exception", ex.getMessage());
+        }finally {
+            try {
+                dbConnection.getConnection().close();
+            }catch (SQLException sql) {
+                Message.loginFailed("SQL-Exception", sql.getMessage());
+            }
+        }
+        return null;
+    }
+
+    public void product (ObservableList<Product> products, String userID, Label uAccount) {
+        try {
+            System.out.println("Print: " + userID);
+            if (uAccount.getText() != null && userID != null) {
+                System.out.println("Print: " + userID);
+                pst = dbConnection.getConnection().prepareStatement(query.getUserInfo());
+                pst.setString(1, userID);
+                rs = pst.executeQuery();
+
+                if (rs.first()) {
+                    System.out.println("Print: " + rs.getString("Username"));
+                    uAccount.setText("Hello, " + rs.getString("Username"));
+                }
+//                userInfo(userID, uAccount);
+            }
             pst = dbConnection.getConnection().prepareStatement(query.getLoadProduct());
             rs = pst.executeQuery();
 

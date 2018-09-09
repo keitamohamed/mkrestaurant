@@ -84,10 +84,10 @@
             <Label fx:id="uAccount" layoutX="915.0" layoutY="16.0" text="Account" />
          </children>
       </Pane>
-      <Pane fx:id="popUp" layoutX="881.0" layoutY="43.0" prefHeight="84.0" prefWidth="120.0">
+      <Pane fx:id="popUp" layoutX="881.0" layoutY="43.0">
          <children>
             <Button fx:id="logout" layoutX="12.0" layoutY="39.0" mnemonicParsing="false" onAction="#logOut" text="Sign Out" />
-            <Button fx:id="account" layoutX="14.0" mnemonicParsing="false" text="Account" />
+            <Button fx:id="account" layoutX="14.0" mnemonicParsing="false" text="Account Info" />
          </children>
       </Pane>
    </children>

@@ -5,12 +5,19 @@ public class SQLQuery {
     private String loadProduct;
     private String updateProduct;
     private String insertProduct;
+    private String userInfo;
 
     public SQLQuery(){}
 
     public String getUserLogin() {
         return "SELECT * FROM User " +
                 "WHERE Username = ? AND Password = ?";
+    }
+
+    public String getUserInfo() {
+        return "SELECT Username" +
+                "FROM User" +
+                "WHERE UserID = ?";
     }
 
     public String getLoadProduct() {
