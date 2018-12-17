@@ -22,15 +22,15 @@
             </Pane>
          </children>
       </GridPane>
-      <Pane fx:id="leftPane" layoutX="5.0" layoutY="68.0" prefHeight="552.0" prefWidth="336.0" style="-fx-border-width: 0 2 2 0; -fx-border-color: red;">
+      <Pane fx:id="leftPane" layoutX="5.0" layoutY="68.0" prefHeight="552.0" prefWidth="408.0" style="-fx-border-width: 0 2 2 0; -fx-border-color: red;">
          <children>
-            <Label fx:id="name" layoutX="96.0" layoutY="35.0" style="-fx-font-size: 20px; -fx-font-family: Apple Chancery, cursive; -fx-font-weight: bold;" text="MK Restaurant " />
+            <Label fx:id="name" layoutX="121.0" layoutY="25.0" style="-fx-font-size: 20px; -fx-font-family: Apple Chancery, cursive; -fx-font-weight: bold;" text="MK Restaurant " />
             <Label layoutX="14.0" layoutY="158.0" text="Order Places" />
-            <TableView layoutX="7.0" layoutY="211.0" prefHeight="326.0" prefWidth="323.0">
+            <TableView layoutX="7.0" layoutY="211.0" prefHeight="326.0" prefWidth="373.0">
               <columns>
                 <TableColumn prefWidth="88.0" text="Order #" />
-                <TableColumn prefWidth="124.0" text="CustName" />
-                  <TableColumn prefWidth="110.0" text="Cust Num" />
+                <TableColumn prefWidth="179.0" text="CustName" />
+                  <TableColumn prefWidth="105.0" text="Cust Num" />
               </columns>
             </TableView>
          </children>
