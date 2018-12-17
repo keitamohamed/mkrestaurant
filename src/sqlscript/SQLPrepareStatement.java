@@ -77,15 +77,12 @@ public class SQLPrepareStatement {
 
     public void product (ObservableList<Product> products, String userID, Label uAccount) {
         try {
-            System.out.println("Print: " + userID);
             if (uAccount.getText() != null && userID != null) {
-                System.out.println("Print: " + userID);
                 pst = dbConnection.getConnection().prepareStatement(query.getUserInfo());
                 pst.setString(1, userID);
                 rs = pst.executeQuery();
 
                 if (rs.first()) {
-                    System.out.println("Print: " + rs.getString("Username"));
                     uAccount.setText("Hello, " + rs.getString("Username"));
                 }
 //                userInfo(userID, uAccount);

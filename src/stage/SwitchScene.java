@@ -30,38 +30,36 @@ public class SwitchScene {
             stage.setOnCloseRequest(e -> stage.close());
         }catch (IOException io) {
             System.out.println("IO-Exception occur: " + io.getMessage());
-            io.printStackTrace();
+            //io.printStackTrace();
         }
     }
 
     @FXML
-    public static void logOut(Event e) {
+    public static void logInAndLogOut(Event e) {
         try {
             ((Node)e.getSource()).getScene().getWindow().hide();
-            Parent main = FXMLLoader.load(SwitchScene.class.getResource("../fxml/Main.fxml"));
+            Parent main = FXMLLoader.load(SwitchScene.class.getResource("fxml/MainIndex.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(main));
             stage.getScene().getStylesheets().add(SwitchScene.class.getResource("../style/Main.css").toExternalForm());
             stage.show();
-        }catch (IOException io) {
-            System.out.println("Io-Exception occur: " + io.getMessage());
+        }catch (IOException | NullPointerException io) {
+            System.out.println(io.getMessage());
 
-        }catch (NullPointerException nullPoint) {
-            System.out.println("Null-Point-Exception occur: " + nullPoint.getMessage());
         }
     }
 
     private static String getFXML(String name, boolean admin) {
         if (name.equals("Main") && !admin) {
-            title = "Login";
-            return "../fxml/Login.fxml";
+            title = "Login Index";
+            return "/fxml/LoginIndex.fxml";
         }
         else if ((name.equals("Login") || name.equals("Admin")) && !admin) {
-            title = "Main";
-            return "../fxml/Main.fxml";
+            title = "Main Index";
+            return "/fxml/MainIndex.fxml";
         }
-        title = "Employee";
-        return "../fxml/Admin.fxml";
+        title = "Employee Index";
+        return "/fxml/AdminIndex.fxml";
     }
 
     private static String getStyleSheet(String name, boolean admin) {
@@ -74,9 +72,9 @@ public class SwitchScene {
 
     private static void sendUserID(String userID, boolean admin) {
         if (admin) {
-            Admin.receiveUserID(userID);
+            Admin.getUserID(userID);
             return;
         }
-        Main.receiveUserID(userID);
+        Main.getUserID(userID);
     }
 }

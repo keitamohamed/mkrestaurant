@@ -31,7 +31,7 @@ public class Admin {
     @FXML
     private Button logout, account;
     @FXML
-    private TextField searchP;
+    private TextField searchProduct;
     @FXML
     private Label uAccount;
     @FXML
@@ -41,13 +41,11 @@ public class Admin {
 
     @FXML
     private void initialize() {
-        loadProduct(products);
-        sortBy();
+        loadProducts(products);
+        FilterProductBySearchKeyword();
 //        uAccount.setText("Hello, " + statement.userInfo(userID));
 
-        uAccount.setOnMouseEntered(e -> {
-            popUp.setVisible(true);
-        });
+        uAccount.setOnMouseEntered(e -> popUp.setVisible(true));
 
         popUp.shapeProperty().addListener(observable -> {
             if (!popUp.isVisible()) {
@@ -55,36 +53,32 @@ public class Admin {
             }
         });
 
-        popUp.setOnMouseExited(event ->  {
-            popUp.setVisible(false);
-        });
+        popUp.setOnMouseExited(event -> popUp.setVisible(false));
     }
-    public static void receiveUserID(String id) {
+
+    public static void getUserID(String id) {
         userID = id;
     }
 
-    private void sortBy() {
+    private void FilterProductBySearchKeyword() {
         FilteredList<Product> filteredScoreData = new FilteredList<>(products, p -> true);
-        searchP.textProperty().addListener((observable, oldValue, newValue) -> {
-
-            filteredScoreData.setPredicate(p -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                String lowerCaseFilter = newValue.toLowerCase();
-                return (String.valueOf(p.getProductID()).toLowerCase().contains(lowerCaseFilter))
-                            || (p.getName().toLowerCase().contains(lowerCaseFilter));
-            });
-        });
+        searchProduct.textProperty().addListener((observable, oldValue, newValue) -> filteredScoreData.setPredicate(p -> {
+            if (newValue == null || newValue.isEmpty()) {
+                return true;
+            }
+            String lowerCaseFilter = newValue.toLowerCase();
+            return (String.valueOf(p.getProductID()).toLowerCase().contains(lowerCaseFilter))
+                        || (p.getName().toLowerCase().contains(lowerCaseFilter));
+        }));
 
         SortedList<Product> sortedData = new SortedList<>(filteredScoreData);
         sortedData.comparatorProperty().bind(productTable.comparatorProperty());
         productTable.setItems(sortedData);
     }
 
-    private void loadProduct(ObservableList<Product> products) {
+    private void loadProducts(ObservableList<Product> products) {
         popUp.setVisible(false);
-        receiveUserID(userID);
+        getUserID(userID);
         statement.product(products, userID, uAccount);
         if (productTable.getItems().size() > 0) {
             productTable.getItems().clear();
@@ -99,7 +93,7 @@ public class Admin {
     }
 
     @FXML
-    private void logOut(Event event) {
+    private void logInAndLogOut(Event event) {
         ((Node)event.getSource()).getScene().getWindow().hide();
         switchStage(event);
     }

@@ -21,7 +21,7 @@
          <children>
             <Pane fx:id="topPane" prefHeight="41.0" prefWidth="1231.0">
                <children>
-                  <Button fx:id="logInNLogOut" layoutX="1060.0" layoutY="7.0" mnemonicParsing="false" onAction="#logOut" prefHeight="39.0" prefWidth="89.0" text="Sign In" />
+                  <Button fx:id="log" layoutX="1060.0" layoutY="7.0" mnemonicParsing="false" onAction="#logInAndLogOut" prefHeight="39.0" prefWidth="89.0" text="Sign In" />
                </children>
                <padding>
                   <Insets bottom="10.0" top="10.0" />
@@ -42,7 +42,7 @@
             </TableView>
             <Label fx:id="totalItemT" layoutX="3.0" layoutY="433.0" prefHeight="27.0" prefWidth="109.0" text="Total item" />
             <Label fx:id="discountT" layoutX="106.0" layoutY="433.0" prefHeight="27.0" prefWidth="101.0" text="Discount%" />
-            <Label fx:id="priceT" layoutX="191.0" layoutY="433.0" prefHeight="27.0" prefWidth="128.0" text="Item Price" />
+            <Label fx:id="priceT" layoutX="191.0" layoutY="433.0" prefHeight="27.0" prefWidth="128.0" text="Items Price" />
             <Label fx:id="totalItem" layoutX="29.0" layoutY="475.0" text="0" />
             <Label fx:id="discountPer" layoutX="124.0" layoutY="475.0" text="0 %" />
             <Label fx:id="sumPrice" layoutX="218.0" layoutY="475.0" text="0" />

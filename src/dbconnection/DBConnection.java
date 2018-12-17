@@ -41,6 +41,7 @@ public class DBConnection implements DBCInterface{
             Message.loginFailed("No-Such-Method-Exaction", e.getMessage());
         } catch (IllegalAccessException | IOException | InstantiationException | ClassNotFoundException e) {
             e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         try {

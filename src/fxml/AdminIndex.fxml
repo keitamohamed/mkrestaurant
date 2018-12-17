@@ -35,15 +35,15 @@
             </TableView>
          </children>
       </Pane>
-      <TableView fx:id="productTable" layoutX="355.0" layoutY="116.0" prefHeight="488.0" prefWidth="713.0">
+      <TableView fx:id="productTable" layoutX="453.0" layoutY="109.0" prefHeight="488.0" prefWidth="615.0">
         <columns>
-          <TableColumn fx:id="productID" prefWidth="128.0" resizable="false" text="Product ID" />
-          <TableColumn fx:id="productName" prefWidth="355.0" resizable="false" text="Name" />
-            <TableColumn fx:id="productQuantity" prefWidth="100.0" resizable="false" text="Quantity" />
-            <TableColumn fx:id="productPrice" prefWidth="129.0" resizable="false" text="Price" />
+          <TableColumn fx:id="productID" prefWidth="150.0" resizable="false" text="Product ID" />
+          <TableColumn fx:id="productName" prefWidth="252.0" resizable="false" text="Name" />
+            <TableColumn fx:id="productQuantity" prefWidth="119.0" resizable="false" text="Quantity" />
+            <TableColumn fx:id="productPrice" prefWidth="92.0" resizable="false" text="Price" />
         </columns>
       </TableView>
-      <TextField fx:id="searchP" layoutX="813.0" layoutY="65.0" prefHeight="27.0" prefWidth="255.0" promptText="Search product by key" />
+      <TextField fx:id="searchProduct" layoutX="813.0" layoutY="65.0" prefHeight="27.0" prefWidth="255.0" promptText="Search product by key" />
       <Pane fx:id="topPane" layoutX="-12.0" layoutY="-8.0" prefHeight="53.0" prefWidth="1137.0">
          <children>
             <MenuBar layoutX="14.0" layoutY="10.0" prefHeight="39.0" prefWidth="300.0">
@@ -86,7 +86,7 @@
       </Pane>
       <Pane fx:id="popUp" layoutX="881.0" layoutY="43.0">
          <children>
-            <Button fx:id="logout" layoutX="12.0" layoutY="39.0" mnemonicParsing="false" onAction="#logOut" text="Sign Out" />
+            <Button fx:id="log" layoutX="12.0" layoutY="39.0" mnemonicParsing="false" onAction="#logInAndLogOut" text="Sign Out" />
             <Button fx:id="account" layoutX="14.0" mnemonicParsing="false" text="Account Info" />
          </children>
       </Pane>
