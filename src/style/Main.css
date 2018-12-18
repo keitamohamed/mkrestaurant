@@ -1,15 +1,49 @@
 
 * {
-    -fx-text-color: #000;
+    -fx-text-color: #000000;
     -fx-primary-bb-color: #434549;
+    -fx-primarycolor: #99e248;
     -fx-primary-bb-text: #fff;
     -fx-secondarytext: #ff4d4d;
     -fx-primaryheader: #232F3D;
+    -fx-primaryfamily: "Times New Roman", Times, serif;
 }
 
 .scroll-pane {
     -fx-background-color: transparent;
-    -fx-padding: 0 0 0 10px;
+    fx-control-inner-background: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.scroll-pane:focused {
+    fx-control-inner-background: transparent;
+    -fx-background-insets: 0;
+}
+
+.scroll-pane > .corner{
+    fx-control-inner-background: transparent;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+
+}
+
+.scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: -fx-primarycolor;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
 }
 
 .table-view {
@@ -19,14 +53,13 @@
 }
 
 .table-view .column-header {
-    -fx-background-color: #14a816;
+    -fx-background-color: -fx-primarycolor;
     -fx-border-width: 0 0 3 0;
 }
 
 .table-view .column-header .label{
-    -fx-text-fill: #fff;
     -fx-font-size: 18px;
-    -fx-font-weight: bold;
+    -fx-font-family: -fx-primaryfamily;
 }
 
 .table-view .table-row-cell {
@@ -86,7 +119,7 @@
 
 .button {
     -fx-font-size: 18px;
-    -fx-font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+    -fx-font-family: -fx-primaryfamily;
     -fx-background-color: transparent;
 }
 
@@ -106,7 +139,7 @@
 
 #topPane .button {
     -fx-font-size: 18px;
-    -fx-font-family: "Times New Roman";
+    -fx-font-family: -fx-primaryfamily;
 }
 
 #topPane .button:hover {
@@ -129,17 +162,8 @@
 
 #flowPane .label {
     -fx-font-size: 16px;
-    -fx-font-family: "Times New Roman";
+    -fx-font-family: -fx-primaryfamily;
     -fx-text-fill: -fx-text-color;
-}
-
-#topPane, #footer {
-    -fx-background-color: #99e248;
-}
-
-#footer .label{
-    -fx-font-size: 18px;
-    -fx-font-family: "Times New Roman";
 }
 
 #flowPane .button {
@@ -158,7 +182,7 @@
 /*==============Styling all the Label==============*/
 #totalItemT, #discountT, #priceT, #totalT {
     -fx-font-size: 15px;
-    -fx-font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
+    -fx-font-family: -fx-primaryfamily;
     -fx-font-weight: bold;
     -fx-alignment: center;
     -fx-border-width: 2 0 2 0;
@@ -168,19 +192,19 @@
 
 #totalItem, #discount, #totalPrice, #discountPer, #sumPrice {
     -fx-font-size: 16px;
-    -fx-font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
+    -fx-font-family: -fx-primaryfamily;
     -fx-alignment: center;
 }
 
 #rName {
     -fx-font-size: 20px;
-    -fx-font-family: "Apple Chancery", cursive;
+    -fx-font-family: -fx-primaryfamily;
     -fx-font-weight: bold;
 }
 
 #rAddress, #rPhone{
     -fx-font-size: 15px;
-    -fx-font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
+    -fx-font-family: -fx-primaryfamily;
 }
 
 /*================Buttons style==============*/
@@ -207,4 +231,13 @@
 
 #checkOut {
     -fx-background-image: url("/image/icon/checkout.png");
+}
+
+#topPane, #footer {
+    -fx-background-color: -fx-primarycolor;
+}
+
+#footer .label{
+    -fx-font-size: 18px;
+    -fx-font-family: -fx-primaryfamily;
 }

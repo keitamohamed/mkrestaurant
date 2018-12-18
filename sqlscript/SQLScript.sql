@@ -70,7 +70,11 @@ VALUE (78232, 'Lays, Sun and Jalapeno Chip', 1, 3.78, 'chips'),
       (97783, 'Golden valley Water', 13, 1.50, 'golden-valley'),
       (33178, 'Orange', 89, 3.89, 'orange'),
       (45543, 'Orange drink', 23, 2.49, 'orange-drink'),
-      (77563, 'Oreo Cookie', 6, 3.67, 'oreo');
+      (99701, 'Creamy Peanut Butter', 15, 4.89, 'cadia-peanut-butter'),
+      (110021, 'Natural Peanut Butter', 4, 7.34, 'crunchy-peanut-butter'),
+      (77563, 'Oreo Cookie', 6, 3.67, 'oreo'),
+      (00172, 'KP Jumbo Salted Peanut', 9, 2.32, 'jumbo-salted-peanut'),
+      (77007, 'KP Salted Peanut', 11, 2.98, 'original-salted-peanut');
 
 
 

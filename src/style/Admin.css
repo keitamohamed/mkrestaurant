@@ -2,7 +2,8 @@
 * {
     -fx-primarytext: #fff;
     -fx-primarysc: #413135;
-    -fx-primarybc: #5e5f6b;
+    -fx-primarybc: #232F3E;
+    -fx-primafyfamily: "Times New Roman", Times, serif;
 }
 
 .table-view {
@@ -12,7 +13,7 @@
 
 .table-view .column-header {
     -fx-border-width: 0 0 1 0;
-    -fx-background-color: #ff4d4d;
+    -fx-background-color: #5e5f6b;
 }
 
 .table-view .column-header .label{
@@ -25,7 +26,7 @@
 .table-view .table-row-cell {
     -fx-background-color: transparent;
     -fx-border-width: 1 0 1 0;
-    -fx-border-color: #ff4d4d;
+    /*-fx-border-color: #ff4d4d;*/
 }
 
 .table-view .table-row-cell:odd{
@@ -158,4 +159,13 @@
     -fx-border-width: 0 1 1 1;
     -fx-border-style: dashed;
     -fx-background-color: transparent;
+}
+
+#footer {
+    -fx-background-color: -fx-primarybc;
+}
+
+#footer .label{
+    -fx-font-family: -fx-primafyfamily;
+
 }

@@ -15,16 +15,16 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Pane prefHeight="45.0" prefWidth="1137.0" style="-fx-background-color: #5e5f6b;">
+            <Pane fx:id="footer" prefHeight="45.0" prefWidth="1137.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="379.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-text-fill: #FFF; -fx-font-size: 16px;" text="Copyright © 2018. All right reserved. Powered by M.K Platform" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="379.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-text-fill: #FFF; -fx-font-size: 16px;" text="Copyright © 2018. All right reserved. Powered by M.Keita Platform" />
                </children>
             </Pane>
          </children>
       </GridPane>
       <Pane fx:id="leftPane" layoutX="5.0" layoutY="68.0" prefHeight="552.0" prefWidth="408.0" style="-fx-border-width: 0 2 2 0; -fx-border-color: red;">
          <children>
-            <Label fx:id="name" layoutX="121.0" layoutY="25.0" style="-fx-font-size: 20px; -fx-font-family: Apple Chancery, cursive; -fx-font-weight: bold;" text="MK Restaurant " />
+            <Label fx:id="name" layoutX="96.0" layoutY="21.0" style="-fx-font-size: 20px; -fx-font-family: Apple Chancery, cursive; -fx-font-weight: bold;" text="M.Keita Online Store" />
             <Label layoutX="14.0" layoutY="158.0" text="Order Places" />
             <TableView layoutX="7.0" layoutY="211.0" prefHeight="326.0" prefWidth="373.0">
               <columns>
