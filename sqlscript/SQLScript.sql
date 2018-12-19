@@ -1,8 +1,10 @@
 DROP DATABASE IF EXISTS OnLineStore;
+
 CREATE DATABASE OnLineStore;
+
 USE OnLineStore;
 
-CREATE TABLE User (
+CREATE TABLE UserTable(
   UserID INT NOT NULL,
   FirstName VARCHAR(60) NOT NULL,
   LastName VARCHAR(60) NOT NULL,
@@ -13,23 +15,26 @@ CREATE TABLE User (
   PRIMARY KEY (UserID)
 )ENGINE = innoDB;
 
-CREATE TABLE UserInfo(
+CREATE TABLE UserInfoTable(
+  ID INT NOT NULL,
   UserID INT NOT NULL,
   UserAddress VARCHAR(100) NOT NULL,
   City VARCHAR(20) NOT NULL,
   State VARCHAR(3) NOT NULL,
-  Zipcode INT NOT NULL
+  Zipcode INT NOT NULL,
+
+  PRIMARY KEY(ID)
 )ENGINE = innoDB;
 
-CREATE TABLE ShippingAddress (
-  SID INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE SAddressTable (
+  ShappingID INT NOT NULL,
   UID INT NOT NULL,
-  SAddress VARCHAR (150) NOT NULL,
+  FullAddress VARCHAR (150) NOT NULL,
 
-  PRIMARY KEY (SID)
+  PRIMARY KEY (ShappingID)
 )ENGINE = innoDB;
 
-CREATE TABLE Product (
+CREATE TABLE ProductTable (
   ProductID INT NOT NULL,
   PName VARCHAR (50) NOT NULL,
   Quantity INT NOT NULL,
@@ -39,8 +44,8 @@ CREATE TABLE Product (
   PRIMARY KEY (ProductID)
 )ENGINE = innoDB;
 
-CREATE TABLE POrder (
-  POrderID INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE OrderTable (
+  ProductID INT NOT NULL,
   OrderID INT NOT NULL,
   UserID INT NOT NULL,
   PID INT NOT NULL,
@@ -48,17 +53,22 @@ CREATE TABLE POrder (
   Price DECIMAL (6, 2) NOT NULL,
   ImageName VARCHAR (50) NULL,
 
-  PRIMARY KEY (POrderID)
+  PRIMARY KEY (ProductID)
 )ENGINE = innoDB;
 
-ALTER TABLE UserInfo ADD CONSTRAINT UserID_FK FOREIGN KEY (UserID) REFERENCES User (UserID);
-ALTER TABLE ShippingAddress ADD CONSTRAINT UID_FK FOREIGN KEY (UID) REFERENCES User (UserID);
-ALTER TABLE POrder ADD CONSTRAINT PID_FK FOREIGN KEY (PID) REFERENCES Product (ProductID);
+ALTER TABLE SAddressTable AUTO_INCREMENT = 100;
+ALTER TABLE UserInfoTable AUTO_INCREMENT = 10011;
+ALTER TABLE OrderTable AUTO_INCREMENT = 1120;
 
-INSERT INTO User (UserID, FirstName, LastName, UserName, Password, UserType)
+ALTER TABLE UserInfoTable ADD CONSTRAINT UserID_FK FOREIGN KEY (UserID) REFERENCES UserTable (UserID);
+ALTER TABLE SAddressTable ADD CONSTRAINT UID_FK FOREIGN KEY (UID) REFERENCES UserTable (UserID);
+ALTER TABLE OrderTable ADD CONSTRAINT PID_FK FOREIGN KEY (PID) REFERENCES ProductTable (ProductID);
+
+
+INSERT INTO UserTable (UserID, FirstName, LastName, UserName, Password, UserType)
 VALUE (25634, 'John', 'Smith', 'jSmith', '!2Smith', 'Admin'),
       (67234, 'Ashely', 'William', 'aWilliam', 'Ashely!23', 'Cust');
-INSERT INTO Product (ProductID, PName, Quantity, Price, ImageName)
+INSERT INTO ProductTable (ProductID, PName, Quantity, Price, ImageName)
 VALUE (78232, 'Lays, Sun and Jalapeno Chip', 1, 3.78, 'chips'),
       (67235, 'Chips Ahoy Cookie', 15, 5.37, 'chips-ahoy-cookie'),
       (75062, 'Pure-Life Water', 7, 3.98, 'pure-life-water'),

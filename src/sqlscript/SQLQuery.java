@@ -1,37 +1,32 @@
 package sqlscript;
 
 public class SQLQuery {
-    private String userLogin;
-    private String loadProduct;
-    private String updateProduct;
-    private String insertProduct;
-    private String userInfo;
 
     public SQLQuery(){}
 
     public String getUserLogin() {
-        return "SELECT * FROM User " +
+        return "SELECT * FROM UserTable " +
                 "WHERE Username = ? AND Password = ?";
     }
 
     public String getUserInfo() {
         return "SELECT Username" +
-                "FROM User" +
+                "FROM UserTable" +
                 "WHERE UserID = ?";
     }
 
     public String getLoadProduct() {
         return "SELECT ProductID, PName, Quantity, Price, ImageName " +
-                "FROM Product";
+                "FROM ProductTable";
     }
 
     public String getUpdateProduct() {
-        return "UPDATE Product SET Quantity = ?, Price = ?, ImageName = ? " +
+        return "UPDATE ProductTable SET Quantity = ?, Price = ?, ImageName = ? " +
                 "WHERE ProductID = ?";
     }
 
     public String getInsertProduct() {
-        return "INSERT INTO Product (ProductID, PName, Quantity, Price, ImageName) " +
+        return "INSERT INTO ProductTable (ProductID, PName, Quantity, Price, ImageName) " +
                 "VALUE (?, ?, ?, ?, ?)";
     }
 }

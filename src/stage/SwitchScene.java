@@ -1,7 +1,10 @@
 package stage;
 
+import blueprint.Cart;
 import controller.Admin;
+import controller.Checkout;
 import controller.Main;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +33,22 @@ public class SwitchScene {
             stage.setOnCloseRequest(e -> stage.close());
         }catch (IOException io) {
             System.out.println("IO-Exception occur: " + io.getMessage());
-            //io.printStackTrace();
+        }
+    }
+
+    public static void switchScene(ObservableList<Cart> order, String className, String loginStatic) {
+        try {
+            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(getFXML(className)));
+            orderList(order, loginStatic);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(anchorPane));
+            stage.setTitle(title);
+            stage.setResizable(false);
+            stage.getScene().getStylesheets().add(SwitchScene.class.getResource(getStyleSheet(className)).toExternalForm());
+            stage.show();
+            stage.setOnCloseRequest(e -> stage.close());
+        }catch (IOException io) {
+            System.out.println("IO-Exception occur: " + io.getMessage());
         }
     }
 
@@ -49,25 +67,41 @@ public class SwitchScene {
         }
     }
 
-    private static String getFXML(String name, boolean admin) {
-        if (name.equals("Main") && !admin) {
+    private static String getFXML(String className, boolean admin) {
+        if (className.equals("Main") && !admin) {
             title = "Login Index";
             return "/fxml/LoginIndex.fxml";
         }
-        else if ((name.equals("Login") || name.equals("Admin")) && !admin) {
+        else if ((className.equals("Login") || className.equals("Admin")) && !admin) {
             title = "Main Index";
             return "/fxml/MainIndex.fxml";
         }
+
         title = "Employee Index";
         return "/fxml/AdminIndex.fxml";
     }
 
-    private static String getStyleSheet(String name, boolean admin) {
-        if (name.equals("Main"))
+    private static String getFXML(String className) {
+        if (className.equals("Main")) {
+            title = "Checkout Index";
+            return "/fxml/CheckoutIndex.fxml";
+        }
+        title = "Main Index";
+        return "/fxml/MainIndex.fxml";
+    }
+
+    private static String getStyleSheet(String className, boolean admin) {
+        if (className.equals("Main"))
             return "../style/Login.css";
-        else if ((name.equals("Login") || name.equals("Admin")) && !admin)
+        else if ((className.equals("Login") || className.equals("Admin")) && !admin)
             return "../style/Main.css";
         return "../style/Admin.css";
+    }
+
+    private static String getStyleSheet(String className) {
+        if (className.equals("Main"))
+            return "../style/Checkout.css";
+        return "../style/Main.css";
     }
 
     private static void sendUserID(String userID, boolean admin) {
@@ -77,4 +111,11 @@ public class SwitchScene {
         }
         Main.getUserID(userID);
     }
+
+    private static void orderList(ObservableList<Cart> carts, String loginStatic){
+
+        Checkout.getOrderList(carts, loginStatic);
+    }
+
+
 }

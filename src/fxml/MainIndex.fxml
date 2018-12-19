@@ -50,7 +50,7 @@
             <Label fx:id="discount" layoutX="124.0" layoutY="551.0" text="0" />
             <Label fx:id="totalPrice" layoutX="219.0" layoutY="551.0" text="0" />
             <Label fx:id="totalT" layoutX="88.0" layoutY="512.0" prefHeight="27.0" prefWidth="225.0" text="Discount        Total Price" />
-            <Button fx:id="checkOut" layoutX="232.0" layoutY="588.0" mnemonicParsing="false" />
+            <Button fx:id="checkOut" layoutX="232.0" layoutY="588.0" mnemonicParsing="false" onAction="#checkoutOrder" />
             <ComboBox fx:id="numQuantity" layoutX="155.0" layoutY="379.0" prefHeight="39.0" prefWidth="164.0" promptText="Update Quantity " />
          </children></Pane>
       <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="358.0" layoutY="144.0" prefHeight="562.0" prefWidth="831.0" vbarPolicy="NEVER">

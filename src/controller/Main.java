@@ -111,7 +111,7 @@ public class Main {
             buttons.get(i).setOnAction(e -> {
                 for (Product p : products) {
                     if (Integer.parseInt(buttons.get(location).getText()) == p.getProductID()) {
-                        cartTable(p.getName(), p.getPrice());
+                        cartTable(Utility.getImageProduct(p.getImage(), 100, 75), p.getName(), p.getPrice());
                         if (!checkOut.isVisible() && !totalPrice.getText().equals("0")) {
                             checkOut.setVisible(true);
                         }
@@ -147,7 +147,7 @@ public class Main {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
     }
 
-    private void cartTable(String name, double price) {
+    private void cartTable(ImageView view, String name, double price) {
         for (Cart cart : ShoppingCarts) {
             if (ShoppingCarts.size() != 0) {
                 if (cart.getName().equals(name)) {
@@ -157,7 +157,7 @@ public class Main {
                 }
             }
         }
-        ShoppingCarts.add(new Cart(name, 1, price));
+        ShoppingCarts.add(new Cart(view, name, 1, price));
         pName.setCellValueFactory(new PropertyValueFactory<>("name"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -225,17 +225,24 @@ public class Main {
     }
 
     @FXML
+    private void checkoutOrder(Event event){
+        String className = this.getClass().getSimpleName();
+        ((Node)event.getSource()).getScene().getWindow().hide();
+        SwitchScene.switchScene(ShoppingCarts, className, log.getText().trim());
+    }
+
+    @FXML
     public void logInAndLogOut(Event event) {
         if (log.getText().equals("Sign In")) {
-            switchStage(event);
+            String className = this.getClass().getSimpleName();
+            switchStage(event, className);
         }
     }
 
     @FXML
-    private void switchStage(Event event) {
-        String className = this.getClass().getSimpleName();
+    private void switchStage(Event event, String type) {
         ((Node)event.getSource()).getScene().getWindow().hide();
-        SwitchScene.switchScene(className, null, false);
+        SwitchScene.switchScene(type, null, false);
     }
 
     public static void getUserID(String id) {
