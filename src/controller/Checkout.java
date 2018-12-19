@@ -40,12 +40,12 @@ public class Checkout {
 
     @FXML
     private void initialize(){
+        cartTable.setPlaceholder(new Label("To View Items, Click View Carts Items Button"));
         disableLoginField();
         disableSignUpField();
 
         message.setText(getMessage());
         submit.setOnAction(e -> System.out.println(loginStatic));
-
         submit.setOnAction(e -> {
             if (signUpNotFillOut()) {
                 message.setText("All fields are require. Please fill out all fields");
@@ -96,7 +96,7 @@ public class Checkout {
         if (imageViewP.isVisible()){
             disableLoginField();
         }
-
+        message.setText("");
         submit.setVisible(true); clearAll.setVisible(true);
         firstName.setVisible(true); lastName.setVisible(true);
         address.setVisible(true); city.setVisible(true);
@@ -122,7 +122,7 @@ public class Checkout {
         if (firstName.isVisible()) {
             disableSignUpField();
         }
-        message.setText(getMessage());
+        message.setText("");
         message.setTextFill(Color.web("#FFFF8D"));
         imageViewU.setVisible(true);
         imageViewP.setVisible(true);

@@ -10,13 +10,81 @@
     -fx-background-color: -fx-primarybc;
 }
 
+.label {
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-primarytexts;
+    -fx-font-family: -fx-primaryfamily;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border: none;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-view .column-header .label{
+    -fx-text-fill: -fx-secondary;
+    -fx-font-size: 18px;
+    -fx-background-color: -fx-primarybc;
+    -fx-font-family: -fx-primaryfamily;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-style: dashed;
+    -fx-border-color: -fx-primarytext;
+}
+
+.table-view .table-row-cell {
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+}
+
+.table-view .table-row-cell .text {
+    -fx-font-size: 15px;
+    -fx-fill: -fx-primarytext;
+}
+
+.table-view .table-row-cell:selected .text{
+    -fx-background-color: steelblue;
+    -fx-fill: -fx-primarytext;
+    -fx-font-weight: bolder;
+}
+
+.table-view .table-column{
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-padding: 10px 0 0 0;
+    -fx-border-width: 0 0 0 0;
+}
+
+.table-view .scroll-bar:horizontal,
+.table-view .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-insets: none;
+    -fx-background-radius: none;
+    -fx-background-color: transparent;
+}
+
+.table-view .scroll-bar .increment-arrow,
+.table-view .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
 .text-field {
     -fx-font-size: 16px;
     -fx-font-family: "Times New Roman";
     -fx-text-fill: -fx-primarytext;
     -fx-border-width: 0 0 1 0;
     -fx-border-style: dashed;
-    -fx-border-color: -fx-secondary;
+    -fx-border-color: -fx-primarytext;
     -fx-background-color: transparent;
 }
 
@@ -41,14 +109,8 @@
     -fx-font-size: 16px;
 }
 
-.label {
-    -fx-font-size: 16px;
-    -fx-text-fill: -fx-primarytexts;
-    -fx-font-family: -fx-primaryfamily;
-}
-
 #createMessage, #message{
-    -fx-text-fill: -fx-secondary;
+    -fx-text-fill: -fx-primarytext;
 }
 
 #userName, #password {
