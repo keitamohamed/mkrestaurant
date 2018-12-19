@@ -10,8 +10,8 @@
    <children>
       <TableView fx:id="cartTable" layoutX="67.0" layoutY="14.0" prefHeight="287.0" prefWidth="803.0">
         <columns>
-          <TableColumn fx:id="itemImage" minWidth="200.0" prefWidth="75.0" text="Image" />
-          <TableColumn fx:id="itemName" minWidth="200.0" prefWidth="330.0" text="Name" />
+          <TableColumn fx:id="itemImage" minWidth="200.0" prefWidth="75.0" text="Product Image" />
+          <TableColumn fx:id="itemName" minWidth="200.0" prefWidth="330.0" text="Product Name" />
             <TableColumn fx:id="itemQuantity" minWidth="127.0" prefWidth="127.0" text="Quantity" />
             <TableColumn fx:id="itemPrice" minWidth="152.0" prefWidth="152.0" text="Price" />
         </columns>
@@ -46,5 +46,6 @@
          </image>
       </ImageView>
       <Button fx:id="viewCartItem" layoutX="488.0" layoutY="333.0" mnemonicParsing="false" text="View Cart Items" />
+      <Label fx:id="viewMessage" layoutX="290.0" layoutY="149.0" text="Click View Cart Items to view all item in carts" />
    </children>
 </AnchorPane>

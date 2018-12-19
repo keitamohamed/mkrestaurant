@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import message.Message;
@@ -82,8 +81,11 @@ public class Main {
 
         numQuantity.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (numQuantity.getSelectionModel().getSelectedItem() != null) {
+                int productID = ShoppingCarts.get((Integer.parseInt(removeItem.getText()))).getProductID();
                 int quantity = numQuantity.getSelectionModel().getSelectedItem();
+                double price = getProductOriginalPrice(productID) * quantity;
                 ShoppingCarts.get((Integer.parseInt(removeItem.getText()))).setQuantity(quantity);
+                ShoppingCarts.get((Integer.parseInt(removeItem.getText()))).setPrice(Utility.roundPrice(price));
                 itemListTable.refresh();
                 calculateItemsTotalPrice(ShoppingCarts);
             }
@@ -111,7 +113,7 @@ public class Main {
             buttons.get(i).setOnAction(e -> {
                 for (Product p : products) {
                     if (Integer.parseInt(buttons.get(location).getText()) == p.getProductID()) {
-                        cartTable(Utility.getImageProduct(p.getImage(), 100, 75), p.getName(), p.getPrice());
+                        cartTable(p.getProductID(), Utility.getImageProduct(p.getImage(), 100, 75), p.getName(), p.getPrice());
                         if (!checkOut.isVisible() && !totalPrice.getText().equals("0")) {
                             checkOut.setVisible(true);
                         }
@@ -147,7 +149,7 @@ public class Main {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
     }
 
-    private void cartTable(ImageView view, String name, double price) {
+    private void cartTable(int productID, ImageView view, String name, double price) {
         for (Cart cart : ShoppingCarts) {
             if (ShoppingCarts.size() != 0) {
                 if (cart.getName().equals(name)) {
@@ -157,7 +159,7 @@ public class Main {
                 }
             }
         }
-        ShoppingCarts.add(new Cart(view, name, 1, price));
+        ShoppingCarts.add(new Cart(productID, view, name, 1, price));
         pName.setCellValueFactory(new PropertyValueFactory<>("name"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -207,6 +209,15 @@ public class Main {
             discount.setText("0");
         }
     }
+
+    private double getProductOriginalPrice(int productID){
+        for (Product product : products){
+            if (product.getProductID() == productID)
+                return product.getPrice();
+        }
+        return 0;
+    }
+
     private void loadData(ObservableList<Product> products) {
         statement.product(products, userID, new Label());
     }

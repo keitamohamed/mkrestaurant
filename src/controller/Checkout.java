@@ -21,7 +21,7 @@ public class Checkout {
     @FXML
     private TextField rPassword;
     @FXML
-    private Label message, incorrectLogin, createMessage;
+    private Label message, incorrectLogin, createMessage, viewMessage;
     @FXML
     private ImageView imageViewU, imageViewP;
     @FXML
@@ -40,9 +40,9 @@ public class Checkout {
 
     @FXML
     private void initialize(){
-        cartTable.setPlaceholder(new Label("To View Items, Click View Carts Items Button"));
         disableLoginField();
         disableSignUpField();
+        disableCartTable();
 
         message.setText(getMessage());
         submit.setOnAction(e -> System.out.println(loginStatic));
@@ -60,7 +60,11 @@ public class Checkout {
 
         });
 
-        viewCartItem.setOnAction(e -> cartTable());
+        viewCartItem.setOnAction(e -> {
+            viewMessage.setVisible(false);
+            cartTable();
+            enableCartTable();
+        });
     }
 
     @FXML
@@ -71,6 +75,15 @@ public class Checkout {
         itemPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         cartTable.setItems(cartList);
+    }
+
+    @FXML
+    private void disableCartTable(){
+        cartTable.setVisible(false);
+    }
+
+    private void enableCartTable(){
+        cartTable.setVisible(true);
     }
 
     @FXML

@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.ImageView;
 
 public class Cart {
+    private SimpleIntegerProperty productID;
     private SimpleStringProperty  name;
     private SimpleIntegerProperty quantity;
     private SimpleDoubleProperty price;
@@ -17,7 +18,8 @@ public class Cart {
         this.price = new SimpleDoubleProperty(p);
     }
 
-    public Cart(ImageView image, String n, int q, double p) {
+    public Cart(int pID, ImageView image, String n, int q, double p) {
+        this.productID = new SimpleIntegerProperty(pID);
         this.view = image;
         this.name = new SimpleStringProperty(n);
         this.quantity = new SimpleIntegerProperty(q);
@@ -27,6 +29,10 @@ public class Cart {
     @Override
     public String toString() {
         return " Name " + name + " Quantity " + quantity + " Price " + price;
+    }
+
+    public int getProductID() {
+        return productID.get();
     }
 
     public ImageView getView() {
@@ -47,5 +53,9 @@ public class Cart {
 
     public void setQuantity(int quantity) {
         this.quantity.set(quantity);
+    }
+
+    public void setPrice(double price) {
+        this.price.set(price);
     }
 }

@@ -33,8 +33,6 @@
     -fx-background-color: -fx-primarybc;
     -fx-font-family: -fx-primaryfamily;
     -fx-border-width: 0 0 2 0;
-    -fx-border-style: dashed;
-    -fx-border-color: -fx-primarytext;
 }
 
 .table-view .table-row-cell {
@@ -115,4 +113,9 @@
 
 #userName, #password {
     -fx-pref-width: 249;
+}
+
+#viewMessage {
+    -fx-text-fill: #FF5253;
+    -fx-border-color: transparent;
 }
