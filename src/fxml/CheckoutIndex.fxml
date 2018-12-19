@@ -24,23 +24,23 @@
       <TextField fx:id="state" layoutX="306.0" layoutY="485.0" promptText="State" />
       <TextField fx:id="zipcode" layoutX="63.0" layoutY="538.0" promptText="Zipcode" />
       <TextField fx:id="rUserName" layoutX="62.0" layoutY="636.0" promptText="Enter username" />
-      <TextField fx:id="userName" layoutX="373.0" layoutY="376.0" promptText="Enter username" />
-      <PasswordField fx:id="password" layoutX="373.0" layoutY="429.0" promptText="Enter password" />
-      <Button fx:id="login" layoutX="536.0" layoutY="511.0" mnemonicParsing="false" text="Login" />
+      <TextField fx:id="userName" layoutX="373.0" layoutY="390.0" promptText="Enter username" />
+      <PasswordField fx:id="password" layoutX="373.0" layoutY="443.0" promptText="Enter password" />
+      <Button fx:id="login" layoutX="536.0" layoutY="525.0" mnemonicParsing="false" text="Login" />
       <Button fx:id="submit" layoutX="427.0" layoutY="692.0" mnemonicParsing="false" text="Submit" />
       <Button fx:id="clearAll" layoutX="286.0" layoutY="692.0" mnemonicParsing="false" text="Clear All" />
-      <Label fx:id="incorrectLogin" layoutX="343.0" layoutY="481.0" text="Incorrect username or passworld" />
+      <Label fx:id="incorrectLogin" layoutX="343.0" layoutY="495.0" text="Incorrect username or passworld" />
       <TextField fx:id="rPassword" layoutX="294.0" layoutY="636.0" promptText="Enter password" />
       <Label fx:id="createMessage" layoutX="63.0" layoutY="597.0" text="Create A Login UserName and Password" />
       <Button fx:id="signUp" layoutX="650.0" layoutY="333.0" mnemonicParsing="false" onAction="#enableSignUpField" text="Sign Up" />
       <Button fx:id="myAccount" layoutX="745.0" layoutY="333.0" mnemonicParsing="false" onAction="#enableLoginField" text="My Account" />
-      <Button fx:id="forgetPassword" layoutX="335.0" layoutY="511.0" mnemonicParsing="false" text="Forget Password" />
-      <ImageView fx:id="imageViewU" fitHeight="25.0" fitWidth="30.0" layoutX="343.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="forgetPassword" layoutX="335.0" layoutY="525.0" mnemonicParsing="false" text="Forget Password" />
+      <ImageView fx:id="imageViewU" fitHeight="25.0" fitWidth="30.0" layoutX="343.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/icon/user.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imageViewP" fitHeight="25.0" fitWidth="30.0" layoutX="343.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageViewP" fitHeight="25.0" fitWidth="30.0" layoutX="343.0" layoutY="446.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/icon/Key-white.png" />
          </image>
