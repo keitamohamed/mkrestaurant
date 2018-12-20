@@ -56,14 +56,16 @@ public class Checkout {
             if (!signUpNotFillOut()) {
                 if (statement.setUserLogin(generateUserID, firstName.getText().trim(), lastName.getText().trim(),
                         rUserName.getText().trim(), rPassword.getText().trim(), "Customer")) {
-                    Message.successful(("Your Account Have Been Created " +
-                            "\nSuccessfully. Your Id is: " + generateUserID), 8);
+                    if (statement.setUserAddressInfo(generateUserID, address.getText().trim(), city.getText().trim(),
+                            state.getText().trim(), zipcode.getText().trim())) {
+                        Message.successful(("Your Account Have Been Created " +
+                                "\nSuccessfully. Your Id is: " + generateUserID), 8);
+                        return;
+                    }
                 }
             }
-            else {
-                message.setText("All fields are require. Please fill out all fields");
-                message.setTextFill(Color.rgb(255, 82, 83));
-            }
+            message.setText("All fields are require. Please fill out all fields");
+            message.setTextFill(Color.rgb(255, 82, 83));
         });
 
         login.setOnAction(e -> {

@@ -9,15 +9,20 @@ public class SQLQuery {
                 "WHERE Username = ? AND Password = ?";
     }
 
+    public String getUserInfo() {
+        return "SELECT Username" +
+                "FROM UserTable" +
+                "WHERE UserID = ?";
+    }
+
     public String setUserLogin() {
         return "INSERT INTO UserTable (UserID, FirstName, LastName, UserName, Password, UserType) " +
                 "VALUE (?, ?, ?, ?, ?, ?)";
     }
 
-    public String getUserInfo() {
-        return "SELECT Username" +
-                "FROM UserTable" +
-                "WHERE UserID = ?";
+    public String setUserAddressInfo() {
+        return "INSERT INTO UserAddressTable (UserID, UserAddress, City, State, Zipcode) " +
+                "VALUE (?, ?, ?, ?, ?)";
     }
 
     public String getLoadProduct() {

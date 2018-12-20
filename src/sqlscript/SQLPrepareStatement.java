@@ -130,6 +130,32 @@ public class SQLPrepareStatement {
         return false;
     }
 
+    public boolean setUserAddressInfo(int userID, String address, String city, String  state,
+                                String zipCode) {
+
+        openConnection();
+        try {
+            pst = dbConnection.getConnection().prepareStatement(query.setUserLogin());
+            pst.setInt(1, userID);
+            pst.setString(2, address);
+            pst.setString(3, city);
+            pst.setString(4, state);
+            pst.setString(5, zipCode);
+
+            pst.executeUpdate();
+            return true;
+        }catch (SQLException ex) {
+            Message.operationFailed(null, ex.getMessage());
+        }finally {
+            try {
+                dbConnection.getConnection().close();
+            }catch (SQLException sql) {
+                Message.operationFailed("SQL-Exception", sql.getMessage());
+            }
+        }
+        return false;
+    }
+
     public boolean insertOrderItems(ObservableList<Cart> carts, int orderID, int userID) {
         try {
 
@@ -155,5 +181,15 @@ public class SQLPrepareStatement {
             }
         }
         return false;
+    }
+
+    private void openConnection(){
+        if (dbConnection.getConnection() == null) {
+            try {
+                dbConnection = DBConnection.getInstance();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        }
     }
 }
