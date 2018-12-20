@@ -15,8 +15,8 @@ CREATE TABLE UserTable(
   PRIMARY KEY (UserID)
 )ENGINE = innoDB;
 
-CREATE TABLE UserInfoTable(
-  ID INT NOT NULL,
+CREATE TABLE UserAddressTable (
+  ID INT NOT NULL AUTO_INCREMENT,
   UserID INT NOT NULL,
   UserAddress VARCHAR(100) NOT NULL,
   City VARCHAR(20) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE UserInfoTable(
 )ENGINE = innoDB;
 
 CREATE TABLE SAddressTable (
-  ShappingID INT NOT NULL,
+  ShappingID INT NOT NULL AUTO_INCREMENT,
   UID INT NOT NULL,
   FullAddress VARCHAR (150) NOT NULL,
 
@@ -45,29 +45,29 @@ CREATE TABLE ProductTable (
 )ENGINE = innoDB;
 
 CREATE TABLE OrderTable (
-  ProductID INT NOT NULL,
+  GenerateID INT NOT NULL AUTO_INCREMENT,
   OrderID INT NOT NULL,
-  UserID INT NOT NULL,
+  UserID INT NULL,
   PID INT NOT NULL,
+  ProductName VARCHAR(150) NOT NULL,
   Quantity INT NOT NULL,
   Price DECIMAL (6, 2) NOT NULL,
-  ImageName VARCHAR (50) NULL,
 
-  PRIMARY KEY (ProductID)
+  PRIMARY KEY (GenerateID)
 )ENGINE = innoDB;
 
 ALTER TABLE SAddressTable AUTO_INCREMENT = 100;
-ALTER TABLE UserInfoTable AUTO_INCREMENT = 10011;
+ALTER TABLE UserAddressTable AUTO_INCREMENT = 1011;
 ALTER TABLE OrderTable AUTO_INCREMENT = 1120;
 
-ALTER TABLE UserInfoTable ADD CONSTRAINT UserID_FK FOREIGN KEY (UserID) REFERENCES UserTable (UserID);
+ALTER TABLE UserAddressTable ADD CONSTRAINT UserID_FK FOREIGN KEY (UserID) REFERENCES UserTable (UserID);
 ALTER TABLE SAddressTable ADD CONSTRAINT UID_FK FOREIGN KEY (UID) REFERENCES UserTable (UserID);
 ALTER TABLE OrderTable ADD CONSTRAINT PID_FK FOREIGN KEY (PID) REFERENCES ProductTable (ProductID);
 
 
 INSERT INTO UserTable (UserID, FirstName, LastName, UserName, Password, UserType)
-VALUE (25634, 'John', 'Smith', 'jSmith', '!2Smith', 'Admin'),
-      (67234, 'Ashely', 'William', 'aWilliam', 'Ashely!23', 'Cust');
+VALUE (256343, 'John', 'Smith', 'jSmith', '!2Smith', 'Admin'),
+      (672341, 'Ashely', 'William', 'aWilliam', 'Ashely!23', 'Customer');
 INSERT INTO ProductTable (ProductID, PName, Quantity, Price, ImageName)
 VALUE (78232, 'Lays, Sun and Jalapeno Chip', 1, 3.78, 'chips'),
       (67235, 'Chips Ahoy Cookie', 15, 5.37, 'chips-ahoy-cookie'),
@@ -83,7 +83,7 @@ VALUE (78232, 'Lays, Sun and Jalapeno Chip', 1, 3.78, 'chips'),
       (99701, 'Creamy Peanut Butter', 15, 4.89, 'cadia-peanut-butter'),
       (110021, 'Natural Peanut Butter', 4, 7.34, 'crunchy-peanut-butter'),
       (77563, 'Oreo Cookie', 6, 3.67, 'oreo'),
-      (00172, 'KP Jumbo Salted Peanut', 9, 2.32, 'jumbo-salted-peanut'),
+      (70172, 'KP Jumbo Salted Peanut', 9, 2.32, 'jumbo-salted-peanut'),
       (77007, 'KP Salted Peanut', 11, 2.98, 'original-salted-peanut');
 
 

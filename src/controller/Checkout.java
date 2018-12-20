@@ -7,13 +7,17 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import message.Message;
+import sqlscript.SQLPrepareStatement;
+
+import java.util.Random;
 
 public class Checkout {
 
     @FXML
     private Button submit, login, clearAll, forgetPassword;
     @FXML
-    private Button viewCartItem, signUp, myAccount;
+    private Button viewCartItem, signUp, myAccount, guessUser;
     @FXML
     private TextField firstName, lastName, userName, address;
     @FXML
@@ -35,6 +39,7 @@ public class Checkout {
     @FXML
     private TableColumn<Cart, Double> itemPrice;
 
+    private SQLPrepareStatement statement = new SQLPrepareStatement();
     private static ObservableList<Cart> cartList;
     private static String loginStatic;
 
@@ -45,9 +50,17 @@ public class Checkout {
         disableCartTable();
 
         message.setText(getMessage());
-        submit.setOnAction(e -> System.out.println(loginStatic));
+
         submit.setOnAction(e -> {
-            if (signUpNotFillOut()) {
+            int generateUserID = generateUserID();
+            if (!signUpNotFillOut()) {
+                if (statement.setUserLogin(generateUserID, firstName.getText().trim(), lastName.getText().trim(),
+                        rUserName.getText().trim(), rPassword.getText().trim(), "Customer")) {
+                    Message.successful(("Your Account Have Been Created " +
+                            "\nSuccessfully. Your Id is: " + generateUserID), 8);
+                }
+            }
+            else {
                 message.setText("All fields are require. Please fill out all fields");
                 message.setTextFill(Color.rgb(255, 82, 83));
             }
@@ -65,6 +78,20 @@ public class Checkout {
             cartTable();
             enableCartTable();
         });
+
+        guessUser.setOnAction(e -> {
+            insertOrder(guessUser.getText().trim());
+        });
+    }
+
+    @FXML
+    private void insertOrder(String userType){
+        int orderIDGenerated = generateOrderID();
+        if (userType.equals("Guess User"))
+            if (statement.insertOrderItems(cartList, orderIDGenerated,0))
+                Message.successful(("Data Insert Successfully and " +
+                        "your order id is: " + orderIDGenerated), 6);
+
     }
 
     @FXML
@@ -146,6 +173,18 @@ public class Checkout {
     }
 
     @FXML
+    private int generateOrderID() {
+        Random random = new Random();
+        return (random.nextInt(900000) + 900000);
+    }
+
+    @FXML
+    private int generateUserID() {
+        Random random = new Random();
+        return (random.nextInt(90000) + 90000);
+    }
+
+    @FXML
     private boolean loginFieldNotFillOut(){
         return userName.getText().isEmpty() || password.getText().isEmpty();
 
@@ -159,7 +198,7 @@ public class Checkout {
 
     private String getMessage(){
         return "Important: If you are not login, please click on My Account to login. " +
-                "If you do not have an Account, click\non the Sign Up button and " +
-                "create an Account";
+                "If you do not have an Account, click on the Sign Up\nbutton and create " +
+                "an Account, or Checkout as a Guess";
     }
 }

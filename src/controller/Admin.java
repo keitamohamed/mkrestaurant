@@ -79,7 +79,7 @@ public class Admin {
     private void loadProducts(ObservableList<Product> products) {
         popUp.setVisible(false);
         getUserID(userID);
-        statement.product(products, userID, uAccount);
+        statement.getProducts(products, userID, uAccount);
         if (productTable.getItems().size() > 0) {
             productTable.getItems().clear();
         }

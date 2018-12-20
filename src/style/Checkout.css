@@ -78,7 +78,7 @@
 
 .text-field {
     -fx-font-size: 16px;
-    -fx-font-family: "Times New Roman";
+    -fx-font-family: -fx-primaryfamily;
     -fx-text-fill: -fx-primarytext;
     -fx-border-width: 0 0 1 0;
     -fx-border-style: dashed;
@@ -104,7 +104,7 @@
 }
 
 #forgetPassword, #login{
-    -fx-font-size: 16px;
+    -fx-font-size: 18px;
 }
 
 #createMessage, #message{

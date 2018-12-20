@@ -28,12 +28,12 @@ public class Login {
 
         login.setOnAction( e -> {
             try {
-                boolean admin = statement.checkLogin(userName, password);
+                boolean admin = statement.checkLoginInfo(userName, password);
                 String className = this.getClass().getSimpleName();
                 ((Node)e.getSource()).getScene().getWindow().hide();
                 SwitchScene.switchScene(className, userName.getText(), admin);
 //                switchStage();
-//                if (statement.checkLogin(userName, password)) {
+//                if (statement.checkLoginInfo(userName, password)) {
 //                    incorrectLogin.setText("Admin login: " + userName.getText());
 //                }
             } catch (Throwable throwable) {

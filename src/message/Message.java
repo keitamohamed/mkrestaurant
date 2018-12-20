@@ -10,14 +10,14 @@ public class Message {
 
     public static void successful(String message, int second) {
         Notifications.create()
-                .darkStyle()
+                //.darkStyle()
                 .text(message)
                 .position(Pos.CENTER)
                 .hideAfter(Duration.seconds(second))
                 .show();
     }
 
-    public static void loginFailed(String title, String message) {
+    public static void operationFailed(String title, String message) {
         al = new Alert(Alert.AlertType.ERROR);
         al.setTitle(title);
         al.setHeaderText(null);

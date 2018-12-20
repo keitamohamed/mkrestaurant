@@ -9,6 +9,11 @@ public class SQLQuery {
                 "WHERE Username = ? AND Password = ?";
     }
 
+    public String setUserLogin() {
+        return "INSERT INTO UserTable (UserID, FirstName, LastName, UserName, Password, UserType) " +
+                "VALUE (?, ?, ?, ?, ?, ?)";
+    }
+
     public String getUserInfo() {
         return "SELECT Username" +
                 "FROM UserTable" +
@@ -20,13 +25,29 @@ public class SQLQuery {
                 "FROM ProductTable";
     }
 
-    public String getUpdateProduct() {
+    public String getOrderTableItems() {
+        return "SELECT OrderID, UserID, PID, Quantity, Price, ImageName" +
+                "FROM OrderTable";
+    }
+
+    public String getUserOrderItem() {
+        return "SELECT OrderID, UserID, PID, Quantity, Price, ImageName" +
+                "FROM OrderTable" +
+                "WHERE UserID = ?";
+    }
+
+    public String setUpdateProduct() {
         return "UPDATE ProductTable SET Quantity = ?, Price = ?, ImageName = ? " +
                 "WHERE ProductID = ?";
     }
 
-    public String getInsertProduct() {
+    public String setInsertProduct() {
         return "INSERT INTO ProductTable (ProductID, PName, Quantity, Price, ImageName) " +
                 "VALUE (?, ?, ?, ?, ?)";
+    }
+
+    public String setInsertOrderTable() {
+        return "INSERT INTO OrderTable (OrderID, UserID, PID, ProductName, Quantity, Price) " +
+                "VALUE (?, ?, ?, ?, ?, ?)";
     }
 }

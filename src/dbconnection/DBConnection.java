@@ -38,7 +38,7 @@ public class DBConnection implements DBCInterface{
             while (enumeration.hasMoreElements())
                 enumeration.nextElement();
         } catch (NoSuchMethodException | InvocationTargetException e) {
-            Message.loginFailed("No-Such-Method-Exaction", e.getMessage());
+            Message.operationFailed("No-Such-Method-Exaction", e.getMessage());
         } catch (IllegalAccessException | IOException | InstantiationException | ClassNotFoundException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -47,7 +47,7 @@ public class DBConnection implements DBCInterface{
         try {
             connection = DriverManager.getConnection((url + dbName), sName, sPassword);
         } catch (SQLException | NullPointerException e) {
-            Message.loginFailed("Connection Failed", e.getMessage());
+            Message.operationFailed("Connection Failed", e.getMessage());
         }
         return connection;
     }
@@ -67,7 +67,7 @@ public class DBConnection implements DBCInterface{
             url = properties.getProperty("url");
 
         }catch (Exception e) {
-            Message.loginFailed("Connection Failed", e.getMessage());
+            Message.operationFailed("Connection Failed", e.getMessage());
         }
         finally {
             assert inputStream != null;

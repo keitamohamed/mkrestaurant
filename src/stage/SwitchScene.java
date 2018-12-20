@@ -29,6 +29,7 @@ public class SwitchScene {
             stage.setTitle(title);
             stage.setResizable(false);
             stage.getScene().getStylesheets().add(SwitchScene.class.getResource(getStyleSheet(className, admin)).toExternalForm());
+            stage.getScene().getStylesheets().add(SwitchScene.class.getResource("../style/Message.css").toExternalForm());
             stage.show();
             stage.setOnCloseRequest(e -> stage.close());
         }catch (IOException io) {
@@ -45,6 +46,7 @@ public class SwitchScene {
             stage.setTitle(title);
             stage.setResizable(false);
             stage.getScene().getStylesheets().add(SwitchScene.class.getResource(getStyleSheet(className)).toExternalForm());
+            stage.getScene().getStylesheets().add(SwitchScene.class.getResource("../style/Message.css").toExternalForm());
             stage.show();
             stage.setOnCloseRequest(e -> stage.close());
         }catch (IOException io) {

@@ -1,5 +1,6 @@
 package sqlscript;
 
+import blueprint.Cart;
 import blueprint.Product;
 import dbconnection.DBConnection;
 import javafx.collections.ObservableList;
@@ -23,10 +24,10 @@ public class SQLPrepareStatement {
             if (dbConnection.getConnection() == null)
                 dbConnection = DBConnection.getInstance();
         }catch (Throwable te) {
-            Message.loginFailed("Throwable", te.getMessage());
+            Message.operationFailed("Throwable", te.getMessage());
         }
     }
-    public boolean checkLogin (TextField name, PasswordField password) {
+    public boolean checkLoginInfo(TextField name, PasswordField password) {
         try {
             pst = dbConnection.getConnection().prepareStatement(query.getUserLogin());
             pst.setString(1, name.getText().trim());
@@ -41,12 +42,12 @@ public class SQLPrepareStatement {
         }catch (SQLException ex) {
             String message = "Username: " + name.getText().trim() + ", password " + password.getText().trim() +
                     " is in correct. " + ex.getMessage();
-            Message.loginFailed("Exception", message);
+            Message.operationFailed("Exception", message);
         }finally {
             try {
                 dbConnection.getConnection().close();
             }catch (SQLException sql) {
-                Message.loginFailed("SQL-Exception", sql.getMessage());
+                Message.operationFailed("SQL-Exception", sql.getMessage());
             }
         }
         return false;
@@ -64,18 +65,18 @@ public class SQLPrepareStatement {
             }
 
         }catch (SQLException ex) {
-            Message.loginFailed("Exception", ex.getMessage());
+            Message.operationFailed("Exception", ex.getMessage());
         }finally {
             try {
                 dbConnection.getConnection().close();
             }catch (SQLException sql) {
-                Message.loginFailed("SQL-Exception", sql.getMessage());
+                Message.operationFailed("SQL-Exception", sql.getMessage());
             }
         }
         return null;
     }
 
-    public void product (ObservableList<Product> products, String userID, Label uAccount) {
+    public void getProducts(ObservableList<Product> products, String userID, Label uAccount) {
         try {
             if (uAccount.getText() != null && userID != null) {
                 pst = dbConnection.getConnection().prepareStatement(query.getUserInfo());
@@ -85,7 +86,6 @@ public class SQLPrepareStatement {
                 if (rs.first()) {
                     uAccount.setText("Hello, " + rs.getString("Username"));
                 }
-//                userInfo(userID, uAccount);
             }
             pst = dbConnection.getConnection().prepareStatement(query.getLoadProduct());
             rs = pst.executeQuery();
@@ -95,13 +95,65 @@ public class SQLPrepareStatement {
                         rs.getInt("Quantity"), rs.getDouble("Price"), rs.getString("ImageName")));
             }
         }catch (SQLException ex) {
-            Message.loginFailed("Exception", ex.getMessage());
+            Message.operationFailed("Exception", ex.getMessage());
         }finally {
             try {
                 dbConnection.getConnection().close();
             }catch (SQLException sql) {
-                Message.loginFailed("SQL-Exception", sql.getMessage());
+                Message.operationFailed("SQL-Exception", sql.getMessage());
             }
         }
+    }
+
+    public boolean setUserLogin(int userID, String fName, String lName, String  userName,
+                                String password, String userType) {
+        try {
+            pst = dbConnection.getConnection().prepareStatement(query.setUserLogin());
+            pst.setInt(1, userID);
+            pst.setString(2, fName);
+            pst.setString(3, lName);
+            pst.setString(4, userName);
+            pst.setString(5, password);
+            pst.setString(6, userType);
+
+            pst.executeUpdate();
+            return true;
+        }catch (SQLException ex) {
+            Message.operationFailed(null, ex.getMessage());
+        }finally {
+            try {
+                dbConnection.getConnection().close();
+            }catch (SQLException sql) {
+                Message.operationFailed("SQL-Exception", sql.getMessage());
+            }
+        }
+        return false;
+    }
+
+    public boolean insertOrderItems(ObservableList<Cart> carts, int orderID, int userID) {
+        try {
+
+            for (Cart item : carts) {
+                pst = dbConnection.getConnection().prepareStatement(query.setInsertOrderTable());
+                pst.setInt(1, orderID);
+                pst.setInt(2, userID);
+                pst.setInt(3, item.getProductID());
+                pst.setString(4, item.getName());
+                pst.setInt(5, item.getQuantity());
+                pst.setDouble(6, item.getPrice());
+
+                pst.executeUpdate();
+            }
+            return true;
+        }catch (SQLException ex) {
+            Message.operationFailed(null, ex.getMessage());
+        }finally {
+            try {
+                dbConnection.getConnection().close();
+            }catch (SQLException sql) {
+                Message.operationFailed("SQL-Exception", sql.getMessage());
+            }
+        }
+        return false;
     }
 }

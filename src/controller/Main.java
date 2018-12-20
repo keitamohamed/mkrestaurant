@@ -76,7 +76,7 @@ public class Main {
         removeItem.setOnAction(event -> {
             ShoppingCarts.remove(Integer.parseInt(removeItem.getText()));
             itemListTable.setItems(ShoppingCarts);
-            calculateItemsTotalPrice(ShoppingCarts);
+            Utility.calculatePrice(ShoppingCarts, sumPrice, totalPrice, discountPer, discount, totalItem);
         });
 
         numQuantity.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -87,7 +87,7 @@ public class Main {
                 ShoppingCarts.get((Integer.parseInt(removeItem.getText()))).setQuantity(quantity);
                 ShoppingCarts.get((Integer.parseInt(removeItem.getText()))).setPrice(Utility.roundPrice(price));
                 itemListTable.refresh();
-                calculateItemsTotalPrice(ShoppingCarts);
+                Utility.calculatePrice(ShoppingCarts, sumPrice, totalPrice, discountPer, discount, totalItem);
             }
         });
     }
@@ -165,49 +165,7 @@ public class Main {
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         itemListTable.setItems(ShoppingCarts);
-        calculateItemsTotalPrice(ShoppingCarts);
-    }
-
-    private void calculateItemsTotalPrice(ObservableList<Cart> carts) {
-        NumberFormat nf = NumberFormat.getCurrencyInstance();
-        double price = 0;
-        if (!totalItem.getText().isEmpty()) {
-            totalItem.setText("0");
-        }
-        for (Cart c : carts) {
-            totalItem.setText(String.valueOf((Integer.parseInt(totalItem.getText()) + c.getQuantity())));
-
-            if (sumPrice.getText().equals("0")) {
-                sumPrice.setText(nf.format((c.getQuantity() * c.getPrice())));
-                totalPrice.setText(nf.format((c.getQuantity() * c.getPrice())));
-            }
-            else {
-                price += (c.getQuantity() * c.getPrice());
-                if (price > 100) {
-                    double dPercent = .05;
-                    if (price >= 1000) {
-                        dPercent = .10;
-                    }
-                    discountPer.setText(String.valueOf(dPercent) + " %");
-                    discount.setText(nf.format(price * dPercent));
-
-                    sumPrice.setText(nf.format(price));
-                    totalPrice.setText(String.valueOf(nf.format(price - Double.parseDouble(discount.getText().substring(1)) )));
-
-                } else {
-                    sumPrice.setText(nf.format(price));
-                    totalPrice.setText(nf.format(price));
-                }
-            }
-
-        }
-        // If shopping cart is empty-Reset discount and price variables back to their default value
-        if (carts.size() == 0) {
-            sumPrice.setText("0");
-            totalPrice.setText("0");
-            discountPer.setText("0 %");
-            discount.setText("0");
-        }
+        Utility.calculatePrice(ShoppingCarts, sumPrice, totalPrice, discountPer, discount, totalItem);
     }
 
     private double getProductOriginalPrice(int productID){
@@ -219,7 +177,7 @@ public class Main {
     }
 
     private void loadData(ObservableList<Product> products) {
-        statement.product(products, userID, new Label());
+        statement.getProducts(products, userID, new Label());
     }
 
     private void disableCartQuantityField() {
@@ -230,6 +188,7 @@ public class Main {
         numQuantity.setVisible(false);
     }
 
+    @FXML
     private int generateProductID() {
         Random random = new Random();
         return (random.nextInt(90000) + 90000);
@@ -242,6 +201,13 @@ public class Main {
         SwitchScene.switchScene(ShoppingCarts, className, log.getText().trim());
     }
 
+    /**
+     * logInAndLogout Method is call to switch between stage only
+     * if the login button text is equal to "Sign In" for this class.
+     * And also the class name is pass into the switchStage Method
+     * to deterrent which fxmal to get
+     * @param event
+     */
     @FXML
     public void logInAndLogOut(Event event) {
         if (log.getText().equals("Sign In")) {
@@ -256,6 +222,13 @@ public class Main {
         SwitchScene.switchScene(type, null, false);
     }
 
+    /**
+     * The getUserID Method. When user login, getUserID is call inside
+     * the SwitchScene class to pass the user id in it after retrieve it
+     * from the database. This id will be use when the user want to change
+     * their info etc.
+     * @param id
+     */
     public static void getUserID(String id) {
         userID = id;
     }
