@@ -8,12 +8,12 @@ import org.controlsfx.control.Notifications;
 public class Message {
     private static Alert al;
 
-    public static void successful(String message, int second) {
+    public static void successful(String message, int minutes) {
         Notifications.create()
                 //.darkStyle()
                 .text(message)
                 .position(Pos.CENTER)
-                .hideAfter(Duration.seconds(second))
+                .hideAfter(Duration.minutes(minutes))
                 .show();
     }
 

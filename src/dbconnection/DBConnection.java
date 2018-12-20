@@ -13,7 +13,7 @@ public class DBConnection implements DBCInterface{
     private String sName, sPassword, dbName, drName, url;
     private static  DBConnection instance;
 
-    public static DBConnection getInstance() throws Throwable {
+    public static DBConnection getInstance() {
         if (instance == null){
             instance = new DBConnection();
         }

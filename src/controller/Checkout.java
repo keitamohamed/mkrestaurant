@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import message.Message;
 import sqlscript.SQLPrepareStatement;
@@ -13,11 +14,14 @@ import sqlscript.SQLPrepareStatement;
 import java.util.Random;
 
 public class Checkout {
+    private static String userID;
 
+    @FXML
+    private AnchorPane root;
     @FXML
     private Button submit, login, clearAll, forgetPassword;
     @FXML
-    private Button viewCartItem, signUp, myAccount, guessUser;
+    private Button viewCartItem, signUp, myAccount, submitOrder;
     @FXML
     private TextField firstName, lastName, userName, address;
     @FXML
@@ -41,38 +45,29 @@ public class Checkout {
 
     private SQLPrepareStatement statement = new SQLPrepareStatement();
     private static ObservableList<Cart> cartList;
-    private static String loginStatic;
 
     @FXML
     private void initialize(){
         disableLoginField();
         disableSignUpField();
         disableCartTable();
-
-        message.setText(getMessage());
-
-        submit.setOnAction(e -> {
-            int generateUserID = generateUserID();
-            if (!signUpNotFillOut()) {
-                if (statement.setUserLogin(generateUserID, firstName.getText().trim(), lastName.getText().trim(),
-                        rUserName.getText().trim(), rPassword.getText().trim(), "Customer")) {
-                    if (statement.setUserAddressInfo(generateUserID, address.getText().trim(), city.getText().trim(),
-                            state.getText().trim(), zipcode.getText().trim())) {
-                        Message.successful(("Your Account Have Been Created " +
-                                "\nSuccessfully. Your Id is: " + generateUserID), 8);
-                        return;
-                    }
-                }
+        root.setOnMouseEntered(e -> {
+            if (userID != null) {
+                submitOrder.setText("Submit Order");
+                disableUnnecessarilyField();
+                cartTable();
+                enableCartTable();
             }
-            message.setText("All fields are require. Please fill out all fields");
-            message.setTextFill(Color.rgb(255, 82, 83));
         });
+        message.setText(getMessage());
+        submit.setOnAction(e -> sendUserRegistration());
 
         login.setOnAction(e -> {
-            if (loginFieldNotFillOut()){
-                incorrectLogin.setVisible(true);
+            if (!loginFieldNotFillOut()){
+                statement.checkLoginInfo(userName, password.getText());
+                return;
             }
-
+            incorrectLogin.setVisible(true);
         });
 
         viewCartItem.setOnAction(e -> {
@@ -81,19 +76,43 @@ public class Checkout {
             enableCartTable();
         });
 
-        guessUser.setOnAction(e -> {
-            insertOrder(guessUser.getText().trim());
-        });
+        submitOrder.setOnAction(e -> insertOrder(submitOrder.getText().trim()));
+    }
+
+    @FXML
+    private void sendUserRegistration(){
+        int generateUserID = generateUserID();
+        if (!signUpNotFillOut()) {
+            if (statement.setUserLogin(generateUserID, firstName.getText().trim(), lastName.getText().trim(),
+                    rUserName.getText().trim(), rPassword.getText().trim(), "Customer")) {
+                if (statement.setUserAddressInfo(generateUserID, address.getText().trim(), city.getText().trim(),
+                        state.getText().trim(), zipcode.getText().trim())) {
+                    Message.successful(("Your Account Have Been Created " +
+                            "\nSuccessfully. Your Id is: " + generateUserID), 1);
+                    disableSignUpField();
+                    return;
+                }
+            }
+        }
+        message.setText("All fields are require. Please fill out all fields");
+        message.setTextFill(Color.rgb(255, 82, 83));
     }
 
     @FXML
     private void insertOrder(String userType){
         int orderIDGenerated = generateOrderID();
-        if (userType.equals("Guess User"))
-            if (statement.insertOrderItems(cartList, orderIDGenerated,0))
+        if (userType.equals("Guess User")) {
+            disableUnnecessarilyField();
+            if (statement.insertOrderItems(cartList, orderIDGenerated, 0))
                 Message.successful(("Data Insert Successfully and " +
-                        "your order id is: " + orderIDGenerated), 6);
+                        "your order id is: " + orderIDGenerated), 1);
+            return;
+        }
 
+        if (userID != null)
+            if (statement.insertOrderItems(cartList, orderIDGenerated, Integer.parseInt(userID)))
+                Message.successful(("Data Insert Successfully For User " +
+                        "ID: " + userID), 1);
     }
 
     @FXML
@@ -104,6 +123,17 @@ public class Checkout {
         itemPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         cartTable.setItems(cartList);
+    }
+
+    @FXML
+    private void disableUnnecessarilyField(){
+        disableLoginField();
+        disableSignUpField();
+        signUp.setVisible(false);
+        myAccount.setVisible(false);
+        message.setVisible(false);
+        viewCartItem.setVisible(false);
+        viewMessage.setVisible(false);
     }
 
     @FXML
@@ -193,9 +223,9 @@ public class Checkout {
     }
 
     @FXML
-    public static void getOrderList(ObservableList<Cart> cart, String lStatic) {
+    public static void getOrderList(ObservableList<Cart> cart, String id) {
         cartList = cart;
-        loginStatic = lStatic;
+        userID = id;
     }
 
     private String getMessage(){

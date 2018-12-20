@@ -154,7 +154,7 @@ public class Main {
             if (ShoppingCarts.size() != 0) {
                 if (cart.getName().equals(name)) {
                     Message.successful((name + " is already in your cart. " +
-                            "Select\nit in your car and update it quantity."), 5);
+                            "Select\nit in your car and update it quantity."), 1);
                     return;
                 }
             }
@@ -198,7 +198,7 @@ public class Main {
     private void checkoutOrder(Event event){
         String className = this.getClass().getSimpleName();
         ((Node)event.getSource()).getScene().getWindow().hide();
-        SwitchScene.switchScene(ShoppingCarts, className, log.getText().trim());
+        SwitchScene.switchScene(ShoppingCarts, className, userID);
     }
 
     /**

@@ -11,7 +11,7 @@ import sqlscript.SQLPrepareStatement;
 import stage.SwitchScene;
 
 public class Login {
-//    private DBConnection dbConnection = new DBConnection();
+
     private SQLPrepareStatement statement = new SQLPrepareStatement();
 
     @FXML
@@ -28,14 +28,10 @@ public class Login {
 
         login.setOnAction( e -> {
             try {
-                boolean admin = statement.checkLoginInfo(userName, password);
+                boolean admin = statement.checkLoginInfo(userName, password.getText());
                 String className = this.getClass().getSimpleName();
                 ((Node)e.getSource()).getScene().getWindow().hide();
                 SwitchScene.switchScene(className, userName.getText(), admin);
-//                switchStage();
-//                if (statement.checkLoginInfo(userName, password)) {
-//                    incorrectLogin.setText("Admin login: " + userName.getText());
-//                }
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }

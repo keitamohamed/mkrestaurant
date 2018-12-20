@@ -47,6 +47,6 @@
       </ImageView>
       <Button fx:id="viewCartItem" layoutX="488.0" layoutY="333.0" mnemonicParsing="false" text="View Cart Items" />
       <Label fx:id="viewMessage" layoutX="290.0" layoutY="149.0" text="Click View Cart Items to view all item in carts" />
-      <Button fx:id="guessUser" layoutX="740.0" layoutY="365.0" mnemonicParsing="false" text="Guess User" />
+      <Button fx:id="submitOrder" layoutX="740.0" layoutY="365.0" mnemonicParsing="false" text="Guess User" />
    </children>
 </AnchorPane>

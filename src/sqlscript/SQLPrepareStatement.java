@@ -27,11 +27,12 @@ public class SQLPrepareStatement {
             Message.operationFailed("Throwable", te.getMessage());
         }
     }
-    public boolean checkLoginInfo(TextField name, PasswordField password) {
+
+    public boolean checkLoginInfo(TextField name, String password) {
         try {
             pst = dbConnection.getConnection().prepareStatement(query.getUserLogin());
             pst.setString(1, name.getText().trim());
-            pst.setString(2, password.getText().trim());
+            pst.setString(2, password.trim());
             rs = pst.executeQuery();
 
             if (rs.first()) {
@@ -40,15 +41,9 @@ public class SQLPrepareStatement {
                     return true;
             }
         }catch (SQLException ex) {
-            String message = "Username: " + name.getText().trim() + ", password " + password.getText().trim() +
+            String message = "Username: " + name.getText().trim() + ", password " + password.trim() +
                     " is in correct. " + ex.getMessage();
             Message.operationFailed("Exception", message);
-        }finally {
-            try {
-                dbConnection.getConnection().close();
-            }catch (SQLException sql) {
-                Message.operationFailed("SQL-Exception", sql.getMessage());
-            }
         }
         return false;
     }
@@ -66,12 +61,6 @@ public class SQLPrepareStatement {
 
         }catch (SQLException ex) {
             Message.operationFailed("Exception", ex.getMessage());
-        }finally {
-            try {
-                dbConnection.getConnection().close();
-            }catch (SQLException sql) {
-                Message.operationFailed("SQL-Exception", sql.getMessage());
-            }
         }
         return null;
     }
@@ -96,12 +85,6 @@ public class SQLPrepareStatement {
             }
         }catch (SQLException ex) {
             Message.operationFailed("Exception", ex.getMessage());
-        }finally {
-            try {
-                dbConnection.getConnection().close();
-            }catch (SQLException sql) {
-                Message.operationFailed("SQL-Exception", sql.getMessage());
-            }
         }
     }
 
@@ -120,22 +103,14 @@ public class SQLPrepareStatement {
             return true;
         }catch (SQLException ex) {
             Message.operationFailed(null, ex.getMessage());
-        }finally {
-            try {
-                dbConnection.getConnection().close();
-            }catch (SQLException sql) {
-                Message.operationFailed("SQL-Exception", sql.getMessage());
-            }
         }
         return false;
     }
 
     public boolean setUserAddressInfo(int userID, String address, String city, String  state,
                                 String zipCode) {
-
-        openConnection();
         try {
-            pst = dbConnection.getConnection().prepareStatement(query.setUserLogin());
+            pst = dbConnection.getConnection().prepareStatement(query.setUserAddressInfo());
             pst.setInt(1, userID);
             pst.setString(2, address);
             pst.setString(3, city);
@@ -146,12 +121,6 @@ public class SQLPrepareStatement {
             return true;
         }catch (SQLException ex) {
             Message.operationFailed(null, ex.getMessage());
-        }finally {
-            try {
-                dbConnection.getConnection().close();
-            }catch (SQLException sql) {
-                Message.operationFailed("SQL-Exception", sql.getMessage());
-            }
         }
         return false;
     }
@@ -160,6 +129,7 @@ public class SQLPrepareStatement {
         try {
 
             for (Cart item : carts) {
+                if (userID == 0)
                 pst = dbConnection.getConnection().prepareStatement(query.setInsertOrderTable());
                 pst.setInt(1, orderID);
                 pst.setInt(2, userID);
@@ -173,23 +143,7 @@ public class SQLPrepareStatement {
             return true;
         }catch (SQLException ex) {
             Message.operationFailed(null, ex.getMessage());
-        }finally {
-            try {
-                dbConnection.getConnection().close();
-            }catch (SQLException sql) {
-                Message.operationFailed("SQL-Exception", sql.getMessage());
-            }
         }
         return false;
-    }
-
-    private void openConnection(){
-        if (dbConnection.getConnection() == null) {
-            try {
-                dbConnection = DBConnection.getInstance();
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
-        }
     }
 }
