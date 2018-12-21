@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -37,15 +36,4 @@ public class Login {
             }
         });
     }
-
-    private void logInAndLogOut(Event event) {
-       ((Node)event.getSource()).getScene().getWindow().hide();
-    }
-
-//    private void setConnection() throws Throwable {
-//        if (dbConnection.getConnection() == null) {
-//            dbConnection = DBConnection.getInstance();
-//        }
-//    }
-
 }
