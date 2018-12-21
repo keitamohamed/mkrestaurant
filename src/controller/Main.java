@@ -212,7 +212,8 @@ public class Main {
     public void logInAndLogOut(Event event) {
         if (log.getText().equals("Sign In")) {
             String className = this.getClass().getSimpleName();
-            switchStage(event, className);
+            ((Node)event.getSource()).getScene().getWindow().hide();
+            SwitchScene.switchScene(className, null, false);
         }
     }
 

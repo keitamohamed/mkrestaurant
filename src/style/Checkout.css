@@ -114,8 +114,3 @@
 #userName, #password {
     -fx-pref-width: 249;
 }
-
-#viewMessage {
-    -fx-text-fill: #FF5253;
-    -fx-border-color: transparent;
-}

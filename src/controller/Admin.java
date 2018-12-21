@@ -95,13 +95,7 @@ public class Admin {
     @FXML
     private void logInAndLogOut(Event event) {
         ((Node)event.getSource()).getScene().getWindow().hide();
-        switchStage(event);
-    }
-
-    private void switchStage(Event event) {
         String className = this.getClass().getSimpleName();
-        ((Node)event.getSource()).getScene().getWindow().hide();
         SwitchScene.switchScene(className, null, false);
     }
-
 }

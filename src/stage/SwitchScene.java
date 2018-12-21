@@ -5,14 +5,11 @@ import controller.Admin;
 import controller.Checkout;
 import controller.Main;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import utility.Location;
 
 import java.io.IOException;
 
@@ -22,7 +19,7 @@ public class SwitchScene {
 
     public static void switchScene(String className, String userID, boolean admin) {
         try {
-            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(getFXML(className, admin)));
+            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.location(className, admin)));
             sendUserID(userID, admin);
             Stage stage = new Stage();
             stage.setScene(new Scene(anchorPane));
@@ -39,7 +36,7 @@ public class SwitchScene {
 
     public static void switchScene(ObservableList<Cart> order, String className, String loginStatic) {
         try {
-            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(getFXML(className)));
+            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.location(className)));
             orderList(order, loginStatic);
             Stage stage = new Stage();
             stage.setScene(new Scene(anchorPane));
@@ -54,48 +51,11 @@ public class SwitchScene {
         }
     }
 
-    @FXML
-    public static void logInAndLogOut(Event e) {
-        try {
-            ((Node)e.getSource()).getScene().getWindow().hide();
-            Parent main = FXMLLoader.load(SwitchScene.class.getResource("fxml/MainIndex.fxml"));
-            Stage stage = new Stage();
-            stage.setScene(new Scene(main));
-            stage.getScene().getStylesheets().add(SwitchScene.class.getResource("../style/Main.css").toExternalForm());
-            stage.show();
-        }catch (IOException | NullPointerException io) {
-            System.out.println(io.getMessage());
-
-        }
-    }
-
-    private static String getFXML(String className, boolean admin) {
-        if (className.equals("Main") && !admin) {
-            title = "Login Index";
-            return "/fxml/LoginIndex.fxml";
-        }
-        else if ((className.equals("Login") || className.equals("Admin")) && !admin) {
-            title = "Main Index";
-            return "/fxml/MainIndex.fxml";
-        }
-
-        title = "Employee Index";
-        return "/fxml/AdminIndex.fxml";
-    }
-
-    private static String getFXML(String className) {
-        if (className.equals("Main")) {
-            title = "Checkout Index";
-            return "/fxml/CheckoutIndex.fxml";
-        }
-        title = "Main Index";
-        return "/fxml/MainIndex.fxml";
-    }
-
     private static String getStyleSheet(String className, boolean admin) {
-        if (className.equals("Main"))
+        if (className.equals("Main") && !admin)
             return "../style/Login.css";
-        else if ((className.equals("Login") || className.equals("Admin")) && !admin)
+        else if ((className.equals("Login") || className.equals("Admin")
+                || className.equals("Checkout")) && !admin )
             return "../style/Main.css";
         return "../style/Admin.css";
     }

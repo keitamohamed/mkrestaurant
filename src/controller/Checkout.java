@@ -2,7 +2,9 @@ package controller;
 
 import blueprint.Cart;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -10,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import message.Message;
 import sqlscript.SQLPrepareStatement;
+import stage.SwitchScene;
 
 import java.util.Random;
 
@@ -21,7 +24,7 @@ public class Checkout {
     @FXML
     private Button submit, login, clearAll, forgetPassword;
     @FXML
-    private Button viewCartItem, signUp, myAccount, submitOrder;
+    private Button signUp, myAccount, submitOrder;
     @FXML
     private TextField firstName, lastName, userName, address;
     @FXML
@@ -29,7 +32,7 @@ public class Checkout {
     @FXML
     private TextField rPassword;
     @FXML
-    private Label message, incorrectLogin, createMessage, viewMessage;
+    private Label message, incorrectLogin, createMessage;
     @FXML
     private ImageView imageViewU, imageViewP;
     @FXML
@@ -47,40 +50,34 @@ public class Checkout {
     private static ObservableList<Cart> cartList;
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         disableLoginField();
         disableSignUpField();
         disableCartTable();
         root.setOnMouseEntered(e -> {
+            cartTable();
+            enableCartTable();
             if (userID != null) {
                 submitOrder.setText("Submit Order");
                 disableUnnecessarilyField();
-                cartTable();
-                enableCartTable();
             }
         });
         message.setText(getMessage());
         submit.setOnAction(e -> sendUserRegistration());
 
         login.setOnAction(e -> {
-            if (!loginFieldNotFillOut()){
+            if (!loginFieldNotFillOut()) {
                 statement.checkLoginInfo(userName, password.getText());
                 return;
             }
             incorrectLogin.setVisible(true);
         });
 
-        viewCartItem.setOnAction(e -> {
-            viewMessage.setVisible(false);
-            cartTable();
-            enableCartTable();
-        });
-
-        submitOrder.setOnAction(e -> insertOrder(submitOrder.getText().trim()));
+        submitOrder.setOnAction(this::insertOrder);
     }
 
     @FXML
-    private void sendUserRegistration(){
+    private void sendUserRegistration() {
         int generateUserID = generateUserID();
         if (!signUpNotFillOut()) {
             if (statement.setUserLogin(generateUserID, firstName.getText().trim(), lastName.getText().trim(),
@@ -99,20 +96,21 @@ public class Checkout {
     }
 
     @FXML
-    private void insertOrder(String userType){
+    private void insertOrder(Event event) {
         int orderIDGenerated = generateOrderID();
-        if (userType.equals("Guess User")) {
+        if (userID == null) {
             disableUnnecessarilyField();
-            if (statement.insertOrderItems(cartList, orderIDGenerated, 0))
+            if (statement.insertOrderItems(cartList, orderIDGenerated, 0)) {
                 Message.successful(("Data Insert Successfully and " +
                         "your order id is: " + orderIDGenerated), 1);
-            return;
-        }
-
-        if (userID != null)
-            if (statement.insertOrderItems(cartList, orderIDGenerated, Integer.parseInt(userID)))
+            }
+        } else {
+            if (statement.insertOrderItems(cartList, orderIDGenerated, Integer.parseInt(userID))) {
                 Message.successful(("Data Insert Successfully For User " +
                         "ID: " + userID), 1);
+            }
+        }
+        logInAndLogOut(event);
     }
 
     @FXML
@@ -126,27 +124,25 @@ public class Checkout {
     }
 
     @FXML
-    private void disableUnnecessarilyField(){
+    private void disableUnnecessarilyField() {
         disableLoginField();
         disableSignUpField();
         signUp.setVisible(false);
         myAccount.setVisible(false);
         message.setVisible(false);
-        viewCartItem.setVisible(false);
-        viewMessage.setVisible(false);
     }
 
     @FXML
-    private void disableCartTable(){
+    private void disableCartTable() {
         cartTable.setVisible(false);
     }
 
-    private void enableCartTable(){
+    private void enableCartTable() {
         cartTable.setVisible(true);
     }
 
     @FXML
-    private boolean signUpNotFillOut(){
+    private boolean signUpNotFillOut() {
         return firstName.getText().isEmpty() || lastName.getText().isEmpty() ||
                 address.getText().isEmpty() || city.getText().isEmpty() ||
                 state.getText().isEmpty() || zipcode.getText().isEmpty() ||
@@ -155,31 +151,41 @@ public class Checkout {
 
     @FXML
     private void disableSignUpField() {
-        submit.setVisible(false); clearAll.setVisible(false);
-        firstName.setVisible(false); lastName.setVisible(false);
-        address.setVisible(false); city.setVisible(false);
-        state.setVisible(false); zipcode.setVisible(false);
-        rUserName.setVisible(false); rPassword.setVisible(false);
+        submit.setVisible(false);
+        clearAll.setVisible(false);
+        firstName.setVisible(false);
+        lastName.setVisible(false);
+        address.setVisible(false);
+        city.setVisible(false);
+        state.setVisible(false);
+        zipcode.setVisible(false);
+        rUserName.setVisible(false);
+        rPassword.setVisible(false);
         createMessage.setVisible(false);
     }
 
     @FXML
-    private void enableSignUpField(){
-        if (imageViewP.isVisible()){
+    private void enableSignUpField() {
+        if (imageViewP.isVisible()) {
             disableLoginField();
         }
         message.setText("");
-        submit.setVisible(true); clearAll.setVisible(true);
-        firstName.setVisible(true); lastName.setVisible(true);
-        address.setVisible(true); city.setVisible(true);
-        state.setVisible(true); zipcode.setVisible(true);
-        rUserName.setVisible(true); rPassword.setVisible(true);
+        submit.setVisible(true);
+        clearAll.setVisible(true);
+        firstName.setVisible(true);
+        lastName.setVisible(true);
+        address.setVisible(true);
+        city.setVisible(true);
+        state.setVisible(true);
+        zipcode.setVisible(true);
+        rUserName.setVisible(true);
+        rPassword.setVisible(true);
         createMessage.setVisible(true);
 
     }
 
     @FXML
-    private void disableLoginField(){
+    private void disableLoginField() {
         imageViewU.setVisible(false);
         imageViewP.setVisible(false);
         userName.setVisible(false);
@@ -190,7 +196,7 @@ public class Checkout {
     }
 
     @FXML
-    private void enableLoginField(){
+    private void enableLoginField() {
         if (firstName.isVisible()) {
             disableSignUpField();
         }
@@ -217,7 +223,7 @@ public class Checkout {
     }
 
     @FXML
-    private boolean loginFieldNotFillOut(){
+    private boolean loginFieldNotFillOut() {
         return userName.getText().isEmpty() || password.getText().isEmpty();
 
     }
@@ -228,9 +234,16 @@ public class Checkout {
         userID = id;
     }
 
-    private String getMessage(){
+    private String getMessage() {
         return "Important: If you are not login, please click on My Account to login. " +
                 "If you do not have an Account, click on the Sign Up\nbutton and create " +
                 "an Account, or Checkout as a Guess";
+    }
+
+    @FXML
+    private void logInAndLogOut(Event event) {
+        ((Node)event.getSource()).getScene().getWindow().hide();
+        String className = this.getClass().getSimpleName();
+        SwitchScene.switchScene(className, userID, false);
     }
 }

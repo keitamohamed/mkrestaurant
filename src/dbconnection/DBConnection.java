@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.*;
 
-public class DBConnection implements DBCInterface{
+public class DBConnection implements Interface {
     private InputStream inputStream;
     private Connection connection;
     private String sName, sPassword, dbName, drName, url;
@@ -74,4 +74,5 @@ public class DBConnection implements DBCInterface{
             inputStream.close();
         }
     }
+
 }
