@@ -1,7 +1,7 @@
 package stage;
 
 import blueprint.Cart;
-import controller.Admin;
+import controller.Employee;
 import controller.Checkout;
 import controller.Main;
 import javafx.collections.ObservableList;
@@ -15,17 +15,15 @@ import java.io.IOException;
 
 public class SwitchScene {
 
-    private static String title;
-
-    public static void switchScene(String className, String userID, boolean admin) {
+    public static void switchScene(String className, String userID, String userType) {
         try {
-            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.location(className, admin)));
-            sendUserID(userID, admin);
+            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.fxmlLocation(className, userType)));
+            sendUserID(userID, userType);
             Stage stage = new Stage();
             stage.setScene(new Scene(anchorPane));
-            stage.setTitle(title);
+            stage.setTitle(stageTitle(className, userType));
             stage.setResizable(false);
-            stage.getScene().getStylesheets().add(SwitchScene.class.getResource(getStyleSheet(className, admin)).toExternalForm());
+            stage.getScene().getStylesheets().add(SwitchScene.class.getResource(getStyleSheet(className, userType)).toExternalForm());
             stage.getScene().getStylesheets().add(SwitchScene.class.getResource("../style/Message.css").toExternalForm());
             stage.show();
             stage.setOnCloseRequest(e -> stage.close());
@@ -36,11 +34,11 @@ public class SwitchScene {
 
     public static void switchScene(ObservableList<Cart> order, String className, String loginStatic) {
         try {
-            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.location(className)));
+            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.fxmlLocation(className)));
             orderList(order, loginStatic);
             Stage stage = new Stage();
             stage.setScene(new Scene(anchorPane));
-            stage.setTitle(title);
+            stage.setTitle(subStageTitle(className));
             stage.setResizable(false);
             stage.getScene().getStylesheets().add(SwitchScene.class.getResource(getStyleSheet(className)).toExternalForm());
             stage.getScene().getStylesheets().add(SwitchScene.class.getResource("../style/Message.css").toExternalForm());
@@ -51,11 +49,11 @@ public class SwitchScene {
         }
     }
 
-    private static String getStyleSheet(String className, boolean admin) {
-        if (className.equals("Main") && !admin)
+    private static String getStyleSheet(String className, String userType) {
+        if (className.equals("Main") && !userType.equals("Employee"))
             return "../style/Login.css";
-        else if ((className.equals("Login") || className.equals("Admin")
-                || className.equals("Checkout")) && !admin )
+        else if ((className.equals("Login") || className.equals("Employee")
+                || className.equals("Checkout")) && !userType.equals("Employee"))
             return "../style/Main.css";
         return "../style/Admin.css";
     }
@@ -66,9 +64,27 @@ public class SwitchScene {
         return "../style/Main.css";
     }
 
-    private static void sendUserID(String userID, boolean admin) {
-        if (admin) {
-            Admin.getUserID(userID);
+    private static String stageTitle(String className, String userType){
+        if (className.equals("Main") && !userType.equals("Employee")) {
+            return "Login";
+        }
+        else if ((className.equals("Login") || className.equals("Employee")
+                || className.equals("Checkout")) && !userType.equals("Employee")) {
+            return "Main";
+        }
+        return "Employee";
+    }
+
+    private static String subStageTitle(String className){
+        if (className.equals("Main")) {
+            return "Checkout";
+        }
+        return "Main";
+    }
+
+    private static void sendUserID(String userID, String userType) {
+        if (userType.equals("Employee")) {
+            Employee.getUserID(userID);
             return;
         }
         Main.getUserID(userID);

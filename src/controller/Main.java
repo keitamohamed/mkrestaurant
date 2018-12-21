@@ -213,14 +213,14 @@ public class Main {
         if (log.getText().equals("Sign In")) {
             String className = this.getClass().getSimpleName();
             ((Node)event.getSource()).getScene().getWindow().hide();
-            SwitchScene.switchScene(className, null, false);
+            SwitchScene.switchScene(className, null, "Customer");
         }
     }
 
     @FXML
     private void switchStage(Event event, String type) {
         ((Node)event.getSource()).getScene().getWindow().hide();
-        SwitchScene.switchScene(type, null, false);
+        SwitchScene.switchScene(type, null, null);
     }
 
     /**

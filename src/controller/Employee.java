@@ -14,7 +14,7 @@ import javafx.scene.layout.Pane;
 import sqlscript.SQLPrepareStatement;
 import stage.SwitchScene;
 
-public class Admin {
+public class Employee {
     private static String userID;
     private SQLPrepareStatement statement = new SQLPrepareStatement();
 
@@ -43,8 +43,6 @@ public class Admin {
     private void initialize() {
         loadProducts(products);
         FilterProductBySearchKeyword();
-//        uAccount.setText("Hello, " + statement.userInfo(userID));
-
         uAccount.setOnMouseEntered(e -> popUp.setVisible(true));
 
         popUp.shapeProperty().addListener(observable -> {
@@ -96,6 +94,6 @@ public class Admin {
     private void logInAndLogOut(Event event) {
         ((Node)event.getSource()).getScene().getWindow().hide();
         String className = this.getClass().getSimpleName();
-        SwitchScene.switchScene(className, null, false);
+        SwitchScene.switchScene(className, null, "Customer");
     }
 }

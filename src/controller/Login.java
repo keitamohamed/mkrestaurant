@@ -24,13 +24,17 @@ public class Login {
 
     @FXML
     private void initialize() {
+        incorrectLogin.setVisible(false);
 
         login.setOnAction( e -> {
             try {
-                boolean admin = statement.checkLoginInfo(userName, password.getText());
+                String userType = statement.checkLoginInfo(userName, password.getText());
                 String className = this.getClass().getSimpleName();
-                ((Node)e.getSource()).getScene().getWindow().hide();
-                SwitchScene.switchScene(className, userName.getText(), admin);
+                if (userType != null) {
+                    ((Node)e.getSource()).getScene().getWindow().hide();
+                    SwitchScene.switchScene(className, userName.getText(), userType);
+                }
+                incorrectLogin.setVisible(true);
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }

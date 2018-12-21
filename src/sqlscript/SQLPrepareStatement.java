@@ -28,7 +28,7 @@ public class SQLPrepareStatement {
         }
     }
 
-    public boolean checkLoginInfo(TextField name, String password) {
+    public String checkLoginInfo(TextField name, String password) {
         try {
             pst = dbConnection.getConnection().prepareStatement(query.getUserLogin());
             pst.setString(1, name.getText().trim());
@@ -36,16 +36,15 @@ public class SQLPrepareStatement {
             rs = pst.executeQuery();
 
             if (rs.first()) {
-                name.setText("" + Integer.toString(rs.getInt("UserID")));
-                if (rs.getString("UserType").equals("Admin"))
-                    return true;
+                name.setText(Integer.toString(rs.getInt("UserID")));
+                return  rs.getString("UserType");
             }
         }catch (SQLException ex) {
             String message = "Username: " + name.getText().trim() + ", password " + password.trim() +
                     " is in correct. " + ex.getMessage();
             Message.operationFailed("Exception", message);
         }
-        return false;
+        return null;
     }
 
     public String userInfo (String userID, Label uAccount) {

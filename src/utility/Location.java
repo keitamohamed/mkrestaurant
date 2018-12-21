@@ -21,9 +21,9 @@ public class Location implements Interface {
 
     }
 
-    public static String location(String className, boolean value) {
+    public static String fxmlLocation(String className, String userType) {
         String fxmlLocation = null;
-        className = changeMainClassName(className, value);
+        className = changeMainClassName(className, userType);
         try {
             fxmlLocation = url().getProperty(className);
         }catch (Exception e) {
@@ -40,7 +40,7 @@ public class Location implements Interface {
         return fxmlLocation;
     }
 
-    public static String location(String subClass) {
+    public static String fxmlLocation(String subClass) {
         String fxmlSubClassUrl = null;
         subClass = changeSubClassName(subClass);
         try {
@@ -59,15 +59,15 @@ public class Location implements Interface {
         return fxmlSubClassUrl;
     }
 
-    private static String changeMainClassName(String className, boolean value){
-        if (className.equals("Main") && !value) {
+    private static String changeMainClassName(String className, String userType){
+        if (className.equals("Main") && !userType.equals("Employee")) {
             return "Login";
         }
-        else if ((className.equals("Login") || className.equals("Admin")
-                || className.equals("Checkout")) && !value) {
+        else if ((className.equals("Login") || className.equals("Employee")
+                || className.equals("Checkout")) && !userType.equals("Employee")) {
             return "Main";
         }
-        return "Admin";
+        return "Employee";
     }
 
     private static String changeSubClassName(String className){
@@ -79,7 +79,7 @@ public class Location implements Interface {
 
     private static Properties url() throws IOException {
         Properties properties = new Properties();
-        String drURL = "config/ClassFxmlURL.properties";
+        String drURL = "config/FxmlFileLocation.properties";
         inputStream = new FileInputStream(drURL);
         properties.load(inputStream);
 

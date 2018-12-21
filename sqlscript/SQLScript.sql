@@ -66,7 +66,7 @@ ALTER TABLE OrderTable ADD CONSTRAINT PID_FK FOREIGN KEY (PID) REFERENCES Produc
 
 
 INSERT INTO UserTable (UserID, FirstName, LastName, UserName, Password, UserType)
-VALUE (256343, 'John', 'Smith', 'jSmith', '!2Smith', 'Admin'),
+VALUE (256343, 'John', 'Smith', 'jSmith', '!2Smith', 'Employee'),
       (672341, 'Ashely', 'William', 'aWilliam', 'Ashely!23', 'Customer');
 INSERT INTO ProductTable (ProductID, PName, Quantity, Price, ImageName)
 VALUE (78232, 'Lays, Sun and Jalapeno Chip', 1, 3.78, 'chips'),

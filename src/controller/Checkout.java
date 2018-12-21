@@ -244,6 +244,6 @@ public class Checkout {
     private void logInAndLogOut(Event event) {
         ((Node)event.getSource()).getScene().getWindow().hide();
         String className = this.getClass().getSimpleName();
-        SwitchScene.switchScene(className, userID, false);
+        SwitchScene.switchScene(className, userID, "Customer");
     }
 }
