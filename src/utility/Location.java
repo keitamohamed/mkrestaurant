@@ -11,6 +11,7 @@ import java.util.Properties;
 
 public class Location implements Interface {
     private static InputStream inputStream;
+
     @Override
     public Connection mySQL() {
         return null;
