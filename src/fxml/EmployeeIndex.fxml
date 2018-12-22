@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Employee">
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Employee">
    <children>
       <GridPane alignment="TOP_CENTER" layoutX="-18.0" layoutY="655.0" prefHeight="45.0" prefWidth="1137.0">
         <columnConstraints>
@@ -82,7 +85,7 @@
             <Label fx:id="uAccount" layoutX="915.0" layoutY="16.0" text="Account" />
          </children>
       </Pane>
-      <Pane fx:id="popUp" layoutX="881.0" layoutY="43.0">
+      <Pane fx:id="popUp" layoutX="881.0" layoutY="43.0" prefHeight="78.0" prefWidth="140.0">
          <children>
             <Button fx:id="log" layoutX="12.0" layoutY="39.0" mnemonicParsing="false" onAction="#logInAndLogOut" text="Sign Out" />
             <Button fx:id="account" layoutX="14.0" mnemonicParsing="false" text="Account Info" />

@@ -6,10 +6,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import sqlscript.SQLPrepareStatement;
 import stage.SwitchScene;
@@ -17,7 +20,8 @@ import stage.SwitchScene;
 public class Employee {
     private static String userID, setUserFirstName;
     private SQLPrepareStatement statement = new SQLPrepareStatement();
-
+    @FXML
+    private AnchorPane root;
     @FXML
     private TableView<Product> productTable;
     @FXML
@@ -35,12 +39,13 @@ public class Employee {
     @FXML
     private Label uAccount;
     @FXML
-    private Pane popUp;
+    private Pane popUp, topPane;
 
     private ObservableList<Product> products = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
+
         loadProducts(products);
         FilterProductBySearchKeyword();
         uAccount.setOnMouseEntered(e -> popUp.setVisible(true));
