@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.text.NumberFormat;
+import java.util.concurrent.locks.Lock;
 
 public class Utility {
 
@@ -90,5 +91,15 @@ public class Utility {
             view.setFitHeight(imageHeight);
         }
         return view;
+    }
+
+    public static void waitTime(String mom){
+        synchronized (mom) {
+            try {
+                mom.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

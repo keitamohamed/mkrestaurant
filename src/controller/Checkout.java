@@ -1,6 +1,7 @@
 package controller;
 
 import blueprint.Cart;
+import com.sun.webkit.network.Util;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -10,9 +11,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import message.Message;
 import sqlscript.SQLPrepareStatement;
 import stage.SwitchScene;
+import utility.Utility;
 
 import java.util.Random;
 
@@ -32,7 +35,7 @@ public class Checkout {
     @FXML
     private TextField rPassword;
     @FXML
-    private Label message, incorrectLogin, createMessage;
+    private Label message, incorrectLogin, createMessage, loginStatic;
     @FXML
     private ImageView imageViewU, imageViewP;
     @FXML
@@ -67,13 +70,24 @@ public class Checkout {
 
         login.setOnAction(e -> {
             if (!loginFieldNotFillOut()) {
-                statement.checkLoginInfo(userName, password.getText());
+                statement.checkLoginInfo(userName, password.getText().trim());
+                disableUnnecessarilyField();
+                userID = userName.getText().trim();
+                changeButtonText();
                 return;
             }
             incorrectLogin.setVisible(true);
         });
 
         submitOrder.setOnAction(this::insertOrder);
+    }
+
+    @FXML
+    private void changeButtonText(){
+        loginStatic.setText("You Are Successfully Login. Your ID Is: " + userID);
+        loginStatic.setTextFill(Color.rgb(255,255,141));
+        submitOrder.setText("Submit Order");
+        loginStatic.setVisible(true);
     }
 
     @FXML
@@ -98,7 +112,10 @@ public class Checkout {
     @FXML
     private void insertOrder(Event event) {
         int orderIDGenerated = generateOrderID();
-        if (userID == null) {
+        if (submitOrder.getText().equals("Return Home")){
+            logInAndLogOut(event);
+        }
+        else if (userID == null) {
             disableUnnecessarilyField();
             if (statement.insertOrderItems(cartList, orderIDGenerated, 0)) {
                 Message.successful(("Data Insert Successfully and " +
@@ -110,7 +127,10 @@ public class Checkout {
                         "ID: " + userID), 1);
             }
         }
-        logInAndLogOut(event);
+        submitOrder.setText("Return Home");
+        cartList.clear();
+        cartTable.refresh();
+        cartTable.setVisible(false);
     }
 
     @FXML
