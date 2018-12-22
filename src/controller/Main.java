@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import message.Message;
 import sqlscript.SQLPrepareStatement;
@@ -26,8 +27,10 @@ import java.util.Random;
 
 public class Main {
     private NumberFormat nf = NumberFormat.getCurrencyInstance();
-    private static String userID;
+    private static String userID, setUserName;
     private SQLPrepareStatement statement = new SQLPrepareStatement();
+    @FXML
+    private AnchorPane root;
     @FXML
     private FlowPane flowPane;
     @FXML
@@ -57,12 +60,21 @@ public class Main {
     @FXML
     private void initialize() {
         loadData(products);
+        root.setOnMouseEntered(e -> {
+            if (userID != null) {
+                log.setText("Hello, " + setUserName);
+                log.setLayoutX(1000);
+            }
+
+        });
         disableCartQuantityField();
         rAddress.setText("3420 Eastway Ave NW\n\tRoanoke VA");
         copyRight.setText("Copyright \u00a9 2018. All right reserved. Powered by M.Keita Platform");
         flowPaneChildren(buttonList, products);
         filterSearchProductByKeyword();
+
         actionListener(buttonList, products);
+
         itemListTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (itemListTable.getSelectionModel().getSelectedItem() != null) {
                 if (!removeItem.isVisible()) {
@@ -177,7 +189,7 @@ public class Main {
     }
 
     private void loadData(ObservableList<Product> products) {
-        statement.getProducts(products, userID, new Label());
+        log.setText(statement.getProducts(products, userID, log).getText());
     }
 
     private void disableCartQuantityField() {
@@ -198,7 +210,7 @@ public class Main {
     private void checkoutOrder(Event event){
         String className = this.getClass().getSimpleName();
         ((Node)event.getSource()).getScene().getWindow().hide();
-        SwitchScene.switchScene(ShoppingCarts, className, userID);
+        SwitchScene.switchScene(ShoppingCarts, className, userID, new Button(setUserName));
     }
 
     /**
@@ -213,14 +225,8 @@ public class Main {
         if (log.getText().equals("Sign In")) {
             String className = this.getClass().getSimpleName();
             ((Node)event.getSource()).getScene().getWindow().hide();
-            SwitchScene.switchScene(className, null, "Customer");
+            SwitchScene.switchScene(className, null, "Customer", new Button(setUserName));
         }
-    }
-
-    @FXML
-    private void switchStage(Event event, String type) {
-        ((Node)event.getSource()).getScene().getWindow().hide();
-        SwitchScene.switchScene(type, null, null);
     }
 
     /**
@@ -230,7 +236,9 @@ public class Main {
      * their info etc.
      * @param id
      */
-    public static void getUserID(String id) {
+    public static void getUserID(String id, Button userFirstName) {
         userID = id;
+        setUserName = userFirstName.getText();
+
     }
 }

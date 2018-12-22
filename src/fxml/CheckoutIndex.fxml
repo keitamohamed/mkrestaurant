@@ -32,15 +32,15 @@
       <Label fx:id="incorrectLogin" layoutX="343.0" layoutY="495.0" text="Incorrect username or passworld" />
       <TextField fx:id="rPassword" layoutX="294.0" layoutY="636.0" promptText="Enter password" />
       <Label fx:id="createMessage" layoutX="63.0" layoutY="597.0" text="Create A Login UserName and Password" />
-      <Button fx:id="signUp" layoutX="540.0" layoutY="334.0" mnemonicParsing="false" onAction="#enableSignUpField" text="Sign Up" />
-      <Button fx:id="myAccount" layoutX="627.0" layoutY="334.0" mnemonicParsing="false" onAction="#enableLoginField" text="My Account" />
+      <Button fx:id="signUp" layoutX="540.0" layoutY="334.0" mnemonicParsing="false" text="Sign Up" />
+      <Button fx:id="myAccount" layoutX="627.0" layoutY="334.0" mnemonicParsing="false" text="My Account" />
       <Button fx:id="forgetPassword" layoutX="403.0" layoutY="524.0" mnemonicParsing="false" text="Forget Password" />
       <ImageView fx:id="imageViewU" fitHeight="25.0" fitWidth="30.0" layoutX="343.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/icon/user.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imageViewP" fitHeight="25.0" fitWidth="30.0" layoutX="343.0" layoutY="446.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="passwordImage" fitHeight="25.0" fitWidth="30.0" layoutX="343.0" layoutY="446.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/icon/Key-white.png" />
          </image>

@@ -15,7 +15,7 @@ import sqlscript.SQLPrepareStatement;
 import stage.SwitchScene;
 
 public class Employee {
-    private static String userID;
+    private static String userID, setUserFirstName;
     private SQLPrepareStatement statement = new SQLPrepareStatement();
 
     @FXML
@@ -54,10 +54,6 @@ public class Employee {
         popUp.setOnMouseExited(event -> popUp.setVisible(false));
     }
 
-    public static void getUserID(String id) {
-        userID = id;
-    }
-
     private void FilterProductBySearchKeyword() {
         FilteredList<Product> filteredScoreData = new FilteredList<>(products, p -> true);
         searchProduct.textProperty().addListener((observable, oldValue, newValue) -> filteredScoreData.setPredicate(p -> {
@@ -76,8 +72,8 @@ public class Employee {
 
     private void loadProducts(ObservableList<Product> products) {
         popUp.setVisible(false);
-        getUserID(userID);
-        statement.getProducts(products, userID, uAccount);
+        getUserID(userID, new Button(setUserFirstName));
+        statement.getProducts(products, userID, logout);
         if (productTable.getItems().size() > 0) {
             productTable.getItems().clear();
         }
@@ -94,6 +90,12 @@ public class Employee {
     private void logInAndLogOut(Event event) {
         ((Node)event.getSource()).getScene().getWindow().hide();
         String className = this.getClass().getSimpleName();
-        SwitchScene.switchScene(className, null, "Customer");
+        SwitchScene.switchScene(className, null, "Customer", new Button(uAccount.getText()));
+    }
+
+    public static void getUserID(String id, Button userFirstName) {
+        userID = id;
+        setUserFirstName = userFirstName.getText();
+
     }
 }

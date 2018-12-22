@@ -12,6 +12,7 @@ import stage.SwitchScene;
 public class Login {
 
     private SQLPrepareStatement statement = new SQLPrepareStatement();
+    private Button setUserFirstName = new Button();
 
     @FXML
     private Button login;
@@ -28,11 +29,11 @@ public class Login {
 
         login.setOnAction( e -> {
             try {
-                String userType = statement.checkLoginInfo(userName, password.getText());
+                String userType = statement.checkLoginInfo(userName, password.getText(), setUserFirstName);
                 String className = this.getClass().getSimpleName();
                 if (userType != null) {
                     ((Node)e.getSource()).getScene().getWindow().hide();
-                    SwitchScene.switchScene(className, userName.getText(), userType);
+                    SwitchScene.switchScene(className, userName.getText(), userType, setUserFirstName);
                 }
                 incorrectLogin.setVisible(true);
             } catch (Throwable throwable) {

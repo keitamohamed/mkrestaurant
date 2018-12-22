@@ -10,8 +10,8 @@ public class SQLQuery {
     }
 
     public String getUserInfo() {
-        return "SELECT Username" +
-                "FROM UserTable" +
+        return "SELECT * " +
+                "FROM UserTable " +
                 "WHERE UserID = ?";
     }
 

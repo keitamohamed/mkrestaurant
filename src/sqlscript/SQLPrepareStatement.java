@@ -4,8 +4,7 @@ import blueprint.Cart;
 import blueprint.Product;
 import dbconnection.DBConnection;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import message.Message;
 
@@ -28,7 +27,7 @@ public class SQLPrepareStatement {
         }
     }
 
-    public String checkLoginInfo(TextField name, String password) {
+    public String checkLoginInfo(TextField name, String password, Button userFirstName) {
         try {
             pst = dbConnection.getConnection().prepareStatement(query.getUserLogin());
             pst.setString(1, name.getText().trim());
@@ -37,6 +36,7 @@ public class SQLPrepareStatement {
 
             if (rs.first()) {
                 name.setText(Integer.toString(rs.getInt("UserID")));
+                userFirstName.setText(rs.getString("FirstName"));
                 return  rs.getString("UserType");
             }
         }catch (SQLException ex) {
@@ -47,33 +47,25 @@ public class SQLPrepareStatement {
         return null;
     }
 
-    public String userInfo (String userID, Label uAccount) {
+    public void getUserInfo (String userID, Button userFirstName) {
         try {
             pst = dbConnection.getConnection().prepareStatement(query.getUserInfo());
-            pst.setString(1, userID);
+            pst.setInt(1, Integer.parseInt(userID));
             rs = pst.executeQuery();
 
             if (rs.first()) {
-                System.out.println("Print: " + rs.getString("Username"));
-                uAccount.setText("Hello, " + rs.getString("Username"));
+                userFirstName.setText("Hello, " + rs.getString("FirstName"));
             }
 
         }catch (SQLException ex) {
             Message.operationFailed("Exception", ex.getMessage());
         }
-        return null;
     }
 
-    public void getProducts(ObservableList<Product> products, String userID, Label uAccount) {
+    public Button getProducts(ObservableList<Product> products, String userID, Button userFirstName) {
         try {
-            if (uAccount.getText() != null && userID != null) {
-                pst = dbConnection.getConnection().prepareStatement(query.getUserInfo());
-                pst.setString(1, userID);
-                rs = pst.executeQuery();
-
-                if (rs.first()) {
-                    uAccount.setText("Hello, " + rs.getString("Username"));
-                }
+            if (userID != null) {
+                getUserInfo(userID, userFirstName);
             }
             pst = dbConnection.getConnection().prepareStatement(query.getLoadProduct());
             rs = pst.executeQuery();
@@ -85,6 +77,7 @@ public class SQLPrepareStatement {
         }catch (SQLException ex) {
             Message.operationFailed("Exception", ex.getMessage());
         }
+        return userFirstName;
     }
 
     public boolean setUserLogin(int userID, String fName, String lName, String  userName,
@@ -128,7 +121,6 @@ public class SQLPrepareStatement {
         try {
 
             for (Cart item : carts) {
-                if (userID == 0)
                 pst = dbConnection.getConnection().prepareStatement(query.setInsertOrderTable());
                 pst.setInt(1, orderID);
                 pst.setInt(2, userID);
@@ -141,6 +133,7 @@ public class SQLPrepareStatement {
             }
             return true;
         }catch (SQLException ex) {
+            System.out.println("Print this");
             Message.operationFailed(null, ex.getMessage());
         }
         return false;

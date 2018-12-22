@@ -7,6 +7,7 @@ import controller.Main;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utility.Location;
@@ -15,10 +16,10 @@ import java.io.IOException;
 
 public class SwitchScene {
 
-    public static void switchScene(String className, String userID, String userType) {
+    public static void switchScene(String className, String userID, String userType, Button userFirstName) {
         try {
             AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.fxmlLocation(className, userType)));
-            sendUserID(userID, userType);
+            sendUserID(userID, userType, userFirstName);
             Stage stage = new Stage();
             stage.setScene(new Scene(anchorPane));
             stage.setTitle(stageTitle(className, userType));
@@ -32,10 +33,10 @@ public class SwitchScene {
         }
     }
 
-    public static void switchScene(ObservableList<Cart> order, String className, String loginStatic) {
+    public static void switchScene(ObservableList<Cart> order, String className, String loginStatic, Button userFirstName) {
         try {
             AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.fxmlLocation(className)));
-            orderList(order, loginStatic);
+            orderList(order, loginStatic, userFirstName.getText());
             Stage stage = new Stage();
             stage.setScene(new Scene(anchorPane));
             stage.setTitle(subStageTitle(className));
@@ -82,17 +83,16 @@ public class SwitchScene {
         return "Main";
     }
 
-    private static void sendUserID(String userID, String userType) {
+    private static void sendUserID(String userID, String userType, Button setUserFirstName) {
         if (userType.equals("Employee")) {
-            Employee.getUserID(userID);
+            Employee.getUserID(userID, setUserFirstName);
             return;
         }
-        Main.getUserID(userID);
+        Main.getUserID(userID, setUserFirstName);
     }
 
-    private static void orderList(ObservableList<Cart> carts, String loginStatic){
-
-        Checkout.getOrderList(carts, loginStatic);
+    private static void orderList(ObservableList<Cart> carts, String loginStatic, String userFirstName){
+        Checkout.getOrderList(carts, loginStatic, userFirstName);
     }
 
 
