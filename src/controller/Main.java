@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import message.Message;
 import sqlscript.SQLPrepareStatement;
 import stage.SwitchScene;
@@ -32,13 +33,15 @@ public class Main {
     @FXML
     private AnchorPane root;
     @FXML
+    private GridPane gridPaneTopRight;
+    @FXML
     private FlowPane flowPane;
     @FXML
     private TextField searchKeyWord;
     @FXML
     private Label rAddress, totalItem, discount, totalPrice, discountPer, sumPrice, copyRight;
     @FXML
-    private Button removeItem, checkOut, log;
+    private Button removeItem, checkOut, log, signOut;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -60,10 +63,10 @@ public class Main {
     @FXML
     private void initialize() {
         loadData(products);
+        changePaneBehavior();
         root.setOnMouseEntered(e -> {
             if (userID != null) {
                 log.setText("Hello, " + setUserName);
-                log.setLayoutX(1000);
             }
 
         });
@@ -102,6 +105,26 @@ public class Main {
                 Utility.calculatePrice(ShoppingCarts, sumPrice, totalPrice, discountPer, discount, totalItem);
             }
         });
+    }
+
+    @FXML
+    private void changePaneBehavior(){
+        gridPaneTopRight.setPrefHeight(52);
+        signOut.setVisible(false);
+        gridPaneTopRight.setOnMouseEntered(e -> {
+            if (!log.getText().equals("Register / Sign In")) {
+                signOut.setVisible(true);
+                gridPaneTopRight.setPrefHeight(100);
+                signOut.setVisible(true);
+            }
+        });
+
+        gridPaneTopRight.setOnMouseExited(e -> {
+            gridPaneTopRight.setPrefHeight(52);
+            signOut.setVisible(false);
+        });
+
+        signOut.setOnAction(this::logInAndLogOut);
     }
 
     private void flowPaneChildren(List<Button> buttonList, List<Product> products) {
@@ -222,11 +245,14 @@ public class Main {
      */
     @FXML
     public void logInAndLogOut(Event event) {
+        String className = this.getClass().getSimpleName();
         if (log.getText().equals("Register / Sign In")) {
-            String className = this.getClass().getSimpleName();
             ((Node)event.getSource()).getScene().getWindow().hide();
             SwitchScene.switchScene(className, null, "Customer", new Button(setUserName));
+            return;
         }
+        log.setText("Register / Sign In");
+        setUserName = null; userID = null;
     }
 
     /**

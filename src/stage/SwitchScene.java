@@ -61,16 +61,21 @@ public class SwitchScene {
             return "Login";
         }
         else if ((className.equals("Login") || className.equals("Employee")
-                || className.equals("Checkout")) && !userType.equals("Employee")) {
+                || className.equals("Checkout") || className.equals("Sign Out"))
+                && !userType.equals("Employee")) {
             return "Main";
         }
         return "Employee";
     }
 
-    private static String subStageTitle(String className){
-        if (className.equals("Main")) {
+    private static String subStageTitle(String textValue){
+        if (textValue.equals("Main")) {
             return "Checkout";
         }
+        else if (textValue.equals("Sign Out"))
+            return "Main";
+        else if (textValue.equals("Sign Up / Register") || textValue.equals("Sign Up"))
+            return "Register";
         return "Main";
     }
 
@@ -94,6 +99,4 @@ public class SwitchScene {
         stage.setResizable(false);
         stage.show();
     }
-
-
 }

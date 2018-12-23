@@ -95,13 +95,13 @@ public class Checkout {
         else if (userID == null) {
             disableUnnecessarilyField();
             if (statement.insertOrderItems(cartList, orderIDGenerated, 0)) {
-                Message.successful(("Data Insert Successfully and " +
-                        "your order id is: " + orderIDGenerated), 1);
+                Message.successful(("You Order Were Successfully Receive.\n" +
+                        "Your Order ID is: " + orderIDGenerated), 1);
             }
         } else {
             if (statement.insertOrderItems(cartList, orderIDGenerated, Integer.parseInt(userID))) {
-                Message.successful(("Data Insert Successfully For User " +
-                        "ID: " + userID), 1);
+                Message.successful(("You Order Was Successfully Receive. " +
+                        "Your\nUser ID is: " + userID + ". Order ID is: " + orderIDGenerated), 1);
             }
         }
         submitOrder.setText("Return Home");

@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -15,7 +16,7 @@ public class Login {
     private Button setUserFirstName = new Button();
 
     @FXML
-    private Button login;
+    private Button login, register;
     @FXML
     private Label incorrectLogin;
     @FXML
@@ -27,18 +28,27 @@ public class Login {
     private void initialize() {
         incorrectLogin.setVisible(false);
 
-        login.setOnAction( e -> {
-            try {
-                String userType = statement.checkLoginInfo(userName, password.getText(), setUserFirstName);
-                String className = this.getClass().getSimpleName();
-                if (userType != null) {
-                    ((Node)e.getSource()).getScene().getWindow().hide();
-                    SwitchScene.switchScene(className, userName.getText(), userType, setUserFirstName);
-                }
-                incorrectLogin.setVisible(true);
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
+        login.setOnAction(this::signInAccount);
+        register.setOnAction(e -> getPopUpStage(register));
+    }
+
+    @FXML
+    private void signInAccount(Event event) {
+        try {
+            String userType = statement.checkLoginInfo(userName, password.getText(), setUserFirstName);
+            String className = this.getClass().getSimpleName();
+            if (userType != null) {
+                ((Node)event.getSource()).getScene().getWindow().hide();
+                SwitchScene.switchScene(className, userName.getText(), userType, setUserFirstName);
             }
-        });
+            incorrectLogin.setVisible(true);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void getPopUpStage(Button button) {
+        SwitchScene.switchScene(button);
     }
 }

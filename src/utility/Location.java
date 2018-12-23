@@ -98,22 +98,26 @@ public class Location implements Interface {
         return stylesheetUrl;
     }
 
-    private static String changeMainClassName(String className, String userType){
-        if (className.equals("Main") && !userType.equals("Employee")) {
+    private static String changeMainClassName(String value, String userType){
+        if (value.equals("Main") && !userType.equals("Employee")) {
             return "Login";
         }
-        else if ((className.equals("Login") || className.equals("Employee")
-                || className.equals("Checkout")) && !userType.equals("Employee")) {
+        else if ((value.equals("Login") || value.equals("Employee")
+                || value.equals("Checkout")) && !userType.equals("Employee")) {
             return "Main";
         }
+        else if (value.equals("Sign Out"))
+            return "Main";
         return "Employee";
     }
 
-    private static String changeSubClassName(String className){
-        if (className.equals("Main")) {
+    private static String changeSubClassName(String textValue){
+        if (textValue.equals("Main")) {
             return "Checkout";
         }
-        else if (className.equals("Sign Up / Register") || className.equals("Sign Up"))
+        else if (textValue.equals("Sign Out"))
+            return "Main";
+        else if (textValue.equals("Sign up / Register") || textValue.equals("Sign Up"))
             return "Register";
         return "Main";
     }

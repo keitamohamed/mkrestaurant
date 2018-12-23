@@ -55,7 +55,9 @@ public class Register {
                 if (statement.setUserAddressInfo(generateUserID, address.getText().trim(), city.getText().trim(),
                         state.getText().trim(), zipCode.getText().trim())) {
                     Message.successful(("Your Account Have Been Created " +
-                            "\nSuccessfully. Your Id is: " + generateUserID), 1);
+                            "Successfully.\nYour User ID is: " + generateUserID + ", Username is " +
+                            "" + userName.getText() + "\nand your password is " + password.getText() + ". " +
+                            "You can close\nthe Registration window and login."), 1);
                 }
             }
             clearFields();

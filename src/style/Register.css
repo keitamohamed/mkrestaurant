@@ -45,12 +45,16 @@
     -fx-font-family: -fx-primaryfamily;
 }
 
+/*.label {*/
+    /*-fx-font-family: Papyrus;*/
+/*}*/
+
 #createMessage, #title {
     -fx-font-size: 18px;
-    -fx-font-family: "Apple Chancery", cursive;
+    -fx-font-family: Papyrus, Apple Chancery, -fx-primaryfamily, cursive;
 }
 
 #fieldsRequire {
-    -fx-font-family: "Didot", serif;
+    -fx-font-family: Didot, Papyrus, serif;
     -fx-text-fill: -fx-primarytexts;
  }
