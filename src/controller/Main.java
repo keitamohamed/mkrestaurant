@@ -203,6 +203,12 @@ public class Main {
         Utility.calculatePrice(ShoppingCarts, sumPrice, totalPrice, discountPer, discount, totalItem);
     }
 
+    /**
+     * getProductOriginalPrice Method: The method take in the product
+     * id and return the product original price
+     * @param productID
+     * @return
+     */
     private double getProductOriginalPrice(int productID){
         for (Product product : products){
             if (product.getProductID() == productID)
@@ -211,6 +217,11 @@ public class Main {
         return 0;
     }
 
+    /**
+     * loadDate Method: This method is call when you run the
+     * program to load all product from the database
+     * @param products
+     */
     private void loadData(ObservableList<Product> products) {
         log.setText(statement.getProducts(products, userID, log).getText());
     }
@@ -229,6 +240,12 @@ public class Main {
         return (random.nextInt(90000) + 90000);
     }
 
+    /**
+     * CheckoutOrder Method: When the carts button is
+     * press this method is call and the checkout items will be
+     * pass into the switchScene method for final checkout
+     * @param event
+     */
     @FXML
     private void checkoutOrder(Event event){
         String className = this.getClass().getSimpleName();
