@@ -161,12 +161,6 @@ public class Checkout {
     }
 
     @FXML
-    private int generateUserID() {
-        Random random = new Random();
-        return (random.nextInt(90000) + 90000);
-    }
-
-    @FXML
     private boolean loginFieldNotFillOut() {
         return userName.getText().isEmpty() || password.getText().isEmpty();
 
