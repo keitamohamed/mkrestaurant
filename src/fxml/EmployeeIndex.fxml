@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Employee">
    <children>
       <GridPane fx:id="gridPaneFooter" alignment="TOP_CENTER" layoutX="-18.0" layoutY="640.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="53.0" prefWidth="1137.0">
@@ -49,7 +52,7 @@
         </columns>
       </TableView>
       <TextField fx:id="searchProduct" layoutX="813.0" layoutY="65.0" prefHeight="27.0" prefWidth="255.0" promptText="Search product by key" />
-      <Pane fx:id="topPane" layoutX="-12.0" layoutY="-8.0" prefHeight="53.0" prefWidth="1137.0">
+      <Pane fx:id="topPane" layoutX="-12.0" layoutY="-8.0" prefHeight="53.0" prefWidth="902.0">
          <children>
             <MenuBar layoutX="14.0" layoutY="10.0" prefHeight="39.0" prefWidth="300.0">
               <menus>
@@ -86,13 +89,13 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <Label fx:id="uAccount" layoutX="915.0" layoutY="16.0" text="Account" />
          </children>
       </Pane>
-      <Pane fx:id="popUp" layoutX="881.0" layoutY="43.0" prefHeight="78.0" prefWidth="140.0">
+      <Pane fx:id="popUp" layoutX="881.0" layoutY="-13.0" prefHeight="144.0" prefWidth="236.0">
          <children>
-            <Button fx:id="log" layoutX="12.0" layoutY="39.0" mnemonicParsing="false" onAction="#logInAndLogOut" text="Sign Out" />
-            <Button fx:id="account" layoutX="14.0" mnemonicParsing="false" text="Account Info" />
+            <Button fx:id="log" layoutX="14.0" layoutY="91.0" mnemonicParsing="false" onAction="#logInAndLogOut" text="Sign Out" />
+            <Button fx:id="account" layoutX="14.0" layoutY="53.0" mnemonicParsing="false" text="Account Info" />
+            <Label fx:id="uAccount" layoutX="13.0" layoutY="19.0" text="Account" />
          </children>
       </Pane>
    </children>

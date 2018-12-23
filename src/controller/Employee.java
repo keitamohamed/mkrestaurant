@@ -34,7 +34,7 @@ public class Employee {
     @FXML
     private TableColumn<Product, Double> productPrice;
     @FXML
-    private Button logout, account;
+    private Button log, account;
     @FXML
     private TextField searchProduct;
     @FXML
@@ -49,18 +49,40 @@ public class Employee {
 
         loadProducts(products);
         FilterProductBySearchKeyword();
+        changePaneBehavior();
         uAccount.setOnMouseEntered(e -> popUp.setVisible(true));
-        popUp.shapeProperty().addListener(observable -> {
-            if (!popUp.isVisible()) {
-                popUp.setVisible(false);
-            }
-        });
-        popUp.setOnMouseExited(event -> popUp.setVisible(false));
+//        popUp.shapeProperty().addListener(observable -> {
+//            if (!popUp.isVisible()) {
+//                popUp.setVisible(false);
+//            }
+//        });
+//        popUp.setOnMouseExited(event -> popUp.setVisible(false));
         root.setOnMouseEntered(e -> {
             if (userID != null){
                 uAccount.setText("Hello, " + setUserFirstName);
             }
         });
+    }
+
+    @FXML
+    private void changePaneBehavior(){
+        popUp.setPrefHeight(58);
+        account.setVisible(false);
+        log.setVisible(false);
+        popUp.setOnMouseEntered(e -> {
+            account.setVisible(true);
+            popUp.setPrefHeight(130);
+            account.setVisible(true);
+            log.setVisible(true);
+        });
+
+        popUp.setOnMouseExited(e -> {
+            popUp.setPrefHeight(58);
+            account.setVisible(false);
+            log.setVisible(false);
+        });
+
+        //signOut.setOnAction(this::switchStage);
     }
 
     private void FilterProductBySearchKeyword() {
@@ -80,9 +102,8 @@ public class Employee {
     }
 
     private void loadProducts(ObservableList<Product> products) {
-        popUp.setVisible(false);
         getUserID(userID, new Button(setUserFirstName));
-        statement.getProducts(products, userID, logout);
+        statement.getProducts(products, userID, log);
         if (productTable.getItems().size() > 0) {
             productTable.getItems().clear();
         }

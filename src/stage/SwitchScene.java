@@ -5,7 +5,10 @@ import controller.Employee;
 import controller.Checkout;
 import controller.Main;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -98,5 +101,20 @@ public class SwitchScene {
         stage.getScene().getStylesheets().add(SwitchScene.class.getResource("../style/Message.css").toExternalForm());
         stage.setResizable(false);
         stage.show();
+    }
+
+    /**
+     * logInAndLogout Method is call to switch between stage only
+     * if the login button text is equal to "Sign In" for the class.
+     * And also the class name is pass into the switchStage Method
+     * to deterrent which fxmal to get
+     * @param event
+     */
+    @FXML
+    public static void switchStage(Event event, String className, Button button) {
+        if (button.getText().equals("Register / Sign In") || button.getText().equals("Sing Out")) {
+            ((Node)event.getSource()).getScene().getWindow().hide();
+            SwitchScene.switchScene(className, null, "Customer", button);
+        }
     }
 }

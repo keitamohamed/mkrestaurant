@@ -124,7 +124,8 @@ public class Main {
             signOut.setVisible(false);
         });
 
-        signOut.setOnAction(this::logInAndLogOut);
+        log.setOnAction(e -> SwitchScene.switchStage(e, this.getClass().getSimpleName(), log));
+        signOut.setOnAction(this::logOut);
     }
 
     private void flowPaneChildren(List<Button> buttonList, List<Product> products) {
@@ -253,21 +254,8 @@ public class Main {
         SwitchScene.switchScene(ShoppingCarts, className, userID, new Button(setUserName));
     }
 
-    /**
-     * logInAndLogout Method is call to switch between stage only
-     * if the login button text is equal to "Sign In" for this class.
-     * And also the class name is pass into the switchStage Method
-     * to deterrent which fxmal to get
-     * @param event
-     */
     @FXML
-    public void logInAndLogOut(Event event) {
-        String className = this.getClass().getSimpleName();
-        if (log.getText().equals("Register / Sign In")) {
-            ((Node)event.getSource()).getScene().getWindow().hide();
-            SwitchScene.switchScene(className, null, "Customer", new Button(setUserName));
-            return;
-        }
+    private void logOut(Event event) {
         log.setText("Register / Sign In");
         setUserName = null; userID = null;
     }

@@ -71,8 +71,8 @@
          <children>
             <Pane fx:id="topPane" prefHeight="153.0" prefWidth="412.0">
                <children>
-                  <Button fx:id="log" alignment="TOP_CENTER" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#logInAndLogOut" text="Register / Sign In" />
-                  <Button fx:id="signOut" layoutX="17.0" layoutY="52.0" mnemonicParsing="false" text="Sign Out" />
+                  <Button fx:id="log" alignment="TOP_CENTER" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" text="Register / Sign In" />
+                  <Button fx:id="signOut" layoutX="17.0" layoutY="65.0" mnemonicParsing="false" text="Sign Out" />
                </children>
             </Pane>
          </children>
