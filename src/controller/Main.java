@@ -222,7 +222,7 @@ public class Main {
      */
     @FXML
     public void logInAndLogOut(Event event) {
-        if (log.getText().equals("Sign In")) {
+        if (log.getText().equals("Register / Sign In")) {
             String className = this.getClass().getSimpleName();
             ((Node)event.getSource()).getScene().getWindow().hide();
             SwitchScene.switchScene(className, null, "Customer", new Button(setUserName));

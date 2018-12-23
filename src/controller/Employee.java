@@ -6,13 +6,12 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import sqlscript.SQLPrepareStatement;
 import stage.SwitchScene;
@@ -22,6 +21,8 @@ public class Employee {
     private SQLPrepareStatement statement = new SQLPrepareStatement();
     @FXML
     private AnchorPane root;
+    @FXML
+    private GridPane gridPaneFooter;
     @FXML
     private TableView<Product> productTable;
     @FXML
@@ -37,7 +38,7 @@ public class Employee {
     @FXML
     private TextField searchProduct;
     @FXML
-    private Label uAccount;
+    private Label uAccount, footer;
     @FXML
     private Pane popUp, topPane;
 
@@ -49,14 +50,17 @@ public class Employee {
         loadProducts(products);
         FilterProductBySearchKeyword();
         uAccount.setOnMouseEntered(e -> popUp.setVisible(true));
-
         popUp.shapeProperty().addListener(observable -> {
             if (!popUp.isVisible()) {
                 popUp.setVisible(false);
             }
         });
-
         popUp.setOnMouseExited(event -> popUp.setVisible(false));
+        root.setOnMouseEntered(e -> {
+            if (userID != null){
+                uAccount.setText("Hello, " + setUserFirstName);
+            }
+        });
     }
 
     private void FilterProductBySearchKeyword() {
@@ -101,6 +105,5 @@ public class Employee {
     public static void getUserID(String id, Button userFirstName) {
         userID = id;
         setUserFirstName = userFirstName.getText();
-
     }
 }

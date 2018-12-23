@@ -23,17 +23,11 @@ public class Checkout {
     @FXML
     private AnchorPane root;
     @FXML
-    private Button submit, login, clearAll, forgetPassword;
+    private Button login, forgetPassword, signUp, myAccount, submitOrder;
     @FXML
-    private Button signUp, myAccount, submitOrder;
+    private TextField userName, password;
     @FXML
-    private TextField firstName, lastName, userName, address;
-    @FXML
-    private TextField password, city, state, zipcode, rUserName;
-    @FXML
-    private TextField rPassword;
-    @FXML
-    private Label message, incorrectLogin, createMessage, loginStatic;
+    private Label message, incorrectLogin, loginStatic;
     @FXML
     private ImageView imageViewU, passwordImage;
     @FXML
@@ -53,7 +47,6 @@ public class Checkout {
     @FXML
     private void initialize() {
         setLoginFieldVisible(false);
-        setSignUpFieldVisible(false);
         disableCartTable();
         root.setOnMouseEntered(e -> {
             cartTable();
@@ -64,7 +57,6 @@ public class Checkout {
             }
         });
         message.setText(getMessage());
-        submit.setOnAction(e -> sendUserRegistration());
 
         login.setOnAction(e -> {
             if (!loginFieldNotFillOut()) {
@@ -77,7 +69,7 @@ public class Checkout {
             incorrectLogin.setVisible(true);
         });
 
-        signUp.setOnAction(e -> setSignUpFieldVisible(true));
+        signUp.setOnAction(e -> getPopUpStage(signUp));
         myAccount.setOnAction(e -> {
             passwordImage.setVisible(true);
             setLoginFieldVisible(true);
@@ -92,25 +84,6 @@ public class Checkout {
         loginStatic.setTextFill(Color.rgb(255,255,141));
         submitOrder.setText("Submit Order");
         loginStatic.setVisible(true);
-    }
-
-    @FXML
-    private void sendUserRegistration() {
-        int generateUserID = generateUserID();
-        if (!signUpNotFillOut()) {
-            if (statement.setUserLogin(generateUserID, firstName.getText().trim(), lastName.getText().trim(),
-                    rUserName.getText().trim(), rPassword.getText().trim(), "Customer")) {
-                if (statement.setUserAddressInfo(generateUserID, address.getText().trim(), city.getText().trim(),
-                        state.getText().trim(), zipcode.getText().trim())) {
-                    Message.successful(("Your Account Have Been Created " +
-                            "\nSuccessfully. Your Id is: " + generateUserID), 1);
-                    setSignUpFieldVisible(false);
-                    return;
-                }
-            }
-        }
-        message.setText("All fields are require. Please fill out all fields");
-        message.setTextFill(Color.rgb(255, 82, 83));
     }
 
     @FXML
@@ -151,7 +124,6 @@ public class Checkout {
     @FXML
     private void disableUnnecessarilyField() {
         setLoginFieldVisible(false);
-        setSignUpFieldVisible(false);
         signUp.setVisible(false);
         myAccount.setVisible(false);
         message.setVisible(false);
@@ -166,37 +138,10 @@ public class Checkout {
         cartTable.setVisible(true);
     }
 
-    @FXML
-    private boolean signUpNotFillOut() {
-        return firstName.getText().isEmpty() || lastName.getText().isEmpty() ||
-                address.getText().isEmpty() || city.getText().isEmpty() ||
-                state.getText().isEmpty() || zipcode.getText().isEmpty() ||
-                rUserName.getText().isEmpty() || rPassword.getText().isEmpty();
-    }
-
-    @FXML
-    private void setSignUpFieldVisible(boolean visible) {
-        if (visible) {
-            setLoginFieldVisible(false);
-            message.setText("");
-        }
-        submit.setVisible(visible);
-        clearAll.setVisible(visible);
-        firstName.setVisible(visible);
-        lastName.setVisible(visible);
-        address.setVisible(visible);
-        city.setVisible(visible);
-        state.setVisible(visible);
-        zipcode.setVisible(visible);
-        rUserName.setVisible(visible);
-        rPassword.setVisible(visible);
-        createMessage.setVisible(visible);
-    }
 
     @FXML
     private void setLoginFieldVisible(boolean visible) {
         if (visible){
-            setSignUpFieldVisible(false);
             message.setText("");
             message.setTextFill(Color.web("#FFFF8D"));
         }
@@ -245,5 +190,15 @@ public class Checkout {
         ((Node)event.getSource()).getScene().getWindow().hide();
         String className = this.getClass().getSimpleName();
         SwitchScene.switchScene(className, userID, "Customer", new Button(setUserFirstName));
+    }
+
+    @FXML
+    private void closeWindow(Event event) {
+        ((Node)event.getSource()).getScene().getWindow().hide();
+    }
+
+    @FXML
+    private void getPopUpStage(Button button) {
+        SwitchScene.switchScene(button);
     }
 }

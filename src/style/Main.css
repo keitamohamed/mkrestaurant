@@ -233,11 +233,15 @@
     -fx-background-image: url("/image/icon/checkout.png");
 }
 
-#topPane, #footer {
+#topPane, #gridPaneFooter {
     -fx-background-color: -fx-primarycolor;
 }
 
-#footer .label{
-    -fx-font-size: 18px;
+#gridPaneFooter .label{
+    -fx-font-size: 16px;
     -fx-font-family: -fx-primaryfamily;
+}
+
+#topPane #log {
+    -fx-font-size: 16px;
 }

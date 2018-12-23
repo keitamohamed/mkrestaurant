@@ -24,7 +24,7 @@ public class SwitchScene {
             stage.setScene(new Scene(anchorPane));
             stage.setTitle(stageTitle(className, userType));
             stage.setResizable(false);
-            stage.getScene().getStylesheets().add(SwitchScene.class.getResource(getStyleSheet(className, userType)).toExternalForm());
+            stage.getScene().getStylesheets().add(SwitchScene.class.getResource(Location.cssLocation(className, userType)).toExternalForm());
             stage.getScene().getStylesheets().add(SwitchScene.class.getResource("../style/Message.css").toExternalForm());
             stage.show();
             stage.setOnCloseRequest(e -> stage.close());
@@ -38,31 +38,22 @@ public class SwitchScene {
             AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.fxmlLocation(className)));
             orderList(order, loginStatic, userFirstName.getText());
             Stage stage = new Stage();
-            stage.setScene(new Scene(anchorPane));
-            stage.setTitle(subStageTitle(className));
-            stage.setResizable(false);
-            stage.getScene().getStylesheets().add(SwitchScene.class.getResource(getStyleSheet(className)).toExternalForm());
-            stage.getScene().getStylesheets().add(SwitchScene.class.getResource("../style/Message.css").toExternalForm());
-            stage.show();
+            stageProperty(anchorPane, className, stage);
             stage.setOnCloseRequest(e -> stage.close());
         }catch (IOException io) {
             System.out.println("IO-Exception occur: " + io.getMessage());
         }
     }
 
-    private static String getStyleSheet(String className, String userType) {
-        if (className.equals("Main") && !userType.equals("Employee"))
-            return "../style/Login.css";
-        else if ((className.equals("Login") || className.equals("Employee")
-                || className.equals("Checkout")) && !userType.equals("Employee"))
-            return "../style/Main.css";
-        return "../style/Admin.css";
-    }
-
-    private static String getStyleSheet(String className) {
-        if (className.equals("Main"))
-            return "../style/Checkout.css";
-        return "../style/Main.css";
+    public static void switchScene(Button button) {
+        try {
+            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.fxmlLocation(button.getText().trim())));
+            Stage stage = new Stage();
+            stageProperty(anchorPane, button.getText().trim(), stage);
+            stage.setOnCloseRequest(e -> stage.close());
+        }catch (IOException io) {
+            System.out.println("IO-Exception occur: " + io.getMessage());
+        }
     }
 
     private static String stageTitle(String className, String userType){
@@ -93,6 +84,15 @@ public class SwitchScene {
 
     private static void orderList(ObservableList<Cart> carts, String loginStatic, String userFirstName){
         Checkout.getOrderList(carts, loginStatic, userFirstName);
+    }
+
+    private static void stageProperty(AnchorPane anchorPane, String className, Stage stage){
+        stage.setScene(new Scene(anchorPane));
+        stage.setTitle(subStageTitle(className));
+        stage.getScene().getStylesheets().add(SwitchScene.class.getResource(Location.cssLocation(className)).toExternalForm());
+        stage.getScene().getStylesheets().add(SwitchScene.class.getResource("../style/Message.css").toExternalForm());
+        stage.setResizable(false);
+        stage.show();
     }
 
 

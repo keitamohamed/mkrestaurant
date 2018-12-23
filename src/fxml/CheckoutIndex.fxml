@@ -17,30 +17,19 @@
         </columns>
       </TableView>
       <Label fx:id="message" layoutX="28.0" layoutY="306.0" prefWidth="871.0" text="Important" />
-      <TextField fx:id="firstName" layoutX="63.0" layoutY="376.0" promptText="Enter first name" />
-      <TextField fx:id="lastName" layoutX="306.0" layoutY="376.0" promptText="Enter last name" />
-      <TextField fx:id="address" layoutX="63.0" layoutY="431.0" prefHeight="27.0" prefWidth="370.0" promptText="Street address" />
-      <TextField fx:id="city" layoutX="63.0" layoutY="485.0" promptText="City" />
-      <TextField fx:id="state" layoutX="306.0" layoutY="485.0" promptText="State" />
-      <TextField fx:id="zipcode" layoutX="63.0" layoutY="538.0" promptText="Zipcode" />
-      <TextField fx:id="rUserName" layoutX="62.0" layoutY="636.0" promptText="Enter username" />
-      <TextField fx:id="userName" layoutX="373.0" layoutY="390.0" promptText="Enter username" />
-      <PasswordField fx:id="password" layoutX="373.0" layoutY="443.0" promptText="Enter password" />
-      <Button fx:id="login" layoutX="564.0" layoutY="524.0" mnemonicParsing="false" text="Login" />
-      <Button fx:id="submit" layoutX="414.0" layoutY="691.0" mnemonicParsing="false" text="Submit" />
-      <Button fx:id="clearAll" layoutX="294.0" layoutY="691.0" mnemonicParsing="false" text="Clear All" />
-      <Label fx:id="incorrectLogin" layoutX="343.0" layoutY="495.0" text="Incorrect username or passworld" />
-      <TextField fx:id="rPassword" layoutX="294.0" layoutY="636.0" promptText="Enter password" />
-      <Label fx:id="createMessage" layoutX="63.0" layoutY="597.0" text="Create A Login UserName and Password" />
+      <TextField fx:id="userName" layoutX="336.0" layoutY="390.0" prefHeight="27.0" prefWidth="259.0" promptText="Enter username" />
+      <PasswordField fx:id="password" layoutX="336.0" layoutY="444.0" prefHeight="27.0" prefWidth="259.0" promptText="Enter password" />
+      <Button fx:id="login" layoutX="543.0" layoutY="523.0" mnemonicParsing="false" text="Login" />
+      <Label fx:id="incorrectLogin" layoutX="336.0" layoutY="494.0" prefHeight="17.0" prefWidth="259.0" text="Incorrect username or passworld" />
       <Button fx:id="signUp" layoutX="540.0" layoutY="334.0" mnemonicParsing="false" text="Sign Up" />
       <Button fx:id="myAccount" layoutX="627.0" layoutY="334.0" mnemonicParsing="false" text="My Account" />
-      <Button fx:id="forgetPassword" layoutX="403.0" layoutY="524.0" mnemonicParsing="false" text="Forget Password" />
-      <ImageView fx:id="imageViewU" fitHeight="25.0" fitWidth="30.0" layoutX="343.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="forgetPassword" layoutX="336.0" layoutY="523.0" mnemonicParsing="false" text="Forget Password" />
+      <ImageView fx:id="imageViewU" fitHeight="25.0" fitWidth="30.0" layoutX="305.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/icon/user.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="passwordImage" fitHeight="25.0" fitWidth="30.0" layoutX="343.0" layoutY="446.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="passwordImage" fitHeight="25.0" fitWidth="30.0" layoutX="305.0" layoutY="446.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/icon/Key-white.png" />
          </image>

@@ -1,0 +1,56 @@
+
+* {
+    -fx-primarybc: #2A2E37;
+    -fx-primarytext: #B2B2B2;
+    -fx-primarytexts: RGB(255, 82, 83);
+    -fx-secondary: #FFFF8D;
+    -fx-primaryfamily: "Times New Roman", Times, serif;
+    -fx-secondaryf: "Didot", serif;
+}
+
+.root {
+    -fx-background-color: -fx-primarybc;
+}
+
+.text-field {
+    -fx-font-size: 16px;
+    -fx-font-family: -fx-primaryfamily;
+    -fx-text-fill: -fx-primarytext;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: dashed;
+    -fx-border-color: -fx-primarytext;
+    -fx-background-color: transparent;
+}
+
+.button {
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-size: 17px;
+    -fx-font-family: -fx-primaryfamily;
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+.button:hover {
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: -fx-primarybc;
+}
+
+#register, #clearFields {
+    -fx-font-family: -fx-secondaryfamily;
+}
+
+.label {
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-family: -fx-primaryfamily;
+}
+
+#createMessage, #title {
+    -fx-font-size: 18px;
+    -fx-font-family: "Apple Chancery", cursive;
+}
+
+#fieldsRequire {
+    -fx-font-family: "Didot", serif;
+    -fx-text-fill: -fx-primarytexts;
+ }

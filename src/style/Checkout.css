@@ -105,9 +105,11 @@
 
 #forgetPassword, #login{
     -fx-font-size: 18px;
+    -fx-font-family: "Apple Chancery", cursive;
 }
 
-#createMessage, #message{
+#message{
+    -fx-font-family: "Didot", serif;
     -fx-text-fill: -fx-primarytext;
 }
 

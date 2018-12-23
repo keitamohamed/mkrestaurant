@@ -56,3 +56,7 @@
     -fx-font-weight: normal;
     display: none
 }
+
+#register {
+    -fx-font-style: oblique;
+}
