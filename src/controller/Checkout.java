@@ -18,6 +18,7 @@ import java.util.Random;
 
 public class Checkout {
     private static String userID, setUserFirstName;
+    private Button getUserName = new Button();
     private boolean orderSubmitted = false;
 
     @FXML
@@ -60,9 +61,10 @@ public class Checkout {
 
         login.setOnAction(e -> {
             if (!loginFieldNotFillOut()) {
-                statement.checkLoginInfo(userName, password.getText().trim(), new Button());
+                statement.checkLoginInfo(userName, password.getText().trim(), getUserName);
                 disableUnnecessarilyField();
                 userID = userName.getText().trim();
+                setUserFirstName = getUserName.getText().trim();
                 changeButtonText();
                 return;
             }
@@ -90,7 +92,7 @@ public class Checkout {
     private void insertOrder(Event event) {
         int orderIDGenerated = generateOrderID();
         if (submitOrder.getText().equals("Return Home")){
-            logInAndLogOut(event);
+            SwitchScene.switchStage(event, this.getClass().getSimpleName(), userID, "Customer", new Button(setUserFirstName));
         }
         else if (userID == null) {
             disableUnnecessarilyField();
@@ -177,18 +179,6 @@ public class Checkout {
         return "Important: If you are not login, please click on My Account to login. " +
                 "If you do not have an Account, click on the Sign Up\nbutton and create " +
                 "an Account, or Checkout as a Guess";
-    }
-
-    @FXML
-    private void logInAndLogOut(Event event) {
-        ((Node)event.getSource()).getScene().getWindow().hide();
-        String className = this.getClass().getSimpleName();
-        SwitchScene.switchScene(className, userID, "Customer", new Button(setUserFirstName));
-    }
-
-    @FXML
-    private void closeWindow(Event event) {
-        ((Node)event.getSource()).getScene().getWindow().hide();
     }
 
     @FXML

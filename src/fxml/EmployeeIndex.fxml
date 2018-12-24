@@ -93,7 +93,7 @@
       </Pane>
       <Pane fx:id="popUp" layoutX="881.0" layoutY="-13.0" prefHeight="144.0" prefWidth="236.0">
          <children>
-            <Button fx:id="log" layoutX="14.0" layoutY="91.0" mnemonicParsing="false" onAction="#logInAndLogOut" text="Sign Out" />
+            <Button fx:id="log" layoutX="14.0" layoutY="91.0" mnemonicParsing="false" text="Sign Out" />
             <Button fx:id="account" layoutX="14.0" layoutY="53.0" mnemonicParsing="false" text="Account Info" />
             <Label fx:id="uAccount" layoutX="13.0" layoutY="19.0" text="Account" />
          </children>

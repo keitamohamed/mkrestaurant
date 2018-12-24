@@ -124,7 +124,11 @@ public class Main {
             signOut.setVisible(false);
         });
 
-        log.setOnAction(e -> SwitchScene.switchStage(e, this.getClass().getSimpleName(), log));
+        log.setOnAction(e -> {
+            if (userID == null) {
+                SwitchScene.switchStage(e, this.getClass().getSimpleName(), setUserName, "Customer", log);
+            }
+        });
         signOut.setOnAction(this::logOut);
     }
 

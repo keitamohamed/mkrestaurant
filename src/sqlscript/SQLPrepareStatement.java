@@ -47,7 +47,7 @@ public class SQLPrepareStatement {
         return null;
     }
 
-    public void getUserInfo (String userID, Button userFirstName) {
+    private void getUserInfo (String userID, Button userFirstName) {
         try {
             pst = dbConnection.getConnection().prepareStatement(query.getUserInfo());
             pst.setInt(1, Integer.parseInt(userID));

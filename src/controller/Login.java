@@ -28,23 +28,15 @@ public class Login {
     private void initialize() {
         incorrectLogin.setVisible(false);
 
-        login.setOnAction(this::signInAccount);
-        register.setOnAction(e -> getPopUpStage(register));
-    }
-
-    @FXML
-    private void signInAccount(Event event) {
-        try {
+        login.setOnAction(e -> {
             String userType = statement.checkLoginInfo(userName, password.getText(), setUserFirstName);
-            String className = this.getClass().getSimpleName();
             if (userType != null) {
-                ((Node)event.getSource()).getScene().getWindow().hide();
-                SwitchScene.switchScene(className, userName.getText(), userType, setUserFirstName);
+                SwitchScene.switchStage(e, this.getClass().getSimpleName(), userName.getText(),
+                        userType, setUserFirstName);
             }
             incorrectLogin.setVisible(true);
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
+        });
+        register.setOnAction(e -> getPopUpStage(register));
     }
 
     @FXML

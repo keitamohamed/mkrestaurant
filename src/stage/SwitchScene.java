@@ -111,10 +111,10 @@ public class SwitchScene {
      * @param event
      */
     @FXML
-    public static void switchStage(Event event, String className, Button button) {
-        if (button.getText().equals("Register / Sign In") || button.getText().equals("Sing Out")) {
+    public static void switchStage(Event event, String className, String userName, String userType, Button button) {
+        if (userType != null) {
             ((Node)event.getSource()).getScene().getWindow().hide();
-            SwitchScene.switchScene(className, null, "Customer", button);
+            SwitchScene.switchScene(className, userName, userType, button);
         }
     }
 }

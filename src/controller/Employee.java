@@ -51,12 +51,7 @@ public class Employee {
         FilterProductBySearchKeyword();
         changePaneBehavior();
         uAccount.setOnMouseEntered(e -> popUp.setVisible(true));
-//        popUp.shapeProperty().addListener(observable -> {
-//            if (!popUp.isVisible()) {
-//                popUp.setVisible(false);
-//            }
-//        });
-//        popUp.setOnMouseExited(event -> popUp.setVisible(false));
+
         root.setOnMouseEntered(e -> {
             if (userID != null){
                 uAccount.setText("Hello, " + setUserFirstName);
@@ -82,7 +77,9 @@ public class Employee {
             log.setVisible(false);
         });
 
-        //signOut.setOnAction(this::switchStage);
+        log.setOnAction(e -> SwitchScene.switchStage(e, this.getClass().getSimpleName(), null, "Customer",
+                new Button(null)));
+
     }
 
     private void FilterProductBySearchKeyword() {
@@ -116,15 +113,9 @@ public class Employee {
         productTable.setItems(products);
     }
 
-    @FXML
-    private void logInAndLogOut(Event event) {
-        ((Node)event.getSource()).getScene().getWindow().hide();
-        String className = this.getClass().getSimpleName();
-        SwitchScene.switchScene(className, null, "Customer", new Button(uAccount.getText()));
-    }
-
     public static void getUserID(String id, Button userFirstName) {
         userID = id;
         setUserFirstName = userFirstName.getText();
+        userFirstName.setText("Sign Out");
     }
 }
