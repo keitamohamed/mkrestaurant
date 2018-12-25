@@ -2,6 +2,7 @@ package utility;
 
 import blueprint.Cart;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -10,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.text.NumberFormat;
+import java.util.Random;
 
 public class Utility {
 
@@ -110,5 +112,11 @@ public class Utility {
             view.setFitHeight(imageHeight);
         }
         return view;
+    }
+
+    @FXML
+    public static int generateProductID() {
+        Random random = new Random();
+        return (random.nextInt(90000) + 90000);
     }
 }

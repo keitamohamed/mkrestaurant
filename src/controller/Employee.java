@@ -5,25 +5,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import sqlscript.SQLPrepareStatement;
 import stage.SwitchScene;
-import utility.Utility;
 
 public class Employee {
     private static String userID, setUserFirstName;
     private SQLPrepareStatement statement = new SQLPrepareStatement();
     @FXML
     private AnchorPane root;
-    @FXML
-    private GridPane gridPaneFooter;
     @FXML
     private TableView<Product> productTable;
     @FXML
@@ -39,9 +33,9 @@ public class Employee {
     @FXML
     private TextField searchProduct;
     @FXML
-    private Label uAccount, footer;
+    private Label uAccount;
     @FXML
-    private Pane popUp, topPane;
+    private Pane popUp;
 
     private ObservableList<Product> products = FXCollections.observableArrayList();
 

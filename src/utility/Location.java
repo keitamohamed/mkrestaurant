@@ -112,13 +112,15 @@ public class Location implements Interface {
     }
 
     private static String changeSubClassName(String textValue){
-        if (textValue.equals("Main")) {
-            return "Checkout";
+        switch (textValue) {
+            case "Main":
+                return "Checkout";
+            case "Sign Out":
+                return "Main";
+            case "Sign up / Register":
+            case "Sign Up":
+                return "Register";
         }
-        else if (textValue.equals("Sign Out"))
-            return "Main";
-        else if (textValue.equals("Sign up / Register") || textValue.equals("Sign Up"))
-            return "Register";
         return "Main";
     }
 

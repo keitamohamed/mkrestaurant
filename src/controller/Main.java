@@ -19,7 +19,6 @@ import utility.Utility;
 
 import java.text.NumberFormat;
 import java.util.List;
-import java.util.Random;
 
 
 public class Main {
@@ -233,12 +232,6 @@ public class Main {
         checkOut.setVisible(false);
         numQuantity.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         numQuantity.setVisible(false);
-    }
-
-    @FXML
-    private int generateProductID() {
-        Random random = new Random();
-        return (random.nextInt(90000) + 90000);
     }
 
     /**
