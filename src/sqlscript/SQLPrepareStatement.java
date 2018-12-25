@@ -84,11 +84,7 @@ public class SQLPrepareStatement {
                                 String password, String userType) {
         try {
             pst = dbConnection.getConnection().prepareStatement(query.setUserLogin());
-            pst.setInt(1, userID);
-            pst.setString(2, fName);
-            pst.setString(3, lName);
-            pst.setString(4, userName);
-            pst.setString(5, password);
+            setField(pst, userID, fName, lName, userName, password);
             pst.setString(6, userType);
 
             pst.executeUpdate();
@@ -103,12 +99,7 @@ public class SQLPrepareStatement {
                                 String zipCode) {
         try {
             pst = dbConnection.getConnection().prepareStatement(query.setUserAddressInfo());
-            pst.setInt(1, userID);
-            pst.setString(2, address);
-            pst.setString(3, city);
-            pst.setString(4, state);
-            pst.setString(5, zipCode);
-
+            setField(pst, userID, address, city, state, zipCode);
             pst.executeUpdate();
             return true;
         }catch (SQLException ex) {
@@ -137,5 +128,18 @@ public class SQLPrepareStatement {
             Message.operationFailed(null, ex.getMessage());
         }
         return false;
+    }
+
+    private void setField(PreparedStatement pst, int id, String value1, String value2, String value3, String value4) {
+        try {
+            pst.setInt(1, id);
+            pst.setString(2, value1);
+            pst.setString(3, value2);
+            pst.setString(4, value3);
+            pst.setString(5, value4);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
