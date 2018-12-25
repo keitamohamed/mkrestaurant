@@ -110,14 +110,16 @@ public class SwitchScene {
      * if the login button text is equal to "Sign In" for the class.
      * And also the class name is pass into the switchStage Method
      * to deterrent which fxmal to get
-     * @param event
-     * Need it to close current class.
      */
     @FXML
-    public static void switchStage(Event event, String className, String userName, String userType, Button button) {
+    public static void switchStage(String className, String userName, String userType, Button button) {
         if (userType != null) {
-            ((Node)event.getSource()).getScene().getWindow().hide();
             SwitchScene.switchScene(className, userName, userType, button);
         }
+    }
+
+    @FXML
+    public static void closeStage(Event event) {
+        ((Node)event.getSource()).getScene().getWindow().hide();
     }
 }

@@ -41,23 +41,17 @@ public class Location implements Interface {
         return fxmlLocation;
     }
 
-    public static String fxmlLocation(String subClass) {
-        String fxmlSubClassUrl = null;
-        subClass = changeSubClassName(subClass);
-        try {
-            fxmlSubClassUrl = url("FxmlFileURL").getProperty(subClass);
-        }catch (Exception e) {
-            Message.operationFailed("", e.getMessage());
+    private static String changeMainClassName(String value, String valueTwo){
+        if (value.equals("Main") && !valueTwo.equals("Employee")) {
+            return "Login";
         }
-        finally {
-            assert inputStream != null;
-            try {
-                inputStream.close();
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
+        else if ((value.equals("Login") || value.equals("Employee")
+                || value.equals("Checkout")) && !valueTwo.equals("Employee")) {
+            return "Main";
         }
-        return fxmlSubClassUrl;
+        else if (value.equals("Sign Out"))
+            return "Main";
+        return "Employee";
     }
 
     public static String cssLocation(String className, String userType) {
@@ -79,6 +73,25 @@ public class Location implements Interface {
         return stylesheetUrl;
     }
 
+    public static String fxmlLocation(String subClass) {
+        String fxmlSubClassUrl = null;
+        subClass = changeSubClassName(subClass);
+        try {
+            fxmlSubClassUrl = url("FxmlFileURL").getProperty(subClass);
+        }catch (Exception e) {
+            Message.operationFailed("", e.getMessage());
+        }
+        finally {
+            assert inputStream != null;
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return fxmlSubClassUrl;
+    }
+
     public static String cssLocation(String className) {
         String stylesheetUrl = null;
         className = changeSubClassName(className);
@@ -96,19 +109,6 @@ public class Location implements Interface {
             }
         }
         return stylesheetUrl;
-    }
-
-    private static String changeMainClassName(String value, String userType){
-        if (value.equals("Main") && !userType.equals("Employee")) {
-            return "Login";
-        }
-        else if ((value.equals("Login") || value.equals("Employee")
-                || value.equals("Checkout")) && !userType.equals("Employee")) {
-            return "Main";
-        }
-        else if (value.equals("Sign Out"))
-            return "Main";
-        return "Employee";
     }
 
     private static String changeSubClassName(String textValue){

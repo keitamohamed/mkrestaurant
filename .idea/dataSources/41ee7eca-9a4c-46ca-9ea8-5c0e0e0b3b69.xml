@@ -9127,7 +9127,7 @@ User</ColNames>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1562" parent="374" name="PID">
+    <column id="1562" parent="374" name="ProductID">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -9152,7 +9152,7 @@ User</ColNames>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="1566" parent="374" name="PID_FK">
-      <ColNames>PID</ColNames>
+      <ColNames>ProductID</ColNames>
       <Type>btree</Type>
     </index>
     <key id="1567" parent="374" name="PRIMARY">
@@ -9161,7 +9161,7 @@ User</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="1568" parent="374" name="PID_FK">
-      <ColNames>PID</ColNames>
+      <ColNames>ProductID</ColNames>
       <RefSchemaName>onlinestore</RefSchemaName>
       <RefTableName>producttable</RefTableName>
       <RefColNames>productid</RefColNames>

@@ -30,13 +30,18 @@ public class SQLQuery {
                 "FROM ProductTable";
     }
 
+    public String getOrder(){
+        return "SELECT * " +
+                "FROM OrderTable";
+    }
+
     public String getOrderTableItems() {
         return "SELECT OrderID, UserID, PID, Quantity, Price, ImageName" +
                 "FROM OrderTable";
     }
 
     public String getUserOrderItem() {
-        return "SELECT OrderID, UserID, PID, Quantity, Price, ImageName" +
+        return "SELECT * " +
                 "FROM OrderTable" +
                 "WHERE UserID = ?";
     }
@@ -52,7 +57,7 @@ public class SQLQuery {
     }
 
     public String setInsertOrderTable() {
-        return "INSERT INTO OrderTable (OrderID, UserID, PID, ProductName, Quantity, Price) " +
+        return "INSERT INTO OrderTable (OrderID, UserID, ProductID, ProductName, Quantity, Price) " +
                 "VALUE (?, ?, ?, ?, ?, ?)";
     }
 }

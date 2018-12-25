@@ -167,3 +167,21 @@
 #gridPaneFooter .label{
     -fx-font-family: -fx-primafyfamily;
 }
+
+#leftPane #orderTitle, #productTitle {
+    -fx-font-size: 18px;
+    -fx-font-family: Papyrus, Apple Chancery, -fx-primaryfamily, cursive;
+}
+
+.text-field {
+    -fx-font-size: 16px;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #000;
+    -fx-border-radius: 10px;
+    -fx-border-style: dashed;
+    -fx-background-color: transparent;
+}
+
+.text-field .placeholder {
+    -fx-font-size: 16px;
+}

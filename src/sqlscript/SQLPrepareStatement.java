@@ -1,6 +1,7 @@
 package sqlscript;
 
 import blueprint.Cart;
+import blueprint.Order;
 import blueprint.Product;
 import dbconnection.DBConnection;
 import javafx.collections.ObservableList;
@@ -78,6 +79,27 @@ public class SQLPrepareStatement {
             Message.operationFailed("Exception", ex.getMessage());
         }
         return userFirstName;
+    }
+
+    public void getOrder(ObservableList<Order> order, String userID) {
+        try {
+            if (userID == null) {
+                pst = dbConnection.getConnection().prepareStatement(query.getOrder());
+            }
+            else {
+                pst = dbConnection.getConnection().prepareStatement(query.getLoadProduct());
+                pst.setInt(1, Integer.parseInt(userID));
+            }
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                order.add(new Order(rs.getInt("OrderID"), rs.getInt("UserID"), rs.getInt("ProductID"),
+                        rs.getString("ProductName"), rs.getInt("Quantity"),
+                        rs.getDouble("Price")));
+            }
+        }catch (SQLException ex) {
+            Message.operationFailed("Exception", ex.getMessage());
+        }
     }
 
     public boolean setUserLogin(int userID, String fName, String lName, String  userName,

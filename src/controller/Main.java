@@ -126,7 +126,8 @@ public class Main {
 
         log.setOnAction(e -> {
             if (userID == null) {
-                SwitchScene.switchStage(e, this.getClass().getSimpleName(), setUserName, "Customer", log);
+                SwitchScene.closeStage(e);
+                SwitchScene.switchStage(this.getClass().getSimpleName(), setUserName, "Customer", log);
             }
         });
         signOut.setOnAction(e -> logOut());

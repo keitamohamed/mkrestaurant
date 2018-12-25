@@ -93,7 +93,8 @@ public class Checkout {
     private void insertOrder(Event event) {
         int orderIDGenerated = generateOrderID();
         if (submitOrder.getText().equals("Return Home")){
-            SwitchScene.switchStage(event, this.getClass().getSimpleName(), userID, "Customer", new Button(setUserFirstName));
+            SwitchScene.closeStage(event);
+            SwitchScene.switchStage(this.getClass().getSimpleName(), userID, "Customer", new Button(setUserFirstName));
         }
         else if (userID == null) {
             disableUnnecessarilyField();

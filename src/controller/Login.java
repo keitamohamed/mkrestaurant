@@ -29,7 +29,8 @@ public class Login {
         login.setOnAction(e -> {
             String userType = statement.checkLoginInfo(userName, password.getText(), setUserFirstName);
             if (userType != null) {
-                SwitchScene.switchStage(e, this.getClass().getSimpleName(), userName.getText(),
+                SwitchScene.closeStage(e);
+                SwitchScene.switchStage(this.getClass().getSimpleName(), userName.getText(),
                         userType, setUserFirstName);
             }
             incorrectLogin.setVisible(true);
