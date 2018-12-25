@@ -122,11 +122,16 @@ public class Checkout {
         message.setVisible(false);
     }
 
+
     @FXML
     private void disableCartTable() {
         cartTable.setVisible(false);
     }
 
+    /**
+     * enableCartTable: It set the carts table
+     * visible to true when Checkout class is loaded.
+     */
     @FXML
     private void enableCartTable() {
         cartTable.setVisible(true);
@@ -147,17 +152,40 @@ public class Checkout {
         forgetPassword.setVisible(visible);
     }
 
+    /**
+     * generateOrderID: Automatic generate order ID when a customer
+     * place an order. And return that ID.
+     * @return
+     */
     @FXML
     private int generateOrderID() {
         Random random = new Random();
         return (random.nextInt(900000) + 900000);
     }
 
+    /**
+     * loginFieldNotFillOut: Will return true only if
+     * the username or password filed are not fill
+     * out
+     * @return
+     */
     @FXML
     private boolean loginFieldNotFillOut() {
         return userName.getText().isEmpty() || password.getText().isEmpty();
     }
 
+    /**
+     * getOrderList: The Method is call inside the SwitchScene
+     * class when the user click the cart button. And it take
+     * three agreement, list of items, userID, and UserFirstName.
+     * @param cart
+     * Contain the customer items for checkout
+     * @param id
+     * Customer ID. It could null if the customer is not login
+     * @param userFirstName
+     * The name of the customer or it could also be null if they
+     * not login
+     */
     @FXML
     public static void getOrderList(ObservableList<Cart> cart, String id, String userFirstName) {
         cartList = cart;
@@ -169,6 +197,7 @@ public class Checkout {
      * getMessage: Will be call and the message will only be print out if the
      * user is not login or not a member yet.
      * @return
+     * Will return the text for the user
      */
     private String getMessage() {
         return "Important: If you are not login, please click on My Account to login. " +
