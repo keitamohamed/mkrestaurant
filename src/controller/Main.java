@@ -66,7 +66,7 @@ public class Main {
 
         });
         disableCartQuantityField();
-        rAddress.setText("3420 Eastway Ave NW\n\tRoanoke VA");
+        rAddress.setText("3420 East way Ave NW\n\tRoanoke VA");
         copyRight.setText("Copyright \u00a9 2018. All right reserved. Powered by M.Keita Platform");
         flowPaneChildren(buttonList, products);
         filterSearchProductByKeyword();
@@ -102,6 +102,11 @@ public class Main {
         });
     }
 
+    /**
+     * changePaneBehavior: Changes the behavior of the
+     * top pane base upon if the user hover on the username when
+     * the user is login to show other available buttons.
+     */
     @FXML
     private void changePaneBehavior(){
         gridPaneTopRight.setPrefHeight(52);
@@ -109,7 +114,7 @@ public class Main {
         gridPaneTopRight.setOnMouseEntered(e -> {
             if (!log.getText().equals("Register / Sign In")) {
                 signOut.setVisible(true);
-                gridPaneTopRight.setPrefHeight(100);
+                gridPaneTopRight.setPrefHeight(110);
                 signOut.setVisible(true);
             }
         });
@@ -161,7 +166,7 @@ public class Main {
     private void filterSearchProductByKeyword() {
         searchKeyWord.textProperty().addListener((observable, oldValue, newValue) -> {
             scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-            if (newValue.isEmpty()) {
+            if (newValue.isEmpty() || newValue == null) {
                 flowPane.getChildren().clear();
                 flowPaneChildren(buttonList, products);
                 actionListener(buttonList, products);
@@ -248,6 +253,10 @@ public class Main {
         SwitchScene.switchScene(shoppingCarts, className, userID, new Button(setUserName));
     }
 
+    /**
+     * Resetting the username and userID will lock the user out
+     * from the database and reset all other field
+     */
     @FXML
     private void logOut() {
         log.setText("Register / Sign In");

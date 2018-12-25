@@ -21,7 +21,7 @@ public class SQLQuery {
     }
 
     public String setUserAddressInfo() {
-        return "INSERT INTO UserAddressTable (UserID, UserAddress, City, State, Zipcode) " +
+        return "INSERT INTO Address (UserID, UserAddress, City, State, ZipCode) " +
                 "VALUE (?, ?, ?, ?, ?)";
     }
 

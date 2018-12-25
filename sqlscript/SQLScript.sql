@@ -15,18 +15,18 @@ CREATE TABLE UserTable(
   PRIMARY KEY (UserID)
 )ENGINE = innoDB;
 
-CREATE TABLE UserAddressTable (
+CREATE TABLE Address (
   ID INT NOT NULL AUTO_INCREMENT,
   UserID INT NOT NULL,
   UserAddress VARCHAR(100) NOT NULL,
   City VARCHAR(20) NOT NULL,
   State VARCHAR(3) NOT NULL,
-  Zipcode INT NOT NULL,
+  ZipCode INT NOT NULL,
 
   PRIMARY KEY(ID)
 )ENGINE = innoDB;
 
-CREATE TABLE SAddressTable (
+CREATE TABLE ShippingAddress (
   ShappingID INT NOT NULL AUTO_INCREMENT,
   UID INT NOT NULL,
   FullAddress VARCHAR (150) NOT NULL,
@@ -56,18 +56,21 @@ CREATE TABLE OrderTable (
   PRIMARY KEY (GenerateID)
 )ENGINE = innoDB;
 
-ALTER TABLE SAddressTable AUTO_INCREMENT = 100;
-ALTER TABLE UserAddressTable AUTO_INCREMENT = 1011;
+ALTER TABLE ShippingAddress AUTO_INCREMENT = 100;
+ALTER TABLE Address AUTO_INCREMENT = 1011;
 ALTER TABLE OrderTable AUTO_INCREMENT = 1120;
 
-ALTER TABLE UserAddressTable ADD CONSTRAINT UserID_FK FOREIGN KEY (UserID) REFERENCES UserTable (UserID);
-ALTER TABLE SAddressTable ADD CONSTRAINT UID_FK FOREIGN KEY (UID) REFERENCES UserTable (UserID);
+ALTER TABLE Address ADD CONSTRAINT UserID_FK FOREIGN KEY (UserID) REFERENCES UserTable (UserID);
+ALTER TABLE ShippingAddress ADD CONSTRAINT UID_FK FOREIGN KEY (UID) REFERENCES UserTable (UserID);
 ALTER TABLE OrderTable ADD CONSTRAINT PID_FK FOREIGN KEY (PID) REFERENCES ProductTable (ProductID);
 
 
 INSERT INTO UserTable (UserID, FirstName, LastName, UserName, Password, UserType)
 VALUE (256343, 'John', 'Smith', 'jSmith', '!2Smith', 'Employee'),
       (672341, 'Ashely', 'William', 'aWilliam', 'Ashely!23', 'Customer');
+INSERT INTO Address(UserID, UserAddress, City, State, ZipCode)
+VALUE (256343, '562 East Way DR Apt 15', 'Charlotte', 'NC', 28740),
+      (672341, '892 Arthur Avenue Ave SE Apt 106', 'New York City', 'NY', 78352);
 INSERT INTO ProductTable (ProductID, PName, Quantity, Price, ImageName)
 VALUE (78232, 'Lays, Sun and Jalapeno Chip', 1, 3.78, 'chips'),
       (67235, 'Chips Ahoy Cookie', 15, 5.37, 'chips-ahoy-cookie'),

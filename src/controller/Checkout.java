@@ -72,7 +72,7 @@ public class Checkout {
             incorrectLogin.setVisible(true);
         });
 
-        signUp.setOnAction(e -> getPopUpStage(signUp));
+        signUp.setOnAction(e -> SwitchScene.switchScene(signUp));
         myAccount.setOnAction(e -> {
             passwordImage.setVisible(true);
             setLoginFieldVisible(true);
@@ -127,10 +127,10 @@ public class Checkout {
         cartTable.setVisible(false);
     }
 
+    @FXML
     private void enableCartTable() {
         cartTable.setVisible(true);
     }
-
 
     @FXML
     private void setLoginFieldVisible(boolean visible) {
@@ -156,7 +156,6 @@ public class Checkout {
     @FXML
     private boolean loginFieldNotFillOut() {
         return userName.getText().isEmpty() || password.getText().isEmpty();
-
     }
 
     @FXML
@@ -166,14 +165,14 @@ public class Checkout {
         setUserFirstName = userFirstName;
     }
 
+    /**
+     * getMessage: Will be call and the message will only be print out if the
+     * user is not login or not a member yet.
+     * @return
+     */
     private String getMessage() {
         return "Important: If you are not login, please click on My Account to login. " +
                 "If you do not have an Account, click on the Sign Up\nbutton and create " +
                 "an Account, or Checkout as a Guess";
-    }
-
-    @FXML
-    private void getPopUpStage(Button button) {
-        SwitchScene.switchScene(button);
     }
 }

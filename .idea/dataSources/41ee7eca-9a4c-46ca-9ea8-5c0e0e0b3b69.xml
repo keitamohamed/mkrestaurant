@@ -1424,10 +1424,10 @@
       <Comment>Users and global privileges</Comment>
       <Collation>utf8_bin</Collation>
     </table>
-    <table id="373" parent="4" name="ordertable"/>
-    <table id="374" parent="4" name="producttable"/>
-    <table id="375" parent="4" name="saddresstable"/>
-    <table id="376" parent="4" name="useraddresstable"/>
+    <table id="373" parent="4" name="address"/>
+    <table id="374" parent="4" name="ordertable"/>
+    <table id="375" parent="4" name="producttable"/>
+    <table id="376" parent="4" name="shippingaddress"/>
     <table id="377" parent="4" name="usertable"/>
     <table id="378" parent="5" name="accounts">
       <Engine>PERFORMANCE_SCHEMA</Engine>
@@ -9057,179 +9057,179 @@ Transition_type_id</ColNames>
 User</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1550" parent="373" name="GenerateID">
+    <column id="1550" parent="373" name="ID">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1551" parent="373" name="OrderID">
+    <column id="1551" parent="373" name="UserID">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1552" parent="373" name="UserID">
-      <Position>3</Position>
-      <DataType>int(11)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="1553" parent="373" name="PID">
-      <Position>4</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="1554" parent="373" name="ProductName">
-      <Position>5</Position>
-      <DataType>varchar(150)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="1555" parent="373" name="Quantity">
-      <Position>6</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="1556" parent="373" name="Price">
-      <Position>7</Position>
-      <DataType>decimal(6,2 digit)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="1557" parent="373" name="PID_FK">
-      <ColNames>PID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="1558" parent="373" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>GenerateID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="1559" parent="373" name="PID_FK">
-      <ColNames>PID</ColNames>
-      <RefSchemaName>onlinestore</RefSchemaName>
-      <RefTableName>producttable</RefTableName>
-      <RefColNames>productid</RefColNames>
-    </foreign-key>
-    <column id="1560" parent="374" name="ProductID">
-      <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="1561" parent="374" name="PName">
-      <Position>2</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="1562" parent="374" name="Quantity">
-      <Position>3</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="1563" parent="374" name="Price">
-      <Position>4</Position>
-      <DataType>decimal(6,2 digit)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="1564" parent="374" name="ImageName">
-      <Position>5</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="1565" parent="374" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>ProductID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="1566" parent="375" name="ShappingID">
-      <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="1567" parent="375" name="UID">
-      <Position>2</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="1568" parent="375" name="FullAddress">
-      <Position>3</Position>
-      <DataType>varchar(150)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="1569" parent="375" name="UID_FK">
-      <ColNames>UID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="1570" parent="375" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>ShappingID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="1571" parent="375" name="UID_FK">
-      <ColNames>UID</ColNames>
-      <RefSchemaName>onlinestore</RefSchemaName>
-      <RefTableName>usertable</RefTableName>
-      <RefColNames>userid</RefColNames>
-    </foreign-key>
-    <column id="1572" parent="376" name="ID">
-      <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="1573" parent="376" name="UserID">
-      <Position>2</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="1574" parent="376" name="UserAddress">
+    <column id="1552" parent="373" name="UserAddress">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1575" parent="376" name="City">
+    <column id="1553" parent="373" name="City">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1576" parent="376" name="State">
+    <column id="1554" parent="373" name="State">
       <Position>5</Position>
       <DataType>varchar(3)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1577" parent="376" name="Zipcode">
+    <column id="1555" parent="373" name="ZipCode">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="1578" parent="376" name="UserID_FK">
+    <index id="1556" parent="373" name="UserID_FK">
       <ColNames>UserID</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="1579" parent="376" name="PRIMARY">
+    <key id="1557" parent="373" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="1580" parent="376" name="UserID_FK">
+    <foreign-key id="1558" parent="373" name="UserID_FK">
       <ColNames>UserID</ColNames>
+      <RefSchemaName>onlinestore</RefSchemaName>
+      <RefTableName>usertable</RefTableName>
+      <RefColNames>userid</RefColNames>
+    </foreign-key>
+    <column id="1559" parent="374" name="GenerateID">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="1560" parent="374" name="OrderID">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="1561" parent="374" name="UserID">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="1562" parent="374" name="PID">
+      <Position>4</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="1563" parent="374" name="ProductName">
+      <Position>5</Position>
+      <DataType>varchar(150)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="1564" parent="374" name="Quantity">
+      <Position>6</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="1565" parent="374" name="Price">
+      <Position>7</Position>
+      <DataType>decimal(6,2 digit)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="1566" parent="374" name="PID_FK">
+      <ColNames>PID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="1567" parent="374" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>GenerateID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1568" parent="374" name="PID_FK">
+      <ColNames>PID</ColNames>
+      <RefSchemaName>onlinestore</RefSchemaName>
+      <RefTableName>producttable</RefTableName>
+      <RefColNames>productid</RefColNames>
+    </foreign-key>
+    <column id="1569" parent="375" name="ProductID">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="1570" parent="375" name="PName">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="1571" parent="375" name="Quantity">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="1572" parent="375" name="Price">
+      <Position>4</Position>
+      <DataType>decimal(6,2 digit)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="1573" parent="375" name="ImageName">
+      <Position>5</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="1574" parent="375" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ProductID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="1575" parent="376" name="ShappingID">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="1576" parent="376" name="UID">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="1577" parent="376" name="FullAddress">
+      <Position>3</Position>
+      <DataType>varchar(150)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="1578" parent="376" name="UID_FK">
+      <ColNames>UID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="1579" parent="376" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ShappingID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1580" parent="376" name="UID_FK">
+      <ColNames>UID</ColNames>
       <RefSchemaName>onlinestore</RefSchemaName>
       <RefTableName>usertable</RefTableName>
       <RefColNames>userid</RefColNames>
