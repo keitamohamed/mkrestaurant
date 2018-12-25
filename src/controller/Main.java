@@ -8,10 +8,6 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -45,20 +41,20 @@ public class Main {
     @FXML
     private ScrollPane scrollPane;
     @FXML
-    TableView<Cart> itemListTable;
+    private TableView<Cart> itemListTable;
     @FXML
-    TableColumn<Cart, String> pName;
+    private TableColumn<Cart, String> pName;
     @FXML
-    TableColumn<Cart, Integer> quantity;
+    private TableColumn<Cart, Integer> itemQuantity;
     @FXML
-    TableColumn<Cart, Double> productPrice;
+    private TableColumn<Cart, Double> productPrice;
     @FXML
     private ComboBox<Integer> numQuantity;
 
     private ObservableList<Product> products = FXCollections.observableArrayList();
     private ObservableList<Button> buttonList = FXCollections.observableArrayList();
     private ObservableList<Button> observableList = FXCollections.observableArrayList();
-    private ObservableList<Cart> ShoppingCarts = FXCollections.observableArrayList();
+    private ObservableList<Cart> shoppingCarts = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
@@ -89,20 +85,20 @@ public class Main {
         });
 
         removeItem.setOnAction(event -> {
-            ShoppingCarts.remove(Integer.parseInt(removeItem.getText()));
-            itemListTable.setItems(ShoppingCarts);
-            Utility.calculatePrice(ShoppingCarts, sumPrice, totalPrice, discountPer, discount, totalItem);
+            shoppingCarts.remove(Integer.parseInt(removeItem.getText()));
+            itemListTable.setItems(shoppingCarts);
+            Utility.calculatePrice(shoppingCarts, sumPrice, totalPrice, discountPer, discount, totalItem);
         });
 
         numQuantity.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (numQuantity.getSelectionModel().getSelectedItem() != null) {
-                int productID = ShoppingCarts.get((Integer.parseInt(removeItem.getText()))).getProductID();
+                int productID = shoppingCarts.get((Integer.parseInt(removeItem.getText()))).getItemID();
                 int quantity = numQuantity.getSelectionModel().getSelectedItem();
                 double price = getProductOriginalPrice(productID) * quantity;
-                ShoppingCarts.get((Integer.parseInt(removeItem.getText()))).setQuantity(quantity);
-                ShoppingCarts.get((Integer.parseInt(removeItem.getText()))).setPrice(Utility.roundPrice(price));
+                shoppingCarts.get((Integer.parseInt(removeItem.getText()))).setItemQuantity(quantity);
+                shoppingCarts.get((Integer.parseInt(removeItem.getText()))).setItemPrice(Utility.roundPrice(price));
                 itemListTable.refresh();
-                Utility.calculatePrice(ShoppingCarts, sumPrice, totalPrice, discountPer, discount, totalItem);
+                Utility.calculatePrice(shoppingCarts, sumPrice, totalPrice, discountPer, discount, totalItem);
             }
         });
     }
@@ -129,7 +125,7 @@ public class Main {
                 SwitchScene.switchStage(e, this.getClass().getSimpleName(), setUserName, "Customer", log);
             }
         });
-        signOut.setOnAction(this::logOut);
+        signOut.setOnAction(e -> logOut());
     }
 
     private void flowPaneChildren(List<Button> buttonList, List<Product> products) {
@@ -190,29 +186,28 @@ public class Main {
     }
 
     private void cartTable(int productID, ImageView view, String name, double price) {
-        for (Cart cart : ShoppingCarts) {
-            if (ShoppingCarts.size() != 0) {
-                if (cart.getName().equals(name)) {
+        for (Cart cart : shoppingCarts) {
+            if (shoppingCarts.size() != 0) {
+                if (cart.getItemName().equals(name)) {
                     Message.successful((name + " is already in your cart. " +
                             "Select\nit in your car and update it quantity."), 1);
                     return;
                 }
             }
         }
-        ShoppingCarts.add(new Cart(productID, view, name, 1, price));
-        pName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-        itemListTable.setItems(ShoppingCarts);
-        Utility.calculatePrice(ShoppingCarts, sumPrice, totalPrice, discountPer, discount, totalItem);
+        shoppingCarts.add(new Cart(productID, view, name, 1, price));
+        Utility.cartsTableProperty(itemListTable, pName, itemQuantity, productPrice, shoppingCarts);
+        Utility.calculatePrice(shoppingCarts, sumPrice, totalPrice, discountPer, discount, totalItem);
     }
 
     /**
      * getProductOriginalPrice Method: The method take in the product
      * id and return the product original price
      * @param productID
+     * Product ID. Need it to get the product price
      * @return
+     * Will return either the product price or 0 if
+     * product not found
      */
     private double getProductOriginalPrice(int productID){
         for (Product product : products){
@@ -226,6 +221,7 @@ public class Main {
      * loadDate Method: This method is call when you run the
      * program to load all product from the database
      * @param products
+     * Empty list of products being pass in to load data from the database into it
      */
     private void loadData(ObservableList<Product> products) {
         log.setText(statement.getProducts(products, userID, log).getText());
@@ -250,16 +246,17 @@ public class Main {
      * press this method is call and the checkout items will be
      * pass into the switchScene method for final checkout
      * @param event
+     * Need it to close current class.
      */
     @FXML
     private void checkoutOrder(Event event){
         String className = this.getClass().getSimpleName();
         ((Node)event.getSource()).getScene().getWindow().hide();
-        SwitchScene.switchScene(ShoppingCarts, className, userID, new Button(setUserName));
+        SwitchScene.switchScene(shoppingCarts, className, userID, new Button(setUserName));
     }
 
     @FXML
-    private void logOut(Event event) {
+    private void logOut() {
         log.setText("Register / Sign In");
         setUserName = null; userID = null;
     }
@@ -270,6 +267,8 @@ public class Main {
      * from the database. This id will be use when the user want to change
      * their info etc.
      * @param id
+     * User ID, which is being pass from the previous stage when you login or
+     * when switching between stage
      */
     public static void getUserID(String id, Button userFirstName) {
         userID = id;

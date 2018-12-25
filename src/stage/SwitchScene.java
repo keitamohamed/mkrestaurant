@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class SwitchScene {
 
-    public static void switchScene(String className, String userID, String userType, Button userFirstName) {
+    private static void switchScene(String className, String userID, String userType, Button userFirstName) {
         try {
             AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.fxmlLocation(className, userType)));
             sendUserID(userID, userType, userFirstName);
@@ -72,13 +72,15 @@ public class SwitchScene {
     }
 
     private static String subStageTitle(String textValue){
-        if (textValue.equals("Main")) {
-            return "Checkout";
+        switch (textValue) {
+            case "Main":
+                return "Checkout";
+            case "Sign Out":
+                return "Main";
+            case "Sign Up / Register":
+            case "Sign Up":
+                return "Register";
         }
-        else if (textValue.equals("Sign Out"))
-            return "Main";
-        else if (textValue.equals("Sign Up / Register") || textValue.equals("Sign Up"))
-            return "Register";
         return "Main";
     }
 
@@ -109,6 +111,7 @@ public class SwitchScene {
      * And also the class name is pass into the switchStage Method
      * to deterrent which fxmal to get
      * @param event
+     * Need it to close current class.
      */
     @FXML
     public static void switchStage(Event event, String className, String userName, String userType, Button button) {

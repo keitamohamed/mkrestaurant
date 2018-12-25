@@ -5,13 +5,23 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.text.NumberFormat;
-import java.util.concurrent.locks.Lock;
 
 public class Utility {
+
+    public static void cartsTableProperty(TableView<Cart> cart, TableColumn<Cart, String> name,
+                                    TableColumn<Cart, Integer> quantity, TableColumn<Cart, Double> price,
+                                          ObservableList<Cart> item) {
+        name.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        quantity.setCellValueFactory(new PropertyValueFactory<>("itemQuantity"));
+        price.setCellValueFactory(new PropertyValueFactory<>("itemPrice"));
+
+        cart.setItems(item);
+    }
 
     /**
      * Pass all price variable and carts observableList and calculate all price, discount
@@ -27,20 +37,20 @@ public class Utility {
             totalItem.setText("0");
         }
         for (Cart c : carts) {
-            totalItem.setText(String.valueOf((Integer.parseInt(totalItem.getText()) + c.getQuantity())));
+            totalItem.setText(String.valueOf((Integer.parseInt(totalItem.getText()) + c.getItemQuantity())));
 
             if (sumPrice.getText().equals("0")) {
-                sumPrice.setText(nf.format(c.getPrice()));
-                totalPrice.setText(nf.format(c.getPrice()));
+                sumPrice.setText(nf.format(c.getItemPrice()));
+                totalPrice.setText(nf.format(c.getItemPrice()));
             }
             else {
-                price += (c.getPrice());
+                price += (c.getItemPrice());
                 if (price > 100) {
                     double dPercent = .05;
                     if (price >= 500) {
                         dPercent = .10;
                     }
-                    discountPer.setText(String.valueOf(dPercent) + " %");
+                    discountPer.setText(dPercent + " %");
                     discount.setText(nf.format(price * dPercent));
 
                     sumPrice.setText(nf.format(price));
@@ -64,7 +74,10 @@ public class Utility {
     /**
      * Pass getProducts price and return the price with only two decimal place
      * @param price
+     * Product original price. It it require to get right price each time when user
+     * change item quantity
      * @return
+     * Will return the product original price
      */
     public static double roundPrice (double price){
         return Math.round(price * 100.0) / 100.0;
@@ -74,9 +87,13 @@ public class Utility {
      * ImageView Method take in image url, width and height, get the right image,
      * resize it width and height and return the image
      * @param imageName
+     * Product image name
      * @param imageWidth
+     * Define the width of the image
      * @param imageHeight
+     * Define the height of the image
      * @return
+     * Will return the product image
      */
     public static ImageView getImageProduct(String imageName, int imageWidth, int imageHeight) {
         Image image;
@@ -93,15 +110,5 @@ public class Utility {
             view.setFitHeight(imageHeight);
         }
         return view;
-    }
-
-    public static void waitTime(String mom){
-        synchronized (mom) {
-            try {
-                mom.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }

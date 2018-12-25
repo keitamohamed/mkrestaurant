@@ -124,10 +124,10 @@ public class SQLPrepareStatement {
                 pst = dbConnection.getConnection().prepareStatement(query.setInsertOrderTable());
                 pst.setInt(1, orderID);
                 pst.setInt(2, userID);
-                pst.setInt(3, item.getProductID());
-                pst.setString(4, item.getName());
-                pst.setInt(5, item.getQuantity());
-                pst.setDouble(6, item.getPrice());
+                pst.setInt(3, item.getItemID());
+                pst.setString(4, item.getItemName());
+                pst.setInt(5, item.getItemQuantity());
+                pst.setDouble(6, item.getItemPrice());
 
                 pst.executeUpdate();
             }

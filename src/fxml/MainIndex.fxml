@@ -27,7 +27,7 @@
             <TableView fx:id="itemListTable" layoutY="135.0" prefHeight="232.0" prefWidth="321.0">
               <columns>
                 <TableColumn fx:id="pName" prefWidth="124.0" resizable="false" text="Product" />
-                <TableColumn fx:id="quantity" prefWidth="101.0" resizable="false" text="Quantity" />
+                <TableColumn fx:id="itemQuantity" prefWidth="101.0" resizable="false" text="Quantity" />
                   <TableColumn fx:id="productPrice" minWidth="0.0" prefWidth="95.0" resizable="false" text="Price" />
               </columns>
             </TableView>

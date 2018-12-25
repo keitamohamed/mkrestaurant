@@ -6,56 +6,56 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.ImageView;
 
 public class Cart {
-    private SimpleIntegerProperty productID;
-    private SimpleStringProperty  name;
-    private SimpleIntegerProperty quantity;
-    private SimpleDoubleProperty price;
-    private ImageView view;
+    private SimpleIntegerProperty itemID;
+    private SimpleStringProperty itemName;
+    private SimpleIntegerProperty itemQuantity;
+    private SimpleDoubleProperty itemPrice;
+    private ImageView itemImage;
 
     public Cart(String n, int q, double p) {
-        this.name = new SimpleStringProperty(n);
-        this.quantity = new SimpleIntegerProperty(q);
-        this.price = new SimpleDoubleProperty(p);
+        this.itemName = new SimpleStringProperty(n);
+        this.itemQuantity = new SimpleIntegerProperty(q);
+        this.itemPrice = new SimpleDoubleProperty(p);
     }
 
     public Cart(int pID, ImageView image, String n, int q, double p) {
-        this.productID = new SimpleIntegerProperty(pID);
-        this.view = image;
-        this.name = new SimpleStringProperty(n);
-        this.quantity = new SimpleIntegerProperty(q);
-        this.price = new SimpleDoubleProperty(p);
+        this.itemID = new SimpleIntegerProperty(pID);
+        this.itemImage = image;
+        this.itemName = new SimpleStringProperty(n);
+        this.itemQuantity = new SimpleIntegerProperty(q);
+        this.itemPrice = new SimpleDoubleProperty(p);
     }
 
     @Override
     public String toString() {
-        return " Name " + name + " Quantity " + quantity + " Price " + price;
+        return " Name " + itemName + " Quantity " + itemQuantity + " Price " + itemPrice;
     }
 
-    public int getProductID() {
-        return productID.get();
+    public int getItemID() {
+        return itemID.get();
     }
 
-    public ImageView getView() {
-        return view;
+    public ImageView getItemImage() {
+        return itemImage;
     }
 
-    public String getName() {
-        return name.get();
+    public String getItemName() {
+        return itemName.get();
     }
 
-    public int getQuantity() {
-        return quantity.get();
+    public int getItemQuantity() {
+        return itemQuantity.get();
     }
 
-    public double getPrice() {
-        return price.get();
+    public double getItemPrice() {
+        return itemPrice.get();
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity.set(quantity);
+    public void setItemQuantity(int itemQuantity) {
+        this.itemQuantity.set(itemQuantity);
     }
 
-    public void setPrice(double price) {
-        this.price.set(price);
+    public void setItemPrice(double itemPrice) {
+        this.itemPrice.set(itemPrice);
     }
 }

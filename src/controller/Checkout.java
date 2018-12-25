@@ -4,7 +4,6 @@ import blueprint.Cart;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -13,6 +12,7 @@ import javafx.scene.paint.Color;
 import message.Message;
 import sqlscript.SQLPrepareStatement;
 import stage.SwitchScene;
+import utility.Utility;
 
 import java.util.Random;
 
@@ -50,7 +50,8 @@ public class Checkout {
         setLoginFieldVisible(false);
         disableCartTable();
         root.setOnMouseEntered(e -> {
-            cartTable();
+            itemImage.setCellValueFactory(new PropertyValueFactory<>("itemImage"));
+            Utility.cartsTableProperty(cartTable, itemName, itemQuantity, itemPrice, cartList);
             enableCartTable();
             if (userID != null && !orderSubmitted) {
                 submitOrder.setText("Submit Order");
@@ -111,16 +112,6 @@ public class Checkout {
         cartTable.refresh();
         cartTable.setVisible(false);
         orderSubmitted = true;
-    }
-
-    @FXML
-    private void cartTable() {
-        itemImage.setCellValueFactory(new PropertyValueFactory<>("view"));
-        itemName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        itemQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        itemPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-        cartTable.setItems(cartList);
     }
 
     @FXML

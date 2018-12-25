@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import sqlscript.SQLPrepareStatement;
 import stage.SwitchScene;
+import utility.Utility;
 
 public class Employee {
     private static String userID, setUserFirstName;
