@@ -22,9 +22,9 @@ public class Location implements Interface {
 
     }
 
-    public static String fxmlLocation(String className, String userType) {
+    public static String fxmlLocation(String className, String userOrClassType) {
         String fxmlLocation = null;
-        className = changeMainClassName(className, userType);
+        className = changeMainClassName(className, userOrClassType);
         try {
             fxmlLocation = url("FxmlFileURL").getProperty(className);
         }catch (Exception e) {
@@ -120,6 +120,8 @@ public class Location implements Interface {
             case "Sign up / Register":
             case "Sign Up":
                 return "Register";
+            case "Account":
+                return "Account";
         }
         return "Main";
     }

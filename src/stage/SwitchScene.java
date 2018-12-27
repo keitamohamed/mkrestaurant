@@ -1,6 +1,7 @@
 package stage;
 
 import blueprint.Cart;
+import controller.Account;
 import controller.Employee;
 import controller.Checkout;
 import controller.Main;
@@ -19,17 +20,29 @@ import java.io.IOException;
 
 public class SwitchScene {
 
-    private static void switchScene(String className, String userID, String userType, Button userFirstName) {
+    private static void switchScene(String className, String userID, String userOrClassType, Button userFirstName) {
         try {
-            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.fxmlLocation(className, userType)));
-            sendUserID(userID, userType, userFirstName);
+            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.fxmlLocation(className, userOrClassType)));
+            sendUserID(userID, userOrClassType, userFirstName);
             Stage stage = new Stage();
             stage.setScene(new Scene(anchorPane));
-            stage.setTitle(stageTitle(className, userType));
+            stage.setTitle(stageTitle(className, userOrClassType));
             stage.setResizable(false);
-            stage.getScene().getStylesheets().add(SwitchScene.class.getResource(Location.cssLocation(className, userType)).toExternalForm());
+            stage.getScene().getStylesheets().add(SwitchScene.class.getResource(Location.cssLocation(className, userOrClassType)).toExternalForm());
             stage.getScene().getStylesheets().add(SwitchScene.class.getResource("../style/Message.css").toExternalForm());
             stage.show();
+            stage.setOnCloseRequest(e -> stage.close());
+        }catch (IOException io) {
+            System.out.println("IO-Exception occur: " + io.getMessage());
+        }
+    }
+
+    public static void switchScene(String typeOfAccount, String userID) {
+        try {
+            AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.fxmlLocation(typeOfAccount)));
+            sendUserID(userID, typeOfAccount, new Button());
+            Stage stage = new Stage();
+            stageProperty(anchorPane, typeOfAccount, stage);
             stage.setOnCloseRequest(e -> stage.close());
         }catch (IOException io) {
             System.out.println("IO-Exception occur: " + io.getMessage());
@@ -88,6 +101,9 @@ public class SwitchScene {
         if (userType.equals("Employee")) {
             Employee.getUserID(userID, setUserFirstName);
             return;
+        }
+        else if (userType.equals("Account")) {
+            Account.getUserInfo(userID);
         }
         Main.getUserID(userID, setUserFirstName);
     }

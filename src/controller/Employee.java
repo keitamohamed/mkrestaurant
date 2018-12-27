@@ -17,6 +17,7 @@ import stage.SwitchScene;
 public class Employee {
     private static String userID, setUserFirstName;
     private SQLPrepareStatement statement = new SQLPrepareStatement();
+    private String className = this.getClass().getSimpleName();
     @FXML
     private AnchorPane root;
     @FXML
@@ -81,10 +82,12 @@ public class Employee {
 
         log.setOnAction(e -> {
             SwitchScene.closeStage(e);
-            SwitchScene.switchStage(this.getClass().getSimpleName(), null, "Customer",
-                    new Button(null));
+            SwitchScene.switchStage(className, null, "Customer", new Button(null));
         });
-
+        account.setOnAction(e -> {
+            SwitchScene.closeStage(e);
+            SwitchScene.switchScene(account.getText().trim(), userID);
+        });
     }
 
     private void filterProductTable() {
