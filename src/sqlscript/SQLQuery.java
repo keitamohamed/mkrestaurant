@@ -11,8 +11,9 @@ public class SQLQuery {
 
     public String getUserInfo() {
         return "SELECT * " +
-                "FROM UserTable " +
-                "WHERE UserID = ?";
+                "FROM UserTable As u JOIN Address As a " +
+                "WHERE u.UserID = a.UserID " +
+                "AND u.UserID = ?";
     }
 
     public String setUserLogin() {

@@ -67,11 +67,11 @@ ALTER TABLE OrderTable ADD CONSTRAINT PID_FK FOREIGN KEY (ProductID) REFERENCES 
 
 
 INSERT INTO UserTable (UserID, FirstName, LastName, UserName, Password, UserType)
-VALUE (256343, 'John', 'Smith', 'jSmith', '!2Smith', 'Employee'),
-      (672341, 'Ashely', 'William', 'aWilliam', 'Ashely!23', 'Customer');
+VALUE (2566343, 'John', 'Smith', 'jSmith', '!2Smith', 'Employee'),
+      (6726341, 'Ashely', 'William', 'aWilliam', 'Ashely!23', 'Customer');
 INSERT INTO Address(UserID, UserAddress, City, State, ZipCode)
-VALUE (256343, '562 East Way DR Apt 15', 'Charlotte', 'NC', 28740),
-      (672341, '892 Arthur Avenue Ave SE Apt 106', 'New York City', 'NY', 78352);
+VALUE (2566343, '562 East Way DR Apt 15', 'Charlotte', 'NC', 28740),
+      (6726341, '892 Arthur Avenue Ave SE Apt 106', 'New York City', 'NY', 78352);
 INSERT INTO ProductTable (ProductID, PName, Quantity, Price, ImageName)
 VALUE (78232, 'Lays, Sun and Jalapeno Chip', 1, 3.78, 'chips'),
       (67235, 'Chips Ahoy Cookie', 15, 5.37, 'chips-ahoy-cookie'),

@@ -59,6 +59,10 @@
     -fx-font-family: -fx-primafyfamily;
 }
 
+#subRoot #idLabel, #lLabel, #fLabel {
+    -fx-font-weight: bold;
+}
+
 #subRoot #subTitle {
     -fx-font-weight: bold;
     -fx-border-width: 0 0 1 0;

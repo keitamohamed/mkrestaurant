@@ -3,6 +3,7 @@ package sqlscript;
 import blueprint.Cart;
 import blueprint.Order;
 import blueprint.Product;
+import blueprint.User;
 import dbconnection.DBConnection;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -56,6 +57,24 @@ public class SQLPrepareStatement {
 
             if (rs.first()) {
                 userFirstName.setText("Hello, " + rs.getString("FirstName"));
+            }
+
+        }catch (SQLException ex) {
+            Message.operationFailed("Exception", ex.getMessage());
+        }
+    }
+
+    public void getUserInfo (String userID, ObservableList<User> users) {
+        try {
+            pst = dbConnection.getConnection().prepareStatement(query.getUserInfo());
+            pst.setInt(1, Integer.parseInt(userID));
+            rs = pst.executeQuery();
+
+            if (rs.first()) {
+                users.add(new User(rs.getInt("UserID"), rs.getString("FirstName"), rs.getString("LastName"),
+                        rs.getString("UserName"), rs.getString("Password"),
+                        rs.getString("UserAddress"), rs.getString("City"), rs.getString("State"),
+                        rs.getInt("ZipCode")));
             }
 
         }catch (SQLException ex) {
