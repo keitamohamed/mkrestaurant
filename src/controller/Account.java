@@ -56,12 +56,12 @@ public class Account {
             accountID.setText(String.valueOf(e.getUserID()));
             firstName.setText(e.getFirstName());
             lastName.setText(e.getLastName());
-            address.setText("Address: " + e.getAddress());
-            city.setText("City: " + e.getCity());
-            state.setText("State: " + e.getState());
-            zipCode.setText("ZipCode: " + e.getZipCode());
-            userName.setText("Username: " + e.getUserName());
-            password.setText("Password: " + e.getPassword());
+            address.setText(e.getAddress());
+            city.setText(e.getCity());
+            state.setText(e.getState());
+            zipCode.setText(String.valueOf(e.getZipCode()));
+            userName.setText(e.getUserName());
+            password.setText(e.getPassword());
         });
     }
 

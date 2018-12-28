@@ -26,16 +26,22 @@
                         <Label fx:id="fLabel" layoutX="35.0" layoutY="93.0" text="First name:" />
                         <Label fx:id="lLabel" layoutX="357.0" layoutY="87.0" text="Last Name:" />
                         <Label fx:id="idLabel" layoutX="33.0" layoutY="45.0" text="Account ID:" />
-                        <Label fx:id="address" layoutX="36.0" layoutY="143.0" text="Address:" />
-                        <Label fx:id="city" layoutX="36.0" layoutY="196.0" text="City:" />
-                        <Label fx:id="state" layoutX="358.0" layoutY="196.0" text="State:" />
-                        <Label fx:id="zipCode" layoutX="36.0" layoutY="249.0" text="ZipCode:" />
+                        <Label fx:id="aLabel" layoutX="36.0" layoutY="143.0" text="Address:" />
+                        <Label fx:id="cLabel" layoutX="36.0" layoutY="196.0" text="City:" />
+                        <Label fx:id="sLabel" layoutX="358.0" layoutY="196.0" text="State:" />
+                        <Label fx:id="zLabel" layoutX="36.0" layoutY="249.0" text="ZipCode:" />
                         <Label fx:id="subTitle" layoutX="32.0" layoutY="303.0" prefHeight="27.0" prefWidth="455.0" text="Login Information" />
-                        <Label fx:id="userName" layoutX="32.0" layoutY="366.0" text="Username:" />
-                        <Label fx:id="password" layoutX="357.0" layoutY="366.0" text="Password:" />
-                        <Label fx:id="accountID" layoutX="143.0" layoutY="45.0" text="1111111" />
-                        <Label fx:id="firstName" layoutX="143.0" layoutY="93.0" text="Mary" />
-                        <Label fx:id="lastName" layoutX="466.0" layoutY="87.0" text="Smith" />
+                        <Label fx:id="uLabel" layoutX="32.0" layoutY="366.0" text="Username:" />
+                        <Label fx:id="pLabel" layoutX="357.0" layoutY="366.0" text="Password:" />
+                        <Label fx:id="accountID" layoutX="134.0" layoutY="45.0" text="1111111" />
+                        <Label fx:id="firstName" layoutX="148.0" layoutY="93.0" text="Mary" />
+                        <Label fx:id="lastName" layoutX="457.0" layoutY="87.0" text="Smith" />
+                        <Label fx:id="address" layoutX="123.0" layoutY="143.0" text="123 Street" />
+                        <Label fx:id="city" layoutX="91.0" layoutY="196.0" text="New York City" />
+                        <Label fx:id="state" layoutX="423.0" layoutY="196.0" text="NY" />
+                        <Label fx:id="userName" layoutX="128.0" layoutY="366.0" text="kk@12" />
+                        <Label fx:id="password" layoutX="445.0" layoutY="366.0" text="1234" />
+                        <Label fx:id="zipCode" layoutX="118.0" layoutY="249.0" text="67231" />
                      </children>
                   </AnchorPane>
             </content>
