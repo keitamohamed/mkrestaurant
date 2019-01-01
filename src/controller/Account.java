@@ -24,7 +24,7 @@ public class Account {
     @FXML
     private TabPane tabPane;
     @FXML
-    private Tab accountInfo, editAccount, editAddress;
+    private Tab editAccount, editAddress;
     @FXML
     private Label accountID, firstName, lastName, address;
     @FXML
@@ -42,13 +42,18 @@ public class Account {
         });
 
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.getText().equals("Edit Account")) {
+            if (newValue.getText().equals("Edit User Account")) {
                 System.out.println();
             }
             else if (newValue.getText().equals("Edit Address")) {
                 System.out.println();
             }
         });
+    }
+
+    @FXML
+    private void updateUserInfo () {
+
     }
 
     private void displaceUserInfo(){

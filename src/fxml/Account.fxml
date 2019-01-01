@@ -33,22 +33,34 @@
                         <Label fx:id="subTitle" layoutX="32.0" layoutY="303.0" prefHeight="27.0" prefWidth="455.0" text="Login Information" />
                         <Label fx:id="uLabel" layoutX="32.0" layoutY="366.0" text="Username:" />
                         <Label fx:id="pLabel" layoutX="357.0" layoutY="366.0" text="Password:" />
-                        <Label fx:id="accountID" layoutX="134.0" layoutY="45.0" text="1111111" />
-                        <Label fx:id="firstName" layoutX="148.0" layoutY="93.0" text="Mary" />
-                        <Label fx:id="lastName" layoutX="457.0" layoutY="87.0" text="Smith" />
-                        <Label fx:id="address" layoutX="123.0" layoutY="143.0" text="123 Street" />
-                        <Label fx:id="city" layoutX="91.0" layoutY="196.0" text="New York City" />
-                        <Label fx:id="state" layoutX="423.0" layoutY="196.0" text="NY" />
-                        <Label fx:id="userName" layoutX="128.0" layoutY="366.0" text="kk@12" />
-                        <Label fx:id="password" layoutX="445.0" layoutY="366.0" text="1234" />
-                        <Label fx:id="zipCode" layoutX="118.0" layoutY="249.0" text="67231" />
+                        <Label fx:id="accountID" layoutX="144.0" layoutY="45.0" text="1111111" />
+                        <Label fx:id="firstName" layoutX="158.0" layoutY="93.0" text="Mary" />
+                        <Label fx:id="lastName" layoutX="467.0" layoutY="87.0" text="Smith" />
+                        <Label fx:id="address" layoutX="133.0" layoutY="143.0" text="123 Street" />
+                        <Label fx:id="city" layoutX="101.0" layoutY="196.0" text="New York City" />
+                        <Label fx:id="state" layoutX="433.0" layoutY="196.0" text="NY" />
+                        <Label fx:id="userName" layoutX="138.0" layoutY="366.0" text="kk@12" />
+                        <Label fx:id="password" layoutX="455.0" layoutY="366.0" text="1234" />
+                        <Label fx:id="zipCode" layoutX="128.0" layoutY="249.0" text="67231" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="editAccount" text="Edit Account">
+          <Tab fx:id="editAccount" text="Edit User Account">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="178.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="178.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="43.0" layoutY="43.0" text="User ID" />
+                        <TextField layoutX="43.0" layoutY="110.0" promptText="Enter last name" />
+                        <TextField layoutX="365.0" layoutY="110.0" promptText="Enter first name" />
+                        <TextField layoutX="43.0" layoutY="180.0" prefHeight="39.0" prefWidth="546.0" promptText="Enter new address" />
+                        <TextField layoutX="43.0" layoutY="248.0" promptText="Enter city" />
+                        <TextField layoutX="365.0" layoutY="248.0" promptText="Enter state" />
+                        <TextField layoutX="43.0" layoutY="325.0" promptText="Enter zip code" />
+                        <TextField layoutX="43.0" layoutY="402.0" prefHeight="39.0" prefWidth="326.0" promptText="Enter new username" />
+                        <PasswordField layoutX="43.0" layoutY="483.0" promptText="Enter password" />
+                        <PasswordField layoutX="365.0" layoutY="483.0" promptText="Conform password" />
+                     </children></AnchorPane>
             </content>
           </Tab>
             <Tab fx:id="editAddress" text="Edit Address">
