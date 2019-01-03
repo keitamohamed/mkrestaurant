@@ -142,14 +142,18 @@
     -fx-background-color: #4e91fc;
 }
 
-.menu .menu-item .menu-button .menu-item .button{
-    -fx-text-fill: #000;
-}
-
 .menu .menu-item .menu-button .menu-item{
-    -fx-background-color: #FFFF8D;
+    -fx-background-color: -fx-primarybc;
 }
 
+.menu .menu-item .menu-button .menu-item .button{
+    -fx-font-family: "Apple Chancery";
+}
+
+.menu .menu-item .menu-button .menu-item .button:hover{
+    -fx-background-color: RGB(0, 149, 203);
+    -fx-font-style: oblique;
+}
 
 #popUp .button {
     -fx-font-size: 18px;

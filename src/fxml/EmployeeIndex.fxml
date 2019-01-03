@@ -50,16 +50,26 @@
                   <items>
                     <MenuItem mnemonicParsing="false">
                            <graphic>
-                              <MenuButton mnemonicParsing="false" popupSide="RIGHT" text="Export Text File">
+                              <MenuButton mnemonicParsing="false" popupSide="RIGHT" text="Export">
                                 <items>
                                   <MenuItem mnemonicParsing="false">
                                        <graphic>
-                                          <Button mnemonicParsing="false" text="Product" />
+                                          <Button mnemonicParsing="false" text="Product to excel" />
                                        </graphic>
                                     </MenuItem>
                                   <MenuItem mnemonicParsing="false">
                                        <graphic>
-                                          <Button mnemonicParsing="false" text="Order" />
+                                          <Button mnemonicParsing="false" text="Order to excel" />
+                                       </graphic>
+                                    </MenuItem>
+                                  <MenuItem mnemonicParsing="false">
+                                       <graphic>
+                                          <Button mnemonicParsing="false" text="Product to text" />
+                                       </graphic>
+                                    </MenuItem>
+                                  <MenuItem mnemonicParsing="false">
+                                       <graphic>
+                                          <Button mnemonicParsing="false" text="Order to text" />
                                        </graphic>
                                     </MenuItem>
                                 </items>
@@ -67,20 +77,7 @@
                            </graphic></MenuItem>
                         <MenuItem mnemonicParsing="false">
                            <graphic>
-                              <MenuButton mnemonicParsing="false" popupSide="RIGHT" text="Export Excel File">
-                                <items>
-                                  <MenuItem mnemonicParsing="false">
-                                       <graphic>
-                                          <Button mnemonicParsing="false" text="Product" />
-                                       </graphic>
-                                    </MenuItem>
-                                  <MenuItem mnemonicParsing="false">
-                                       <graphic>
-                                          <Button mnemonicParsing="false" text="Order" />
-                                       </graphic>
-                                    </MenuItem>
-                                </items>
-                              </MenuButton>
+                              <MenuButton mnemonicParsing="false" popupSide="RIGHT" text="Export Excel File" />
                            </graphic>
                         </MenuItem>
                   </items>
