@@ -18,34 +18,22 @@ public class Employee {
     private static String userID, setUserFirstName;
     private SQLPrepareStatement statement = new SQLPrepareStatement();
     private String className = this.getClass().getSimpleName();
-    @FXML
-    private AnchorPane root;
-    @FXML
-    private TableView<Product> productTable;
-    @FXML
-    private TableColumn<Product, Integer> productID;
-    @FXML
-    private TableColumn<Product, String> productName;
-    @FXML
-    private TableColumn<Product, Integer> productQuantity;
-    @FXML
-    private TableColumn<Product, Double> productPrice;
-    @FXML
-    private TableView<Order> orderTableView;
-    @FXML
-    private TableColumn<Order, Integer> orderID;
-    @FXML
-    private TableColumn<Order, Integer> customerID;
-    @FXML
-    private TableColumn<Order, String> itemName;
-    @FXML
-    private Button log, account;
-    @FXML
-    private TextField searchProduct, searchOrder;
-    @FXML
-    private Label uAccount;
-    @FXML
-    private Pane popUp;
+
+    @FXML private AnchorPane root;
+    @FXML private TableView<Product> productTable;
+    @FXML private TableColumn<Product, Integer> productID;
+    @FXML private TableColumn<Product, String> productName;
+    @FXML private TableColumn<Product, Integer> productQuantity;
+    @FXML private TableColumn<Product, Double> productPrice;
+    @FXML private TableView<Order> orderTableView;
+    @FXML private TableColumn<Order, Integer> orderID;
+    @FXML private TableColumn<Order, Integer> customerID;
+    @FXML private TableColumn<Order, String> itemName;
+    @FXML private Button log, account;
+    @FXML private TextField searchProduct, searchOrder;
+    @FXML private Label uAccount;
+    @FXML private Pane popUp;
+    @FXML private Menu menuProduct;
 
     private ObservableList<Product> products = FXCollections.observableArrayList();
     private ObservableList<Order> orders = FXCollections.observableArrayList();

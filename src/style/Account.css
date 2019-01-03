@@ -50,9 +50,9 @@
 
 .tab-pane .tab:selected{
     -fx-border-width: 1px;
-    -fx-border-radius: 15px;
     -fx-border-style: dashed;
     -fx-border-color: -fx-secondary;
+    -fx-background-color: RGB(0, 149, 203);
 }
 
 #subRoot .label{

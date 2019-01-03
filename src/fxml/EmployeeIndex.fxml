@@ -94,18 +94,41 @@
                   <items>
                         <MenuItem mnemonicParsing="false">
                            <graphic>
-                              <Button mnemonicParsing="false" text="Search Product" />
+                              <Button mnemonicParsing="false" text="Search" />
                            </graphic>
                         </MenuItem>
                         <MenuItem mnemonicParsing="false">
                            <graphic>
-                              <Button mnemonicParsing="false" text="Add New Product" />
+                              <Button mnemonicParsing="false" text="Add" />
                            </graphic>
                         </MenuItem>
                     <MenuItem mnemonicParsing="false">
                            <graphic>
-                              <Button mnemonicParsing="false" text="Edit Product" />
+                              <Button mnemonicParsing="false" text="Update" />
                            </graphic></MenuItem>
+                        <MenuItem mnemonicParsing="false">
+                           <graphic>
+                              <MenuButton mnemonicParsing="false" popupSide="RIGHT" text="Export">
+                                <items>
+                                  <MenuItem mnemonicParsing="false">
+                                       <graphic>
+                                          <Button mnemonicParsing="false" text="As an excel file" />
+                                       </graphic>
+                                    </MenuItem>
+                                  <MenuItem mnemonicParsing="false">
+                                       <graphic>
+                                          <Button mnemonicParsing="false" text="As a csv file" />
+                                       </graphic>
+                                    </MenuItem>
+                                    <MenuItem mnemonicParsing="false">
+                                       <graphic>
+                                          <Button mnemonicParsing="false" text="As a text file" />
+                                       </graphic>
+                                    </MenuItem>
+                                </items>
+                              </MenuButton>
+                           </graphic>
+                        </MenuItem>
                   </items>
                 </Menu>
               </menus>
