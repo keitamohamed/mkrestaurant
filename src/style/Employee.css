@@ -114,16 +114,45 @@
     -fx-background-color: transparent;
 }
 
+.menu .menu-item .menu-button {
+    -fx-padding: 0;
+    -fx-background-color: -fx-primarybc;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+    -fx-border-radius: 0;
+}
+
+.menu .menu-button > .arrow-button {
+    -fx-padding: 0;
+}
+
+.menu .menu-button > .arrow-button .arrow {
+    -fx-padding: 0;
+}
+
+.menu .menu-item .menu-button:hover {
+    -fx-background-color: #4e91fc;
+}
+
 #uAccount:hover {
     -fx-padding: 0 5 0 5;
 }
 
-#popUp .button {
-    -fx-font-size: 18px;
-}
-
 .menu-bar .menu .menu-item .button:hover, #uAccount:hover, #popUp .button:hover {
     -fx-background-color: #4e91fc;
+}
+
+.menu .menu-item .menu-button .menu-item .button{
+    -fx-text-fill: #000;
+}
+
+.menu .menu-item .menu-button .menu-item{
+    -fx-background-color: #FFFF8D;
+}
+
+
+#popUp .button {
+    -fx-font-size: 18px;
 }
 
 #adminPane {

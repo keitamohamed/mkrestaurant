@@ -48,10 +48,10 @@ public class SwitchScene {
         }
     }
 
-    public static void switchScene(ObservableList<Cart> order, String className, String loginStatic, Button userFirstName) {
+    public static void switchScene(ObservableList<Cart> order, String className, String userID) {
         try {
             AnchorPane anchorPane = FXMLLoader.load(SwitchScene.class.getResource(Location.fxmlLocation(className)));
-            orderList(order, loginStatic, userFirstName.getText());
+            orderList(order, userID);
             Stage stage = new Stage();
             stageProperty(anchorPane, className, stage);
             stage.setOnCloseRequest(e -> stage.close());
@@ -108,8 +108,18 @@ public class SwitchScene {
         Main.getUserID(userID, setUserFirstName);
     }
 
-    private static void orderList(ObservableList<Cart> carts, String loginStatic, String userFirstName){
-        Checkout.getOrderList(carts, loginStatic, userFirstName);
+    /**
+     * orderList method will be pass/call when the customer is ready
+     * to place an order. It will be pass to the Checkout controller
+     * during the switching scene.
+     * @param carts
+     * The all items added to the cart
+     * @param userID
+     * Customer id. If the customer is null, the customer will have a
+     * choice to either login or register when they get to the Checkout page
+     */
+    private static void orderList(ObservableList<Cart> carts, String userID){
+        Checkout.getOrderList(carts, userID);
     }
 
     private static void stageProperty(AnchorPane anchorPane, String className, Stage stage){
@@ -134,6 +144,11 @@ public class SwitchScene {
         }
     }
 
+    /**
+     * @param event
+     * closeStage Method: is call when the user is switching between
+     * stages.
+     */
     @FXML
     public static void closeStage(Event event) {
         ((Node)event.getSource()).getScene().getWindow().hide();

@@ -157,6 +157,7 @@ public class Checkout {
      * generateOrderID: Automatic generate order ID when a customer
      * place an order. And return that ID.
      * @return
+     * Will return an order that was generated for the customer
      */
     @FXML
     private int generateOrderID() {
@@ -169,6 +170,8 @@ public class Checkout {
      * the username or password filed are not fill
      * out
      * @return
+     * Will return true if the username or password is
+     * not filled out
      */
     @FXML
     private boolean loginFieldNotFillOut() {
@@ -183,15 +186,11 @@ public class Checkout {
      * Contain the customer items for checkout
      * @param id
      * Customer ID. It could null if the customer is not login
-     * @param userFirstName
-     * The name of the customer or it could also be null if they
-     * not login
      */
     @FXML
-    public static void getOrderList(ObservableList<Cart> cart, String id, String userFirstName) {
+    public static void getOrderList(ObservableList<Cart> cart, String id) {
         cartList = cart;
         userID = id;
-        setUserFirstName = userFirstName;
     }
 
     /**

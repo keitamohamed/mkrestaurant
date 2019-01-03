@@ -257,7 +257,7 @@ public class Main {
     private void checkoutOrder(Event event){
         String className = this.getClass().getSimpleName();
         ((Node)event.getSource()).getScene().getWindow().hide();
-        SwitchScene.switchScene(shoppingCarts, className, userID, new Button(setUserName));
+        SwitchScene.switchScene(shoppingCarts, className, userID);
     }
 
     /**
