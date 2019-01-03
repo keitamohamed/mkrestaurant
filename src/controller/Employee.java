@@ -57,8 +57,8 @@ public class Employee {
         filterProductTable();
         filterOrderTable();
         changePaneBehavior();
-        uAccount.setOnMouseEntered(e -> popUp.setVisible(true));
 
+        uAccount.setOnMouseEntered(e -> popUp.setVisible(true));
         root.setOnMouseEntered(e -> uAccount.setText("Hello, " + setUserFirstName));
     }
 
@@ -84,10 +84,7 @@ public class Employee {
             SwitchScene.closeStage(e);
             SwitchScene.switchStage(className, null, "Customer", new Button(null));
         });
-        account.setOnAction(e -> {
-            SwitchScene.closeStage(e);
-            SwitchScene.switchScene(account.getText().trim(), userID);
-        });
+        account.setOnAction(e -> SwitchScene.switchScene(account.getText().trim(), userID));
     }
 
     private void filterProductTable() {

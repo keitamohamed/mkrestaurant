@@ -43,7 +43,6 @@ public class SwitchScene {
             sendUserID(userID, typeOfAccount, new Button());
             Stage stage = new Stage();
             stageProperty(anchorPane, typeOfAccount, stage);
-            stage.setOnCloseRequest(e -> stage.close());
         }catch (IOException io) {
             System.out.println("IO-Exception occur: " + io.getMessage());
         }
@@ -104,6 +103,7 @@ public class SwitchScene {
         }
         else if (userType.equals("Account")) {
             Account.getUserInfo(userID);
+            return;
         }
         Main.getUserID(userID, setUserFirstName);
     }

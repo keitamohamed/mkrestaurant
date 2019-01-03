@@ -9,6 +9,11 @@ public class SQLQuery {
                 "WHERE Username = ? AND Password = ?";
     }
 
+    public String getFirstName(){
+        return "SELECT * FROM UserTable As u " +
+                "WHERE u.UserID = ?";
+    }
+
     public String getUserInfo() {
         return "SELECT * " +
                 "FROM UserTable As u JOIN Address As a " +

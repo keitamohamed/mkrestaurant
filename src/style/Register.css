@@ -45,10 +45,6 @@
     -fx-font-family: -fx-primaryfamily;
 }
 
-/*.label {*/
-    /*-fx-font-family: Papyrus;*/
-/*}*/
-
 #createMessage, #title {
     -fx-font-size: 18px;
     -fx-font-family: Papyrus, Apple Chancery, -fx-primaryfamily, cursive;

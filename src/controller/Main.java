@@ -36,7 +36,7 @@ public class Main {
     @FXML
     private Label rAddress, totalItem, discount, totalPrice, discountPer, sumPrice, copyRight;
     @FXML
-    private Button removeItem, checkOut, log, signOut;
+    private Button removeItem, checkOut, log, signOut, account;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -61,6 +61,7 @@ public class Main {
         changePaneBehavior();
         root.setOnMouseEntered(e -> {
             if (userID != null) {
+                setUserName = statement.getFirstName(Integer.parseInt(userID));
                 log.setText("Hello, " + setUserName);
             }
 
@@ -111,17 +112,20 @@ public class Main {
     private void changePaneBehavior(){
         gridPaneTopRight.setPrefHeight(52);
         signOut.setVisible(false);
+        account.setVisible(false);
         gridPaneTopRight.setOnMouseEntered(e -> {
             if (!log.getText().equals("Register / Sign In")) {
                 signOut.setVisible(true);
-                gridPaneTopRight.setPrefHeight(110);
+                gridPaneTopRight.setPrefHeight(150);
                 signOut.setVisible(true);
+                account.setVisible(true);
             }
         });
 
         gridPaneTopRight.setOnMouseExited(e -> {
             gridPaneTopRight.setPrefHeight(52);
             signOut.setVisible(false);
+            account.setVisible(false);
         });
 
         log.setOnAction(e -> {
@@ -130,7 +134,9 @@ public class Main {
                 SwitchScene.switchStage(this.getClass().getSimpleName(), setUserName, "Customer", log);
             }
         });
+
         signOut.setOnAction(e -> logOut());
+        account.setOnAction(e -> SwitchScene.switchScene(account.getText().trim(), userID));
     }
 
     private void flowPaneChildren(List<Button> buttonList, List<Product> products) {

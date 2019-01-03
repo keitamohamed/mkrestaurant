@@ -49,6 +49,21 @@ public class SQLPrepareStatement {
         return null;
     }
 
+    public String getFirstName(int userID) {
+        try {
+            pst = dbConnection.getConnection().prepareStatement(query.getFirstName());
+            pst.setInt(1, userID);
+            rs = pst.executeQuery();
+
+            if (rs.first()) {
+                return  rs.getString("FirstName");
+            }
+        }catch (SQLException ex) {
+            Message.operationFailed("Exception", ex.getMessage());
+        }
+        return null;
+    }
+
     private void getUserInfo (String userID, Button userFirstName) {
         try {
             pst = dbConnection.getConnection().prepareStatement(query.getUserInfo());
